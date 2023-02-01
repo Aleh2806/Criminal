@@ -1,5 +1,5 @@
 package aleh.ahiyevich.criminal.model
 
-interface CrimesOnItemClick {
+interface OnItemClick {
     fun onItemClick(position: Int)
 }

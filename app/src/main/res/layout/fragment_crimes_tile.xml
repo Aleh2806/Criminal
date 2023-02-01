@@ -55,7 +55,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             app:layout_anchorGravity="center"
-            tools:listitem="@layout/item_crimes_fragment_tile" />
+            tools:listitem="@layout/item_fragment_tile" />
 
 
 

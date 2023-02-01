@@ -4,7 +4,7 @@ import aleh.ahiyevich.criminal.R
 import aleh.ahiyevich.criminal.databinding.FragmentCrimesListBinding
 import aleh.ahiyevich.criminal.model.CrimeId
 import aleh.ahiyevich.criminal.model.Crimes
-import aleh.ahiyevich.criminal.model.CrimesOnItemClick
+import aleh.ahiyevich.criminal.model.OnItemClick
 import aleh.ahiyevich.criminal.model.FakeRepository
 import aleh.ahiyevich.criminal.view.adapters.CrimesListAdapter
 import android.app.Dialog
@@ -22,7 +22,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import kotlinx.android.synthetic.main.fragment_crimes_list.*
 
-class CrimesFragmentList : Fragment(), CrimesOnItemClick {
+class CrimesFragmentList : Fragment(), OnItemClick {
 
     private val data = createData()
 
@@ -50,12 +50,6 @@ class CrimesFragmentList : Fragment(), CrimesOnItemClick {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        val recyclerView: RecyclerView = binding.recyclerViewCrimes
-        // Эта установка служит для повышения производительности системы
-        recyclerView.setHasFixedSize(true)
-        recyclerView.adapter = CrimesListAdapter(data, this)
-        recyclerView.layoutManager = LinearLayoutManager(this.context)
-
         binding.changerLayouts.setOnClickListener {
             requireActivity()
                 .supportFragmentManager
@@ -65,6 +59,13 @@ class CrimesFragmentList : Fragment(), CrimesOnItemClick {
                 .hide(this)
                 .commit()
         }
+
+
+        val recyclerView: RecyclerView = binding.recyclerViewCrimes
+        // Эта установка служит для повышения производительности системы
+        recyclerView.setHasFixedSize(true)
+        recyclerView.adapter = CrimesListAdapter(data, this)
+        recyclerView.layoutManager = LinearLayoutManager(this.context)
 
 
         binding.bottomNavigationView.setOnItemSelectedListener {
@@ -101,8 +102,6 @@ class CrimesFragmentList : Fragment(), CrimesOnItemClick {
 
         // Закрыл доступ к элементам под замком
         if (!crime.isOpen) {
-            // TODO: Сделать диалоговое окно с выбором купить или нет дело
-//            Toast.makeText(requireContext(), "Клик запрещен", Toast.LENGTH_LONG).show()
             paymentDialog()
         } else {
             requireActivity().supportFragmentManager.beginTransaction()
@@ -166,7 +165,6 @@ class CrimesFragmentList : Fragment(), CrimesOnItemClick {
             if (crimesId !in it.keys) {
                 return false
             }
-
         }
         return true
     }

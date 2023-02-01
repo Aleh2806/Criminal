@@ -1,5 +1,5 @@
 package aleh.ahiyevich.criminal.model
 
-enum class CrimeId {
+enum class SeasonsId {
     ONE,TWO,THREE,FOUR,FIVE,SIX,SEVEN,EIGHT,NINE,TEN
 }

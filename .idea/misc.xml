@@ -68,6 +68,9 @@
         <entry key="..\:/Production/Criminal/app/src/main/res/layout/fragment_three.xml" value="0.259375" />
         <entry key="..\:/Production/Criminal/app/src/main/res/layout/item_crimes_fragment_list.xml" value="0.1" />
         <entry key="..\:/Production/Criminal/app/src/main/res/layout/item_crimes_fragment_tile.xml" value="0.2734375" />
+        <entry key="..\:/Production/Criminal/app/src/main/res/layout/item_fragment_list.xml" value="0.2734375" />
+        <entry key="..\:/Production/Criminal/app/src/main/res/layout/item_fragment_seasons.xml" value="0.2734375" />
+        <entry key="..\:/Production/Criminal/app/src/main/res/layout/item_fragment_tile.xml" value="0.2734375" />
         <entry key="..\:/Production/Criminal/app/src/main/res/layout/my_custom_dialog.xml" value="0.25" />
         <entry key="..\:/Production/Criminal/app/src/main/res/layout/my_custom_dialog_exit.xml" value="0.27239583333333334" />
         <entry key="..\:/Production/Criminal/app/src/main/res/layout/my_custom_dialog_payment.xml" value="0.2734375" />

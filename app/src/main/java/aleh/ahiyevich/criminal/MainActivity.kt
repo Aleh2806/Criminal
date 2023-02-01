@@ -3,6 +3,7 @@ package aleh.ahiyevich.criminal
 import aleh.ahiyevich.criminal.databinding.ActivityMainBinding
 import aleh.ahiyevich.criminal.view.fragments.AuthorisationFragment
 import aleh.ahiyevich.criminal.view.fragments.CrimesFragmentList
+import aleh.ahiyevich.criminal.view.fragments.SeasonsListFragment
 import android.app.Dialog
 import android.content.Context
 import android.content.SharedPreferences
@@ -30,7 +31,7 @@ class MainActivity : AppCompatActivity() {
         if (savedInstanceState == null) {
             supportFragmentManager
                 .beginTransaction()
-                .add(R.id.container_for_fragment, CrimesFragmentList())
+                .add(R.id.container_for_fragment, SeasonsListFragment())
                 .commit()
         }
     }

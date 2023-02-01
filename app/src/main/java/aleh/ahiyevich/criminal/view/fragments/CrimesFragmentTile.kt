@@ -4,7 +4,7 @@ import aleh.ahiyevich.criminal.R
 import aleh.ahiyevich.criminal.databinding.FragmentCrimesTileBinding
 import aleh.ahiyevich.criminal.model.CrimeId
 import aleh.ahiyevich.criminal.model.Crimes
-import aleh.ahiyevich.criminal.model.CrimesOnItemClick
+import aleh.ahiyevich.criminal.model.OnItemClick
 import aleh.ahiyevich.criminal.model.FakeRepository
 import aleh.ahiyevich.criminal.view.adapters.CrimesTileAdapter
 import android.app.Dialog
@@ -22,7 +22,7 @@ import androidx.recyclerview.widget.RecyclerView
 import kotlinx.android.synthetic.main.fragment_crimes_tile.*
 
 
-class CrimesFragmentTile : Fragment(), CrimesOnItemClick {
+class CrimesFragmentTile : Fragment(), OnItemClick {
 
 
     private val data = createData()

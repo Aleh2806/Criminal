@@ -54,7 +54,7 @@
             android:id="@+id/recycler_view_crimes"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            tools:listitem="@layout/item_crimes_fragment_list" />
+            tools:listitem="@layout/item_fragment_list" />
 
         <com.google.android.material.bottomappbar.BottomAppBar
             android:id="@+id/bottom_app_bar"

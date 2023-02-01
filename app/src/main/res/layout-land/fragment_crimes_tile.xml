@@ -57,7 +57,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             app:layout_anchorGravity="center"
-            tools:listitem="@layout/item_crimes_fragment_tile" />
+            tools:listitem="@layout/item_fragment_tile" />
 
 
         <com.google.android.material.bottomappbar.BottomAppBar

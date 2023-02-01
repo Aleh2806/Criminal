@@ -2,7 +2,7 @@ package aleh.ahiyevich.criminal.view.adapters
 
 import aleh.ahiyevich.criminal.model.Crimes
 import aleh.ahiyevich.criminal.R
-import aleh.ahiyevich.criminal.model.CrimesOnItemClick
+import aleh.ahiyevich.criminal.model.OnItemClick
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -13,14 +13,13 @@ import androidx.recyclerview.widget.RecyclerView
 
 class CrimesListAdapter(
     private val data: List<Crimes>,
-    private val listener: CrimesOnItemClick
+    private val listener: OnItemClick
 ) :
     RecyclerView.Adapter<CrimesListAdapter.ItemCrimesViewHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ItemCrimesViewHolder {
-
         val inflatedView = LayoutInflater.from(parent.context)
-            .inflate(R.layout.item_crimes_fragment_list, parent, false)
+            .inflate(R.layout.item_fragment_list, parent, false)
 
         return ItemCrimesViewHolder(inflatedView)
     }

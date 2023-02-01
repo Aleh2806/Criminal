@@ -13,6 +13,13 @@ data class Crimes(
     @DrawableRes val imageCrime: Int
 ) : Parcelable
 
+@Parcelize
+data class Seasons(
+    val isOpenSeason: Boolean = true,
+    val nameSeason: String,
+    @DrawableRes val imageSeason: Int
+): Parcelable
+
 
 object FakeRepository {
 
@@ -68,10 +75,43 @@ object FakeRepository {
         CrimeId.TEN to false
     )
 
+    val nameSeason = mapOf(
+        SeasonsId.ONE to "Сезон 1",
+        SeasonsId.TWO to "Сезон 2",
+        SeasonsId.THREE to "Сезон 3",
+        SeasonsId.FOUR to "Сезон 4",
+        SeasonsId.FIVE to "Сезон 5",
+        SeasonsId.SIX to "Сезон 6",
+        SeasonsId.SEVEN to "Сезон 7",
+        SeasonsId.EIGHT to "Сезон 8",
+        SeasonsId.NINE to "Сезон 9",
+        SeasonsId.TEN to "Сезон 10"
+    )
+
+    val imageSeason = mapOf(
+        SeasonsId.ONE to R.drawable.details_img,
+        SeasonsId.TWO to R.drawable.crime_1,
+        SeasonsId.THREE to R.drawable.crime_2,
+        SeasonsId.FOUR to R.drawable.crime_3,
+        SeasonsId.FIVE to R.drawable.crime_4,
+        SeasonsId.SIX to R.drawable.crime_5,
+        SeasonsId.SEVEN to R.drawable.crime_6,
+        SeasonsId.EIGHT to R.drawable.crime_7,
+        SeasonsId.NINE to R.drawable.crime_8,
+        SeasonsId.TEN to R.drawable.crime_9
+    )
+
+    val isOpenSeason = mapOf(
+        SeasonsId.ONE to true,
+        SeasonsId.TWO to false,
+        SeasonsId.THREE to false,
+        SeasonsId.FOUR to false,
+        SeasonsId.FIVE to false,
+        SeasonsId.SIX to false,
+        SeasonsId.SEVEN to false,
+        SeasonsId.EIGHT to false,
+        SeasonsId.NINE to false,
+        SeasonsId.TEN to false
+    )
+
 }
-
-
-
-
-
-

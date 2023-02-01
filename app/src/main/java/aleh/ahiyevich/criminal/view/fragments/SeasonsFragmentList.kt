@@ -17,7 +17,7 @@ import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 
-class SeasonsListFragment : Fragment(), OnItemClick {
+class SeasonsFragmentList : Fragment(), OnItemClick {
 
     private val data = createData()
 
@@ -46,7 +46,7 @@ class SeasonsListFragment : Fragment(), OnItemClick {
         val recyclerView: RecyclerView = binding.recyclerViewSeasons
         recyclerView.setHasFixedSize(true)
         recyclerView.adapter = SeasonsListAdapter(data, this)
-        recyclerView.layoutManager = GridLayoutManager(requireContext(),2)
+        recyclerView.layoutManager = LinearLayoutManager(requireContext())
     }
 
     override fun onItemClick(position: Int) {
@@ -59,7 +59,8 @@ class SeasonsListFragment : Fragment(), OnItemClick {
             requireActivity()
                 .supportFragmentManager
                 .beginTransaction()
-                .replace(R.id.container_for_fragment, CrimesFragmentList())
+                .replace(R.id.container_for_fragment, CrimesFragmentTile())
+                .hide(this)
                 .addToBackStack("")
                 .commit()
         }

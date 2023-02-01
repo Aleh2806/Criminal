@@ -3,7 +3,7 @@ package aleh.ahiyevich.criminal
 import aleh.ahiyevich.criminal.databinding.ActivityMainBinding
 import aleh.ahiyevich.criminal.view.fragments.AuthorisationFragment
 import aleh.ahiyevich.criminal.view.fragments.CrimesFragmentList
-import aleh.ahiyevich.criminal.view.fragments.SeasonsListFragment
+import aleh.ahiyevich.criminal.view.fragments.SeasonsFragmentList
 import android.app.Dialog
 import android.content.Context
 import android.content.SharedPreferences
@@ -31,7 +31,7 @@ class MainActivity : AppCompatActivity() {
         if (savedInstanceState == null) {
             supportFragmentManager
                 .beginTransaction()
-                .add(R.id.container_for_fragment, SeasonsListFragment())
+                .add(R.id.container_for_fragment, AuthorisationFragment())
                 .commit()
         }
     }
@@ -44,7 +44,7 @@ class MainActivity : AppCompatActivity() {
 
     override fun onResume() {
         super.onResume()
-        fullScreenCall()
+        callFullScreen()
     }
 
     override fun onBackPressed() {
@@ -79,11 +79,11 @@ class MainActivity : AppCompatActivity() {
     }
 
     // Вызов полноэкранного режима
-    private fun fullScreenCall() {
-        if (Build.VERSION.SDK_INT > 11 && Build.VERSION.SDK_INT < 19) {
+    private fun callFullScreen() {
+        if (Build.VERSION.SDK_INT > 11 && Build.VERSION.SDK_INT < 19) { // для ранних версий API
             window.decorView.systemUiVisibility = View.GONE
         } else if (Build.VERSION.SDK_INT >= 19) {
-            //for new api versions.
+            // для более поздних версий API
             window.decorView.systemUiVisibility =
                 View.SYSTEM_UI_FLAG_HIDE_NAVIGATION or View.SYSTEM_UI_FLAG_IMMERSIVE_STICKY
         }

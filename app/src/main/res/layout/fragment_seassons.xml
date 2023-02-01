@@ -5,7 +5,7 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     android:background="@color/background_app"
-    tools:context=".view.fragments.SeasonsListFragment">
+    tools:context=".view.fragments.SeasonsFragmentList">
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recycler_view_seasons"

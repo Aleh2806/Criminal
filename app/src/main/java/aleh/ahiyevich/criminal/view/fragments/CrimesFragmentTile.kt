@@ -76,12 +76,14 @@ class CrimesFragmentTile : Fragment(), OnItemClick {
                         .supportFragmentManager
                         .beginTransaction()
                         .replace(R.id.container_for_fragment, CrimesFragmentTile())
+                        .hide(this)
                         .commit()
                 } else {
                     requireActivity()
                         .supportFragmentManager
                         .beginTransaction()
                         .replace(R.id.container_for_fragment, CrimesFragmentList())
+                        .hide(this)
                         .commit()
                 }
 
@@ -90,6 +92,7 @@ class CrimesFragmentTile : Fragment(), OnItemClick {
                     .supportFragmentManager
                     .beginTransaction()
                     .replace(R.id.container_for_fragment, ProfileFragment())
+                    .hide(this)
                     .addToBackStack("")
                     .commit()
             }

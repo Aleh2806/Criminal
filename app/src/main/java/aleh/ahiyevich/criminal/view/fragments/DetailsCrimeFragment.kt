@@ -2,6 +2,7 @@ package aleh.ahiyevich.criminal.view.fragments
 
 import aleh.ahiyevich.criminal.databinding.FragmentDetailsCrimeBinding
 import aleh.ahiyevich.criminal.model.Crimes
+import android.content.pm.ActivityInfo
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -30,6 +31,17 @@ class DetailsCrimeFragment : Fragment() {
     override fun onDestroyView() {
         super.onDestroyView()
         _binding = null
+    }
+
+    override fun onResume() {
+        super.onResume()
+        activity?.requestedOrientation = ActivityInfo.SCREEN_ORIENTATION_SENSOR
+    }
+
+    override fun onPause() {
+        super.onPause()
+        activity?.requestedOrientation = ActivityInfo.SCREEN_ORIENTATION_PORTRAIT
+
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {

@@ -1,0 +1,15 @@
+<resources>
+    <string name="app_name">Crime time</string>
+    <string name="bottom_menu_home">Главная</string>
+    <string name="bottom_menu_profile">Профиль</string>
+    <string name="bottom_menu_crimes">Дела</string>
+    <string name="go_back">Назад</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="start">Начать</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="list_change_layout">Список</string>
+    <string name="tile_change_layout">Плитка</string>
+    <string name="dummy_button">Dummy Button</string>
+    <string name="dummy_content">DUMMY\nCONTENT</string>
+</resources>

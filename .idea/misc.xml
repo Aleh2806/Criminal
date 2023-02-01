@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="DesignSurface">
+    <option name="filePathToZoomLevelMap">
+      <map>
+        <entry key="..\:/Production/Criminal/app/src/main/res/drawable-v24/btn_background.xml" value="0.1485" />
+        <entry key="..\:/Production/Criminal/app/src/main/res/drawable-v24/ic_launcher_foreground.xml" value="0.1055" />
+        <entry key="..\:/Production/Criminal/app/src/main/res/drawable/backgroun_crimes_header.xml" value="0.1" />
+        <entry key="..\:/Production/Criminal/app/src/main/res/drawable/background_1.xml" value="0.165" />
+        <entry key="..\:/Production/Criminal/app/src/main/res/drawable/background_2.xml" value="0.156" />
+        <entry key="..\:/Production/Criminal/app/src/main/res/drawable/background_3.xml" value="0.156" />
+        <entry key="..\:/Production/Criminal/app/src/main/res/drawable/background_crimes_header.xml" value="0.1" />
+        <entry key="..\:/Production/Criminal/app/src/main/res/drawable/backspace_24.xml" value="0.1485" />
+        <entry key="..\:/Production/Criminal/app/src/main/res/drawable/btn_back_details.xml" value="0.1485" />
+        <entry key="..\:/Production/Criminal/app/src/main/res/drawable/btn_background_grey.xml" value="0.1795" />
+        <entry key="..\:/Production/Criminal/app/src/main/res/drawable/btn_diagonal.xml" value="0.1605" />
+        <entry key="..\:/Production/Criminal/app/src/main/res/drawable/btn_main_layout.xml" value="0.1605" />
+        <entry key="..\:/Production/Criminal/app/src/main/res/drawable/btn_start_fragment.xml" value="0.173" />
+        <entry key="..\:/Production/Criminal/app/src/main/res/drawable/button_back.xml" value="0.134" />
+        <entry key="..\:/Production/Criminal/app/src/main/res/drawable/edit_text_background.xml" value="0.173" />
+        <entry key="..\:/Production/Criminal/app/src/main/res/drawable/gradient_color.xml" value="0.1605" />
+        <entry key="..\:/Production/Criminal/app/src/main/res/drawable/gradient_list.xml" value="0.1605" />
+        <entry key="..\:/Production/Criminal/app/src/main/res/drawable/ic_baseline_home_24.xml" value="0.173" />
+        <entry key="..\:/Production/Criminal/app/src/main/res/drawable/ic_baseline_subscriptions_24.xml" value="0.1" />
+        <entry key="..\:/Production/Criminal/app/src/main/res/drawable/ic_baseline_whatshot_24.xml" value="0.1055" />
+        <entry key="..\:/Production/Criminal/app/src/main/res/drawable/ic_launcher_background.xml" value="0.1055" />
+        <entry key="..\:/Production/Criminal/app/src/main/res/drawable/ic_round_lock_24.xml" value="0.1" />
+        <entry key="..\:/Production/Criminal/app/src/main/res/drawable/ic_round_menu_24.xml" value="0.1055" />
+        <entry key="..\:/Production/Criminal/app/src/main/res/drawable/ic_round_priority_high_24.xml" value="0.1" />
+        <entry key="..\:/Production/Criminal/app/src/main/res/drawable/import_export_24.xml" value="0.1485" />
+        <entry key="..\:/Production/Criminal/app/src/main/res/layout-land/fragment_authorisation.xml" value="0.25" />
+        <entry key="..\:/Production/Criminal/app/src/main/res/layout-land/fragment_crimes.xml" value="0.165" />
+        <entry key="..\:/Production/Criminal/app/src/main/res/layout-land/fragment_crimes_list.xml" value="0.165" />
+        <entry key="..\:/Production/Criminal/app/src/main/res/layout-land/fragment_crimes_tile.xml" value="0.165" />
+        <entry key="..\:/Production/Criminal/app/src/main/res/layout-land/item_crimes_fragment_list.xml" value="0.16822916666666668" />
+        <entry key="..\:/Production/Criminal/app/src/main/res/layout-land/item_crimes_fragment_tile.xml" value="0.2" />
+        <entry key="..\:/Production/Criminal/app/src/main/res/layout-land/my_custom_dialog_exit.xml" value="0.21711711711711712" />
+        <entry key="..\:/Production/Criminal/app/src/main/res/layout-sw600dp/item_crimes_fragment_tile.xml" value="0.205078125" />
+        <entry key="..\:/Production/Criminal/app/src/main/res/layout/activity_authorisation.xml" value="0.2734375" />
+        <entry key="..\:/Production/Criminal/app/src/main/res/layout/activity_loader.xml" value="0.2734375" />
+        <entry key="..\:/Production/Criminal/app/src/main/res/layout/activity_main.xml" value="0.25" />
+        <entry key="..\:/Production/Criminal/app/src/main/res/layout/fragment_authoriation.xml" value="0.259375" />
+        <entry key="..\:/Production/Criminal/app/src/main/res/layout/fragment_authorisation.xml" value="0.2734375" />
+        <entry key="..\:/Production/Criminal/app/src/main/res/layout/fragment_blank.xml" value="0.2734375" />
+        <entry key="..\:/Production/Criminal/app/src/main/res/layout/fragment_blank2.xml" value="0.259375" />
+        <entry key="..\:/Production/Criminal/app/src/main/res/layout/fragment_centr.xml" value="0.2734375" />
+        <entry key="..\:/Production/Criminal/app/src/main/res/layout/fragment_crimes.xml" value="0.165" />
+        <entry key="..\:/Production/Criminal/app/src/main/res/layout/fragment_crimes_list.xml" value="0.24444444444444444" />
+        <entry key="..\:/Production/Criminal/app/src/main/res/layout/fragment_crimes_tile.xml" value="0.165" />
+        <entry key="..\:/Production/Criminal/app/src/main/res/layout/fragment_details_crime.xml" value="0.2734375" />
+        <entry key="..\:/Production/Criminal/app/src/main/res/layout/fragment_fullscreen.xml" value="0.2734375" />
+        <entry key="..\:/Production/Criminal/app/src/main/res/layout/fragment_home.xml" value="0.18394648829431437" />
+        <entry key="..\:/Production/Criminal/app/src/main/res/layout/fragment_instructions.xml" value="0.259375" />
+        <entry key="..\:/Production/Criminal/app/src/main/res/layout/fragment_library.xml" value="0.2734375" />
+        <entry key="..\:/Production/Criminal/app/src/main/res/layout/fragment_profile.xml" value="0.25" />
+        <entry key="..\:/Production/Criminal/app/src/main/res/layout/fragment_second.xml" value="0.2734375" />
+        <entry key="..\:/Production/Criminal/app/src/main/res/layout/fragment_shorts.xml" value="0.259375" />
+        <entry key="..\:/Production/Criminal/app/src/main/res/layout/fragment_slider.xml" value="0.2734375" />
+        <entry key="..\:/Production/Criminal/app/src/main/res/layout/fragment_slider2.xml" value="0.2734375" />
+        <entry key="..\:/Production/Criminal/app/src/main/res/layout/fragment_specifications.xml" value="0.2734375" />
+        <entry key="..\:/Production/Criminal/app/src/main/res/layout/fragment_start.xml" value="0.2734375" />
+        <entry key="..\:/Production/Criminal/app/src/main/res/layout/fragment_subscriptions.xml" value="0.2734375" />
+        <entry key="..\:/Production/Criminal/app/src/main/res/layout/fragment_test.xml" value="0.2734375" />
+        <entry key="..\:/Production/Criminal/app/src/main/res/layout/fragment_three.xml" value="0.259375" />
+        <entry key="..\:/Production/Criminal/app/src/main/res/layout/item_crimes_fragment_list.xml" value="0.1" />
+        <entry key="..\:/Production/Criminal/app/src/main/res/layout/item_crimes_fragment_tile.xml" value="0.2734375" />
+        <entry key="..\:/Production/Criminal/app/src/main/res/layout/my_custom_dialog.xml" value="0.25" />
+        <entry key="..\:/Production/Criminal/app/src/main/res/layout/my_custom_dialog_exit.xml" value="0.27239583333333334" />
+        <entry key="..\:/Production/Criminal/app/src/main/res/layout/my_custom_dialog_payment.xml" value="0.2734375" />
+        <entry key="..\:/Production/Criminal/app/src/main/res/layout/recycler_view_item_crimes_fragment.xml" value="0.165" />
+        <entry key="..\:/Production/Criminal/app/src/main/res/layout/recycler_view_item_crimes_fragment1.xml" value="0.2734375" />
+        <entry key="..\:/Production/Criminal/app/src/main/res/layout/test.xml" value="0.27239583333333334" />
+        <entry key="..\:/Production/Criminal/app/src/main/res/menu/bottom_menu.xml" value="0.25" />
+        <entry key="..\:/Production/Criminal/app/src/main/res/menu/switch_layout_menu.xml" value="0.2734375" />
+        <entry key="..\:/Production/Criminal/app/src/main/res/mipmap-anydpi-v26/ic_launcher.xml" value="0.1495" />
+      </map>
+    </option>
+  </component>
+  <component name="ProjectRootManager" version="2" languageLevel="JDK_11" default="true" project-jdk-name="Android Studio default JDK" project-jdk-type="JavaSDK">
+    <output url="file://$PROJECT_DIR$/build/classes" />
+  </component>
+  <component name="ProjectType">
+    <option name="id" value="Android" />
+  </component>
+</project>

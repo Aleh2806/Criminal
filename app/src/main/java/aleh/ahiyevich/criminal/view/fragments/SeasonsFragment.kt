@@ -7,7 +7,7 @@ import android.view.View
 import android.view.ViewGroup
 import aleh.ahiyevich.criminal.R
 
-class SeassonsFragment : Fragment() {
+class SeasonsFragment : Fragment() {
 
 
     override fun onCreateView(

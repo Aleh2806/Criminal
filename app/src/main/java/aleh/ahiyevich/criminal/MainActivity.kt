@@ -3,7 +3,6 @@ package aleh.ahiyevich.criminal
 import aleh.ahiyevich.criminal.databinding.ActivityMainBinding
 import aleh.ahiyevich.criminal.view.fragments.AuthorisationFragment
 import aleh.ahiyevich.criminal.view.fragments.CrimesFragmentList
-import aleh.ahiyevich.criminal.view.fragments.SeasonsFragmentList
 import android.app.Dialog
 import android.content.Context
 import android.content.SharedPreferences
@@ -26,8 +25,10 @@ class MainActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+
         _binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
+
         if (savedInstanceState == null) {
             supportFragmentManager
                 .beginTransaction()
@@ -36,17 +37,21 @@ class MainActivity : AppCompatActivity() {
         }
     }
 
+
+
     //Зануляем байндинг
     override fun onDestroy() {
         super.onDestroy()
         _binding = null
     }
 
+    // При пересоздании активити вызываем функцию ФуллСкрин
     override fun onResume() {
         super.onResume()
         callFullScreen()
     }
 
+    // Обработка нажатия системной кнопки назад
     override fun onBackPressed() {
         exitDialog()
     }
@@ -89,9 +94,9 @@ class MainActivity : AppCompatActivity() {
         }
     }
 
-
+    // Создаем диалог для выхода из приложения
     private fun exitDialog() {
-        val dialogBinding = layoutInflater.inflate(R.layout.my_custom_dialog_exit, null)
+        val dialogBinding = layoutInflater.inflate(R.layout.dialog_exit, null)
         val myDialog = Dialog(this)
 
         myDialog.setContentView(dialogBinding)

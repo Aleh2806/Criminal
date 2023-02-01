@@ -19,7 +19,7 @@ class CrimesListAdapter(
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ItemCrimesViewHolder {
         val inflatedView = LayoutInflater.from(parent.context)
-            .inflate(R.layout.item_fragment_list, parent, false)
+            .inflate(R.layout.item_list, parent, false)
 
         return ItemCrimesViewHolder(inflatedView)
     }

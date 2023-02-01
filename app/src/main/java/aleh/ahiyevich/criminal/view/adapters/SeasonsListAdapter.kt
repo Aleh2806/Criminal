@@ -17,7 +17,7 @@ class SeasonsListAdapter(private val data: List<Seasons>, private val listener: 
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ItemSeasonViewHolder {
         val inflatedView =
-            LayoutInflater.from(parent.context).inflate(R.layout.item_fragment_list, parent, false)
+            LayoutInflater.from(parent.context).inflate(R.layout.item_list, parent, false)
         return ItemSeasonViewHolder(inflatedView)
     }
 

@@ -118,7 +118,7 @@ class CrimesFragmentTile : Fragment(), OnItemClick {
 
 
     private fun paymentDialog() {
-        val dialogBinding = layoutInflater.inflate(R.layout.my_custom_dialog_payment, null)
+        val dialogBinding = layoutInflater.inflate(R.layout.dialog_payment, null)
         val myDialog = Dialog(requireContext())
 
         myDialog.setContentView(dialogBinding)

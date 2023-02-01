@@ -20,7 +20,7 @@ class CrimesTileAdapter(
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ItemCrimesViewHolder {
 
         val inflatedView = LayoutInflater.from(parent.context)
-            .inflate(R.layout.item_fragment_tile, parent, false)
+            .inflate(R.layout.item_tile, parent, false)
 
         return ItemCrimesViewHolder(inflatedView)
     }

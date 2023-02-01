@@ -3,6 +3,7 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+        <entry key="..\:/Production/Criminal/app/src/main/res/drawable-v24/background_profile_person.xml" value="0.1495" />
         <entry key="..\:/Production/Criminal/app/src/main/res/drawable-v24/btn_background.xml" value="0.1485" />
         <entry key="..\:/Production/Criminal/app/src/main/res/drawable-v24/ic_launcher_foreground.xml" value="0.1055" />
         <entry key="..\:/Production/Criminal/app/src/main/res/drawable/backgroun_crimes_header.xml" value="0.1" />
@@ -24,8 +25,10 @@
         <entry key="..\:/Production/Criminal/app/src/main/res/drawable/ic_baseline_subscriptions_24.xml" value="0.1" />
         <entry key="..\:/Production/Criminal/app/src/main/res/drawable/ic_baseline_whatshot_24.xml" value="0.1055" />
         <entry key="..\:/Production/Criminal/app/src/main/res/drawable/ic_launcher_background.xml" value="0.1055" />
+        <entry key="..\:/Production/Criminal/app/src/main/res/drawable/ic_round_arrow_back_24.xml" value="0.1" />
         <entry key="..\:/Production/Criminal/app/src/main/res/drawable/ic_round_lock_24.xml" value="0.1" />
         <entry key="..\:/Production/Criminal/app/src/main/res/drawable/ic_round_menu_24.xml" value="0.1055" />
+        <entry key="..\:/Production/Criminal/app/src/main/res/drawable/ic_round_person_24.xml" value="0.1495" />
         <entry key="..\:/Production/Criminal/app/src/main/res/drawable/ic_round_priority_high_24.xml" value="0.1" />
         <entry key="..\:/Production/Criminal/app/src/main/res/drawable/import_export_24.xml" value="0.1485" />
         <entry key="..\:/Production/Criminal/app/src/main/res/layout-land/fragment_authorisation.xml" value="0.25" />
@@ -53,6 +56,7 @@
         <entry key="..\:/Production/Criminal/app/src/main/res/layout/fragment_instructions.xml" value="0.259375" />
         <entry key="..\:/Production/Criminal/app/src/main/res/layout/fragment_library.xml" value="0.2734375" />
         <entry key="..\:/Production/Criminal/app/src/main/res/layout/fragment_profile.xml" value="0.25" />
+        <entry key="..\:/Production/Criminal/app/src/main/res/layout/fragment_seassons.xml" value="0.2734375" />
         <entry key="..\:/Production/Criminal/app/src/main/res/layout/fragment_second.xml" value="0.2734375" />
         <entry key="..\:/Production/Criminal/app/src/main/res/layout/fragment_shorts.xml" value="0.259375" />
         <entry key="..\:/Production/Criminal/app/src/main/res/layout/fragment_slider.xml" value="0.2734375" />

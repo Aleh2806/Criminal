@@ -87,7 +87,7 @@ class CrimesFragment : Fragment(), OnItemClick {
             paymentDialog()
         } else {
             requireActivity().supportFragmentManager.beginTransaction()
-                .replace(R.id.container_for_fragment, DetailsCrimeFragment.newInstance(crime))
+                .replace(R.id.container_for_fragment, DetailsCrimeFragmentList())
                 .addToBackStack("")
                 .commit()
         }

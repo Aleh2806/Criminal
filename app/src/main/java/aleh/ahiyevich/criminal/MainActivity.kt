@@ -13,6 +13,8 @@ import android.os.Bundle
 import android.view.View
 import android.widget.Button
 import androidx.appcompat.app.AppCompatActivity
+import kotlinx.android.synthetic.main.activity_main.*
+import kotlinx.android.synthetic.main.fragment_authorisation.*
 
 
 class MainActivity : AppCompatActivity() {
@@ -29,6 +31,12 @@ class MainActivity : AppCompatActivity() {
 
         _binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
+
+        if (authorisation_layout != main_activity) {
+            main_activity_header.visibility = View.GONE
+        } else {
+            main_activity_header.visibility = View.VISIBLE
+        }
 
         if (savedInstanceState == null) {
             supportFragmentManager

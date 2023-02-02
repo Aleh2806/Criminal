@@ -38,31 +38,31 @@ class DetailsCrimeFragmentList : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         binding.detailsBack.setOnClickListener {
-                requireActivity()
-                    .supportFragmentManager
-                    .popBackStack()
-            }
+            requireActivity()
+                .supportFragmentManager
+                .popBackStack()
+        }
 
-        if (details_list != details_tile){
+        if (details_list != details_tile) {
             binding.changerLayouts.setOnClickListener {
                 requireActivity().supportFragmentManager.beginTransaction()
-                    .replace(R.id.container_for_fragment,DetailsCrimeFragmentTile())
+                    .replace(R.id.container_for_fragment, DetailsCrimeFragmentTile())
                     .hide(this)
                     .commit()
             }
         }
 
 
-            // Передача параметров из фрагмента во фрагмент
-            // если аргументы не null, получаем Парселизированный обьект положенный
-            // в бутылку из метода newInstance и отрисовываем фрагмент
+        // Передача параметров из фрагмента во фрагмент
+        // если аргументы не null, получаем Парселизированный обьект положенный
+        // в бутылку из метода newInstance и отрисовываем фрагмент
 //            val crime = arguments?.getParcelable<Crimes>(BUNDLE_CRIME_EXTRA)
 //        if (crime != null)
 //            renderData(crime)
 //    }
-        }
+    }
 
-        // Отрисовка фрагмента через обьект
+    // Отрисовка фрагмента через обьект
 //    private fun renderData(crime: Crimes) {
 //
 //        binding.apply {
@@ -73,11 +73,11 @@ class DetailsCrimeFragmentList : Fragment() {
 //        }
 //    }
 
-        // Передача параметров из фрагмента во фрагмент, кладем в бутылку
-        // Парселизированный обьект
+    // Передача параметров из фрагмента во фрагмент, кладем в бутылку
+    // Парселизированный обьект
 
-        // Затем в аргументы этого Фрагмента ложим бутылку, в которую только что положили
-        // Парселизированный обьект
+    // Затем в аргументы этого Фрагмента ложим бутылку, в которую только что положили
+    // Парселизированный обьект
 //        companion object {
 //            const val BUNDLE_CRIME_EXTRA = "Crime"
 //
@@ -89,6 +89,6 @@ class DetailsCrimeFragmentList : Fragment() {
 //                return fragment
 //            }
 //        }
-    }
+}
 
 

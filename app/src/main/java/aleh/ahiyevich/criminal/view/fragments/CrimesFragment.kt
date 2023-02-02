@@ -4,8 +4,8 @@ import aleh.ahiyevich.criminal.R
 import aleh.ahiyevich.criminal.databinding.FragmentCrimesListBinding
 import aleh.ahiyevich.criminal.model.CrimeId
 import aleh.ahiyevich.criminal.model.Crimes
-import aleh.ahiyevich.criminal.model.OnItemClick
 import aleh.ahiyevich.criminal.model.FakeRepository
+import aleh.ahiyevich.criminal.model.OnItemClick
 import aleh.ahiyevich.criminal.view.adapters.CrimesAdapter
 import android.app.Dialog
 import android.graphics.Color

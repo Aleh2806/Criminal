@@ -12,18 +12,18 @@
         android:id="@+id/header_crimes"
         android:layout_width="match_parent"
         android:layout_height="35dp"
-        android:orientation="horizontal"
         android:layout_marginHorizontal="10dp"
-        android:gravity="center">
+        android:gravity="center"
+        android:orientation="horizontal">
 
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="C r i m e  T i m e"
-                android:textColor="@color/white"
-                android:textSize="35sp"
-                android:layout_gravity="center"
-                android:fontFamily="@font/custom_font" />
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:fontFamily="@font/custom_font"
+            android:text="C r i m e  T i m e"
+            android:textColor="@color/white"
+            android:textSize="35sp" />
 
     </LinearLayout>
 

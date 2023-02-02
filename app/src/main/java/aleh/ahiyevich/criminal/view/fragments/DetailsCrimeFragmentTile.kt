@@ -43,10 +43,10 @@ class DetailsCrimeFragmentTile : Fragment() {
                 .popBackStack()
         }
 
-        if (details_tile != details_list){
+        if (details_tile != details_list) {
             binding.changerLayouts.setOnClickListener {
                 requireActivity().supportFragmentManager.beginTransaction()
-                    .replace(R.id.container_for_fragment,DetailsCrimeFragmentList())
+                    .replace(R.id.container_for_fragment, DetailsCrimeFragmentList())
                     .hide(this)
                     .commit()
             }

@@ -15,8 +15,8 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="vertical"
-            android:background="#CFCFCF">
+            android:background="#CFCFCF"
+            android:orientation="vertical">
 
             <TextView
                 android:id="@+id/alert_title"
@@ -45,9 +45,9 @@
                     android:layout_marginHorizontal="10dp"
                     android:gravity="center"
                     android:padding="10dp"
-                    android:textSize="15sp"
                     android:text="Данное дело закрыто!\nСтоимость этого дела - 1$\nХотите купить его?"
                     android:textColor="@color/black"
+                    android:textSize="15sp"
                     android:textStyle="bold" />
 
                 <View
@@ -62,9 +62,9 @@
                     android:layout_width="match_parent"
                     android:layout_height="40dp"
                     android:layout_below="@id/alert_view"
-                    android:gravity="center"
-                    android:layout_marginTop="10dp"
                     android:layout_marginHorizontal="10dp"
+                    android:layout_marginTop="10dp"
+                    android:gravity="center"
                     android:orientation="horizontal">
 
                     <androidx.appcompat.widget.AppCompatButton
@@ -72,22 +72,22 @@
                         android:layout_width="80dp"
                         android:layout_height="30dp"
                         android:background="@drawable/btn_background"
-                        android:textAllCaps="true"
                         android:text="Да"
+                        android:textAllCaps="true"
                         android:textColor="@color/white"
-                        android:textStyle="bold"
-                        android:textSize="14sp"/>
+                        android:textSize="14sp"
+                        android:textStyle="bold" />
 
                     <androidx.appcompat.widget.AppCompatButton
                         android:id="@+id/alert_no_payment_dialog"
                         android:layout_width="80dp"
                         android:layout_height="30dp"
+                        android:layout_marginStart="35dp"
                         android:background="@drawable/btn_background"
                         android:text="Нет"
                         android:textColor="@color/white"
-                        android:layout_marginStart="35dp"
-                        android:textStyle="bold"
-                        android:textSize="14sp"/>
+                        android:textSize="14sp"
+                        android:textStyle="bold" />
 
 
                 </LinearLayout>

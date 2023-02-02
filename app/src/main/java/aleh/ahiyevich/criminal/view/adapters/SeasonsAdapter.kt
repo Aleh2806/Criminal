@@ -24,7 +24,7 @@ class SeasonsAdapter(private val data: List<Seasons>, private val listener: OnIt
     override fun onBindViewHolder(holder: ItemSeasonViewHolder, position: Int) {
         val season = data[position]
 
-        if (season.isOpenSeason){
+        if (season.isOpenSeason) {
             holder.lockSeason.visibility = View.GONE
         } else {
             holder.lockSeason.visibility = View.VISIBLE

@@ -28,7 +28,7 @@ class CrimesAdapter(
     override fun onBindViewHolder(holder: ItemCrimesViewHolder, position: Int) {
         val crime: Crimes = data[position]
 
-        if (crime.isOpen){
+        if (crime.isOpen) {
             holder.lockCrime.visibility = View.GONE
         } else {
             holder.lockCrime.visibility = View.VISIBLE

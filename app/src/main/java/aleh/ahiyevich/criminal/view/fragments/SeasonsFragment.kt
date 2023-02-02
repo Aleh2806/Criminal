@@ -45,7 +45,7 @@ class SeasonsFragment : Fragment(), OnItemClick {
         val recyclerView: RecyclerView = binding.recyclerViewSeasons
         recyclerView.setHasFixedSize(true)
         recyclerView.adapter = SeasonsAdapter(data, this)
-        recyclerView.layoutManager = GridLayoutManager(requireContext(),2)
+        recyclerView.layoutManager = GridLayoutManager(requireContext(), 2)
     }
 
     override fun onItemClick(position: Int) {

@@ -1,29 +1,29 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:orientation="vertical"
     android:background="@color/background_app"
+    android:orientation="vertical"
     tools:context=".view.fragments.SeasonsFragment">
 
     <LinearLayout
         android:id="@+id/header_crimes"
         android:layout_width="match_parent"
         android:layout_height="35dp"
-        android:orientation="horizontal"
         android:layout_marginHorizontal="10dp"
-        android:gravity="center">
+        android:gravity="center"
+        android:orientation="horizontal">
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:fontFamily="@font/custom_font"
             android:text="C r i m e  T i m e"
             android:textColor="@color/white"
-            android:textSize="35sp"
-            android:layout_gravity="center"
-            android:fontFamily="@font/custom_font" />
+            android:textSize="35sp" />
 
     </LinearLayout>
 
@@ -36,7 +36,7 @@
             android:id="@+id/recycler_view_seasons"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            tools:listitem="@layout/item_tile"/>
+            tools:listitem="@layout/item_tile" />
 
 
         <com.google.android.material.bottomappbar.BottomAppBar

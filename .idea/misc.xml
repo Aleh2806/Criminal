@@ -43,6 +43,8 @@
         <entry key="..\:/Production/Criminal/app/src/main/res/layout/activity_authorisation.xml" value="0.2734375" />
         <entry key="..\:/Production/Criminal/app/src/main/res/layout/activity_loader.xml" value="0.2734375" />
         <entry key="..\:/Production/Criminal/app/src/main/res/layout/activity_main.xml" value="0.25" />
+        <entry key="..\:/Production/Criminal/app/src/main/res/layout/dialog_exit.xml" value="0.2734375" />
+        <entry key="..\:/Production/Criminal/app/src/main/res/layout/dialog_payment.xml" value="0.2734375" />
         <entry key="..\:/Production/Criminal/app/src/main/res/layout/fragment_authoriation.xml" value="0.259375" />
         <entry key="..\:/Production/Criminal/app/src/main/res/layout/fragment_authorisatio.xml" value="0.27239583333333334" />
         <entry key="..\:/Production/Criminal/app/src/main/res/layout/fragment_authorisation.xml" value="0.2734375" />
@@ -54,6 +56,7 @@
         <entry key="..\:/Production/Criminal/app/src/main/res/layout/fragment_crimes_list.xml" value="0.24444444444444444" />
         <entry key="..\:/Production/Criminal/app/src/main/res/layout/fragment_crimes_tile.xml" value="0.165" />
         <entry key="..\:/Production/Criminal/app/src/main/res/layout/fragment_details_crime.xml" value="0.25" />
+        <entry key="..\:/Production/Criminal/app/src/main/res/layout/fragment_details_crime_list.xml" value="0.2734375" />
         <entry key="..\:/Production/Criminal/app/src/main/res/layout/fragment_details_crime_tile.xml" value="0.25" />
         <entry key="..\:/Production/Criminal/app/src/main/res/layout/fragment_fullscreen.xml" value="0.2734375" />
         <entry key="..\:/Production/Criminal/app/src/main/res/layout/fragment_home.xml" value="0.18394648829431437" />
@@ -75,6 +78,7 @@
         <entry key="..\:/Production/Criminal/app/src/main/res/layout/item_fragment_list.xml" value="0.2734375" />
         <entry key="..\:/Production/Criminal/app/src/main/res/layout/item_fragment_seasons.xml" value="0.2734375" />
         <entry key="..\:/Production/Criminal/app/src/main/res/layout/item_fragment_tile.xml" value="0.2734375" />
+        <entry key="..\:/Production/Criminal/app/src/main/res/layout/item_list.xml" value="0.2734375" />
         <entry key="..\:/Production/Criminal/app/src/main/res/layout/item_list_details.xml" value="0.2734375" />
         <entry key="..\:/Production/Criminal/app/src/main/res/layout/item_tile.xml" value="0.2734375" />
         <entry key="..\:/Production/Criminal/app/src/main/res/layout/my_custom_dialog.xml" value="0.25" />

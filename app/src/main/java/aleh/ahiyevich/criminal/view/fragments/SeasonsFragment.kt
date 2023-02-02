@@ -6,7 +6,7 @@ import aleh.ahiyevich.criminal.model.FakeRepository
 import aleh.ahiyevich.criminal.model.OnItemClick
 import aleh.ahiyevich.criminal.model.Seasons
 import aleh.ahiyevich.criminal.model.SeasonsId
-import aleh.ahiyevich.criminal.view.adapters.SeasonsListAdapter
+import aleh.ahiyevich.criminal.view.adapters.SeasonsAdapter
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -14,10 +14,9 @@ import android.view.ViewGroup
 import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.GridLayoutManager
-import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 
-class SeasonsFragmentList : Fragment(), OnItemClick {
+class SeasonsFragment : Fragment(), OnItemClick {
 
     private val data = createData()
 
@@ -45,8 +44,8 @@ class SeasonsFragmentList : Fragment(), OnItemClick {
 
         val recyclerView: RecyclerView = binding.recyclerViewSeasons
         recyclerView.setHasFixedSize(true)
-        recyclerView.adapter = SeasonsListAdapter(data, this)
-        recyclerView.layoutManager = LinearLayoutManager(requireContext())
+        recyclerView.adapter = SeasonsAdapter(data, this)
+        recyclerView.layoutManager = GridLayoutManager(requireContext(),2)
     }
 
     override fun onItemClick(position: Int) {
@@ -59,7 +58,7 @@ class SeasonsFragmentList : Fragment(), OnItemClick {
             requireActivity()
                 .supportFragmentManager
                 .beginTransaction()
-                .replace(R.id.container_for_fragment, CrimesFragmentTile())
+                .replace(R.id.container_for_fragment, CrimesFragment())
                 .hide(this)
                 .addToBackStack("")
                 .commit()

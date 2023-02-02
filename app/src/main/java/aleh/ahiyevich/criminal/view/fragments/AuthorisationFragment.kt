@@ -40,7 +40,7 @@ class AuthorisationFragment : Fragment() {
             requireActivity()
                 .supportFragmentManager
                 .beginTransaction()
-                .replace(R.id.container_for_fragment, SeasonsFragmentList())
+                .replace(R.id.container_for_fragment, SeasonsFragment())
                 .hide(this)
                 .commit()
         }

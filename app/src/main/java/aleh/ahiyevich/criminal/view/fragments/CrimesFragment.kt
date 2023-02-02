@@ -6,7 +6,7 @@ import aleh.ahiyevich.criminal.model.CrimeId
 import aleh.ahiyevich.criminal.model.Crimes
 import aleh.ahiyevich.criminal.model.OnItemClick
 import aleh.ahiyevich.criminal.model.FakeRepository
-import aleh.ahiyevich.criminal.view.adapters.CrimesListAdapter
+import aleh.ahiyevich.criminal.view.adapters.CrimesAdapter
 import android.app.Dialog
 import android.graphics.Color
 import android.graphics.drawable.ColorDrawable
@@ -17,12 +17,10 @@ import android.view.ViewGroup
 import android.widget.Button
 import android.widget.Toast
 import androidx.fragment.app.Fragment
-import androidx.fragment.app.FragmentTransaction
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import kotlinx.android.synthetic.main.fragment_crimes_list.*
 
-class CrimesFragmentList : Fragment(), OnItemClick {
+class CrimesFragment : Fragment(), OnItemClick {
 
     private val data = createData()
 
@@ -50,47 +48,31 @@ class CrimesFragmentList : Fragment(), OnItemClick {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        binding.changerLayouts.setOnClickListener {
-            requireActivity()
-                .supportFragmentManager
-                .beginTransaction()
-                .setTransition(FragmentTransaction.TRANSIT_NONE)
-                .replace(R.id.container_for_fragment, CrimesFragmentTile())
-                .hide(this)
-                .commit()
-        }
-
 
         val recyclerView: RecyclerView = binding.recyclerViewCrimes
         // Эта установка служит для повышения производительности системы
         recyclerView.setHasFixedSize(true)
-        recyclerView.adapter = CrimesListAdapter(data, this)
+        recyclerView.adapter = CrimesAdapter(data, this)
         recyclerView.layoutManager = LinearLayoutManager(this.context)
 
 
         binding.bottomNavigationView.setOnItemSelectedListener {
             when (it.itemId) {
-                R.id.crimes_bottom_menu -> if (recyclerView == recycler_view_crimes) {
+                R.id.home_bottom_menu ->
                     requireActivity()
                         .supportFragmentManager
                         .beginTransaction()
-                        .replace(R.id.container_for_fragment, CrimesFragmentList())
+                        .replace(R.id.container_for_fragment, SeasonsFragment())
                         .commit()
-                } else {
+
+
+                R.id.profile_bottom_menu ->
                     requireActivity()
                         .supportFragmentManager
                         .beginTransaction()
-                        .replace(R.id.container_for_fragment, CrimesFragmentTile())
+                        .replace(R.id.container_for_fragment, ProfileFragment())
+                        .addToBackStack("")
                         .commit()
-                }
-
-
-                R.id.profile_bottom_menu -> requireActivity()
-                    .supportFragmentManager
-                    .beginTransaction()
-                    .replace(R.id.container_for_fragment, ProfileFragment())
-                    .addToBackStack("")
-                    .commit()
             }
             true
         }
@@ -123,14 +105,17 @@ class CrimesFragmentList : Fragment(), OnItemClick {
 
         dialogBinding.findViewById<Button>(R.id.alert_yes_payment_dialog).setOnClickListener {
             myDialog.dismiss()
-            Toast.makeText(requireContext(),"Переход на сторонний сервис оплаты",Toast.LENGTH_LONG).show()
+            Toast.makeText(
+                requireContext(),
+                "Переход на сторонний сервис оплаты",
+                Toast.LENGTH_LONG
+            ).show()
         }
 
         dialogBinding.findViewById<Button>(R.id.alert_no_payment_dialog).setOnClickListener {
             myDialog.dismiss()
         }
     }
-
 
 
     private fun createData(): ArrayList<Crimes> {

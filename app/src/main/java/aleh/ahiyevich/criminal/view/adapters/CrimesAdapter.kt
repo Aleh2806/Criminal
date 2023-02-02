@@ -11,11 +11,11 @@ import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 
-class CrimesListAdapter(
+class CrimesAdapter(
     private val data: List<Crimes>,
     private val listener: OnItemClick
 ) :
-    RecyclerView.Adapter<CrimesListAdapter.ItemCrimesViewHolder>() {
+    RecyclerView.Adapter<CrimesAdapter.ItemCrimesViewHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ItemCrimesViewHolder {
         val inflatedView = LayoutInflater.from(parent.context)

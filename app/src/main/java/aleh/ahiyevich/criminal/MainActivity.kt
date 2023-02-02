@@ -2,7 +2,7 @@ package aleh.ahiyevich.criminal
 
 import aleh.ahiyevich.criminal.databinding.ActivityMainBinding
 import aleh.ahiyevich.criminal.view.fragments.AuthorisationFragment
-import aleh.ahiyevich.criminal.view.fragments.CrimesFragmentList
+import aleh.ahiyevich.criminal.view.fragments.CrimesFragment
 import android.app.Dialog
 import android.content.Context
 import android.content.SharedPreferences
@@ -23,6 +23,7 @@ class MainActivity : AppCompatActivity() {
             return _binding!!
         }
 
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
@@ -36,7 +37,6 @@ class MainActivity : AppCompatActivity() {
                 .commit()
         }
     }
-
 
 
     //Зануляем байндинг
@@ -78,7 +78,7 @@ class MainActivity : AppCompatActivity() {
             // Запускаем Активити/Фрагмент который нужнен при Последующих входах
             supportFragmentManager
                 .beginTransaction()
-                .add(R.id.container_for_fragment, CrimesFragmentList())
+                .add(R.id.container_for_fragment, CrimesFragment())
                 .commit()
         }
     }

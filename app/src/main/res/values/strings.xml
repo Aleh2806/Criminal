@@ -2,7 +2,7 @@
     <string name="app_name">Crime time</string>
     <string name="bottom_menu_home">Главная</string>
     <string name="bottom_menu_profile">Профиль</string>
-    <string name="bottom_menu_crimes">Дела</string>
+    <string name="bottom_menu_crimes">Главная</string>
     <string name="go_back">Назад</string>
     <!-- TODO: Remove or change this placeholder text -->
     <string name="start">Начать</string>

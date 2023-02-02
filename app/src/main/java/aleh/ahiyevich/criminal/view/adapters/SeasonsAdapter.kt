@@ -11,13 +11,13 @@ import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 
-class SeasonsListAdapter(private val data: List<Seasons>, private val listener: OnItemClick) :
-    RecyclerView.Adapter<SeasonsListAdapter.ItemSeasonViewHolder>() {
+class SeasonsAdapter(private val data: List<Seasons>, private val listener: OnItemClick) :
+    RecyclerView.Adapter<SeasonsAdapter.ItemSeasonViewHolder>() {
 
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ItemSeasonViewHolder {
         val inflatedView =
-            LayoutInflater.from(parent.context).inflate(R.layout.item_list, parent, false)
+            LayoutInflater.from(parent.context).inflate(R.layout.item_tile, parent, false)
         return ItemSeasonViewHolder(inflatedView)
     }
 

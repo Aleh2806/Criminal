@@ -1,8 +1,8 @@
 package aleh.ahiyevich.criminal
 
 import aleh.ahiyevich.criminal.databinding.ActivityMainBinding
-import aleh.ahiyevich.criminal.view.fragments.AuthorisationFragment
-import aleh.ahiyevich.criminal.view.fragments.CrimesFragment
+import aleh.ahiyevich.criminal.model.Crimes
+import aleh.ahiyevich.criminal.view.fragments.*
 import android.app.Dialog
 import android.content.Context
 import android.content.SharedPreferences
@@ -34,10 +34,11 @@ class MainActivity : AppCompatActivity() {
         setContentView(binding.root)
 
 
+
         if (savedInstanceState == null) {
             supportFragmentManager
                 .beginTransaction()
-                .add(R.id.container_for_fragment, AuthorisationFragment())
+                .add(R.id.container_for_fragment, PhotoDetailsFragment())
                 .commit()
         }
     }

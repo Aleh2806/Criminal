@@ -55,14 +55,18 @@ class SeasonsFragment : Fragment(), OnItemClick {
         if (!season.isOpenSeason) {
             Toast.makeText(requireContext(), "Сезон закрыт", Toast.LENGTH_SHORT).show()
         } else {
-            requireActivity()
-                .supportFragmentManager
-                .beginTransaction()
-                .replace(R.id.container_for_fragment, CrimesFragment())
-                .hide(this)
-                .addToBackStack("")
-                .commit()
+            replaceFragment(CrimesFragment())
         }
+    }
+
+    private fun replaceFragment(fragment: Fragment) {
+        requireActivity()
+            .supportFragmentManager
+            .beginTransaction()
+            .replace(R.id.container_for_fragment, fragment)
+            .hide(this)
+            .addToBackStack("")
+            .commit()
     }
 
 

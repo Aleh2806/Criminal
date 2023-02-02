@@ -56,23 +56,13 @@ class CrimesFragment : Fragment(), OnItemClick {
         recyclerView.layoutManager = LinearLayoutManager(this.context)
 
 
+
         binding.bottomNavigationView.setOnItemSelectedListener {
             when (it.itemId) {
                 R.id.home_bottom_menu ->
-                    requireActivity()
-                        .supportFragmentManager
-                        .beginTransaction()
-                        .replace(R.id.container_for_fragment, SeasonsFragment())
-                        .commit()
-
-
+                    replaceFragment(SeasonsFragment())
                 R.id.profile_bottom_menu ->
-                    requireActivity()
-                        .supportFragmentManager
-                        .beginTransaction()
-                        .replace(R.id.container_for_fragment, ProfileFragment())
-                        .addToBackStack("")
-                        .commit()
+                    replaceFragment(ProfileFragment())
             }
             true
         }
@@ -86,13 +76,20 @@ class CrimesFragment : Fragment(), OnItemClick {
         if (!crime.isOpen) {
             paymentDialog()
         } else {
-            requireActivity().supportFragmentManager.beginTransaction()
-                .replace(R.id.container_for_fragment, DetailsCrimeFragmentList())
-                .addToBackStack("")
-                .commit()
+            replaceFragment(DetailsCrimeFragmentList())
         }
     }
 
+
+    private fun replaceFragment(fragment: Fragment) {
+        requireActivity()
+            .supportFragmentManager
+            .beginTransaction()
+            .replace(R.id.container_for_fragment, fragment)
+            .addToBackStack("")
+            .hide(this)
+            .commit()
+    }
 
     private fun paymentDialog() {
         val dialogBinding = layoutInflater.inflate(R.layout.dialog_payment, null)

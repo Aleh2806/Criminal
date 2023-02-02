@@ -43,52 +43,26 @@ class DetailsCrimeFragmentList : Fragment() {
                 .popBackStack()
         }
 
-        if (details_list != details_tile) {
-            binding.changerLayouts.setOnClickListener {
-                requireActivity().supportFragmentManager.beginTransaction()
-                    .replace(R.id.container_for_fragment, DetailsCrimeFragmentTile())
-                    .hide(this)
-                    .commit()
-            }
+        binding.photo.setOnClickListener {
+            replaceFragment(PhotoDetailsFragment())
         }
 
-
-        // Передача параметров из фрагмента во фрагмент
-        // если аргументы не null, получаем Парселизированный обьект положенный
-        // в бутылку из метода newInstance и отрисовываем фрагмент
-//            val crime = arguments?.getParcelable<Crimes>(BUNDLE_CRIME_EXTRA)
-//        if (crime != null)
-//            renderData(crime)
-//    }
+        if (details_list != details_tile) {
+            binding.changerLayouts.setOnClickListener {
+                replaceFragment(DetailsCrimeFragmentTile())
+            }
+        }
     }
 
-    // Отрисовка фрагмента через обьект
-//    private fun renderData(crime: Crimes) {
-//
-//        binding.apply {
-//            nameCrimeDetails.text = crime.nameCrime
-//            descriptionCrimeDetails.text = crime.descriptionCrime
-//            imageCrimeDetails.setImageResource(crime.imageCrime)
-//
-//        }
-//    }
 
-    // Передача параметров из фрагмента во фрагмент, кладем в бутылку
-    // Парселизированный обьект
-
-    // Затем в аргументы этого Фрагмента ложим бутылку, в которую только что положили
-    // Парселизированный обьект
-//        companion object {
-//            const val BUNDLE_CRIME_EXTRA = "Crime"
-//
-//            fun newInstance(crime: Crimes): DetailsCrimeFragment {
-//                val bundle = Bundle()
-//                bundle.putParcelable(BUNDLE_CRIME_EXTRA, crime)
-//                val fragment = DetailsCrimeFragment()
-//                fragment.arguments = bundle
-//                return fragment
-//            }
-//        }
+    private fun replaceFragment(fragment: Fragment){
+        requireActivity()
+            .supportFragmentManager
+            .beginTransaction()
+            .replace(R.id.container_for_fragment,fragment)
+            .hide(this)
+            .commit()
+    }
 }
 
 

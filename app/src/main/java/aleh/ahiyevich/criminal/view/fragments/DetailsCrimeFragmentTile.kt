@@ -43,14 +43,24 @@ class DetailsCrimeFragmentTile : Fragment() {
                 .popBackStack()
         }
 
+        binding.photo.setOnClickListener {
+            replaceFragment(PhotoDetailsFragment())
+        }
+
         if (details_tile != details_list) {
             binding.changerLayouts.setOnClickListener {
-                requireActivity().supportFragmentManager.beginTransaction()
-                    .replace(R.id.container_for_fragment, DetailsCrimeFragmentList())
-                    .hide(this)
-                    .commit()
+                replaceFragment(DetailsCrimeFragmentList())
             }
         }
+    }
+
+    private fun replaceFragment(fragment: Fragment){
+        requireActivity()
+            .supportFragmentManager
+            .beginTransaction()
+            .replace(R.id.container_for_fragment,fragment)
+            .hide(this)
+            .commit()
     }
 
 }

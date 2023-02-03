@@ -1,0 +1,47 @@
+{
+  "project_info": {
+    "project_number": "975136766895",
+    "project_id": "crimetimeapp",
+    "storage_bucket": "crimetimeapp.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:975136766895:android:35df13330f79477456cd5a",
+        "android_client_info": {
+          "package_name": "aleh.ahiyevich.criminal"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "975136766895-il1m6vdl1ut3puu1dr34lffg3sgdbmf1.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "aleh.ahiyevich.criminal",
+            "certificate_hash": "cdb8c5f0fa3091b3228a94f470454eccad010b4a"
+          }
+        },
+        {
+          "client_id": "975136766895-prvslje252v98sav0u1taquiu83c2e10.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCvm5xlokVFjeEre0gnHrJL0eVnlmL8lvM"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "975136766895-prvslje252v98sav0u1taquiu83c2e10.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

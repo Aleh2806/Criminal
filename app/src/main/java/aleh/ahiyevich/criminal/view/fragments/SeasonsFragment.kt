@@ -46,7 +46,21 @@ class SeasonsFragment : Fragment(), OnItemClick {
         recyclerView.setHasFixedSize(true)
         recyclerView.adapter = SeasonsAdapter(data, this)
         recyclerView.layoutManager = GridLayoutManager(requireContext(), 2)
+
+
+        binding.bottomNavigationView.setOnItemSelectedListener {
+            when (it.itemId) {
+                R.id.home_bottom_menu ->
+                    Toast.makeText(requireContext(),"Вы на главной странице",Toast.LENGTH_LONG).show()
+                R.id.profile_bottom_menu ->
+                    replaceFragment(ProfileFragment())
+            }
+            true
+        }
     }
+
+
+
 
     override fun onItemClick(position: Int) {
         val season = data[position]
@@ -65,7 +79,6 @@ class SeasonsFragment : Fragment(), OnItemClick {
             .beginTransaction()
             .replace(R.id.container_for_fragment, fragment)
             .hide(this)
-            .addToBackStack("")
             .commit()
     }
 

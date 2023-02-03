@@ -7,8 +7,6 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
-import kotlinx.android.synthetic.main.fragment_details_crime_list.*
-import kotlinx.android.synthetic.main.fragment_details_crime_tile.*
 
 
 class DetailsCrimeFragmentList : Fragment() {
@@ -37,29 +35,31 @@ class DetailsCrimeFragmentList : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        binding.detailsBack.setOnClickListener {
-            requireActivity()
-                .supportFragmentManager
-                .popBackStack()
-        }
-
-        binding.photo.setOnClickListener {
-            replaceFragment(PhotoDetailsFragment())
-        }
-
-        if (details_list != details_tile) {
-            binding.changerLayouts.setOnClickListener {
-                replaceFragment(DetailsCrimeFragmentTile())
+        binding.apply {
+            photo.setOnClickListener { replaceFragment(PhotoDetailsFragment()) }
+            video.setOnClickListener { replaceFragment(VideoDetailsFragment()) }
+            questions.setOnClickListener { replaceFragment(QuestionsDetailsFragment()) }
+            suspected.setOnClickListener { replaceFragment(SuspectedDetailsFragment()) }
+            experts.setOnClickListener { replaceFragment(ExpertsDetailsFragment()) }
+            deponents.setOnClickListener { replaceFragment(DeponentsDetailsFragment()) }
+            changerLayouts.setOnClickListener { replaceFragment(DetailsCrimeFragmentTile()) }
+            detailsBack.setOnClickListener {
+                requireActivity()
+                    .supportFragmentManager
+                    .popBackStack()
             }
         }
+
+
     }
 
 
-    private fun replaceFragment(fragment: Fragment){
+    private fun replaceFragment(fragment: Fragment) {
         requireActivity()
             .supportFragmentManager
             .beginTransaction()
-            .replace(R.id.container_for_fragment,fragment)
+            .replace(R.id.container_for_fragment, fragment)
+            .addToBackStack("")
             .hide(this)
             .commit()
     }

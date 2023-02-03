@@ -1,6 +1,5 @@
 package aleh.ahiyevich.criminal.view.fragments
 
-import aleh.ahiyevich.criminal.R
 import aleh.ahiyevich.criminal.databinding.FragmentPhotoDetailsBinding
 import aleh.ahiyevich.criminal.model.Crimes
 import android.os.Bundle
@@ -8,8 +7,6 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
-import kotlinx.android.synthetic.main.fragment_details_crime_list.*
-import kotlinx.android.synthetic.main.fragment_details_crime_tile.*
 
 
 class PhotoDetailsFragment : Fragment() {
@@ -39,24 +36,9 @@ class PhotoDetailsFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         binding.btnBack.setOnClickListener {
-            if (details_list == details_list){
-                requireActivity()
-                    .supportFragmentManager
-                    .beginTransaction()
-                    .replace(R.id.container_for_fragment,DetailsCrimeFragmentList())
-                    .hide(this)
-                    .commit()
-            } else if (details_tile == details_tile){
-                requireActivity()
-                    .supportFragmentManager
-                    .beginTransaction()
-                    .replace(R.id.container_for_fragment,DetailsCrimeFragmentTile())
-                    .hide(this)
-                    .commit()
-            }
-
-
-
+            requireActivity()
+                .supportFragmentManager
+                .popBackStack()
         }
 
         // Передача параметров из фрагмента во фрагмент

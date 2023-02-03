@@ -1,6 +1,6 @@
 package aleh.ahiyevich.criminal.view.fragments
 
-import aleh.ahiyevich.criminal.databinding.FragmentSuspectedBinding
+import aleh.ahiyevich.criminal.databinding.FragmentDeponentsDetailsBinding
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -8,11 +8,11 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 
 
-class SuspectedFragment : Fragment() {
+class DeponentsDetailsFragment : Fragment() {
 
 
-    private var _binding: FragmentSuspectedBinding? = null
-    private val binding: FragmentSuspectedBinding
+    private var _binding: FragmentDeponentsDetailsBinding? = null
+    private val binding: FragmentDeponentsDetailsBinding
         get() {
             return _binding!!
         }
@@ -22,7 +22,7 @@ class SuspectedFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        _binding = FragmentSuspectedBinding.inflate(inflater, container, false)
+        _binding = FragmentDeponentsDetailsBinding.inflate(inflater, container, false)
         return binding.root
     }
 
@@ -33,5 +33,11 @@ class SuspectedFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
+        binding.btnBack.setOnClickListener {
+            requireActivity()
+                .supportFragmentManager
+                .popBackStack()
+        }
     }
 }

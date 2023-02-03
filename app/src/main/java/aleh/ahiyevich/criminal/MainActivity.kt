@@ -38,7 +38,7 @@ class MainActivity : AppCompatActivity() {
         if (savedInstanceState == null) {
             supportFragmentManager
                 .beginTransaction()
-                .add(R.id.container_for_fragment, PhotoDetailsFragment())
+                .add(R.id.container_for_fragment, CrimesFragment())
                 .commit()
         }
     }

@@ -1,6 +1,6 @@
 package aleh.ahiyevich.criminal.view.fragments
 
-import aleh.ahiyevich.criminal.databinding.FragmentQuestionsBinding
+import aleh.ahiyevich.criminal.databinding.FragmentQuestionsDetailsBinding
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -8,11 +8,11 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 
 
-class QuestionsFragment : Fragment() {
+class QuestionsDetailsFragment : Fragment() {
 
 
-    private var _binding: FragmentQuestionsBinding? = null
-    private val binding: FragmentQuestionsBinding
+    private var _binding: FragmentQuestionsDetailsBinding? = null
+    private val binding: FragmentQuestionsDetailsBinding
         get() {
             return _binding!!
         }
@@ -22,7 +22,7 @@ class QuestionsFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        _binding = FragmentQuestionsBinding.inflate(inflater, container, false)
+        _binding = FragmentQuestionsDetailsBinding.inflate(inflater, container, false)
         return binding.root
     }
 
@@ -33,5 +33,11 @@ class QuestionsFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
+        binding.btnBack.setOnClickListener {
+            requireActivity()
+                .supportFragmentManager
+                .popBackStack()
+        }
     }
 }

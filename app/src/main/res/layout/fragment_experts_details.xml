@@ -30,7 +30,7 @@
             android:layout_height="35dp"
             android:layout_gravity="center"
             android:textAlignment="center"
-            android:text="Материалы допросов"
+            android:text="Отчеты экспертов"
             android:textColor="@color/black"
             android:textSize="25sp"
             android:textStyle="bold" />

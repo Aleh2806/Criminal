@@ -1,6 +1,6 @@
 package aleh.ahiyevich.criminal.view.fragments
 
-import aleh.ahiyevich.criminal.databinding.FragmentVideoDetailsBinding
+import aleh.ahiyevich.criminal.databinding.FragmentExpertsDetailsBinding
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -8,11 +8,9 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 
 
-class VideoDetailsFragment : Fragment() {
-
-
-    private var _binding: FragmentVideoDetailsBinding? = null
-    private val binding: FragmentVideoDetailsBinding
+class ExpertsDetailsFragment : Fragment() {
+    private var _binding: FragmentExpertsDetailsBinding? = null
+    private val binding: FragmentExpertsDetailsBinding
         get() {
             return _binding!!
         }
@@ -22,7 +20,7 @@ class VideoDetailsFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        _binding = FragmentVideoDetailsBinding.inflate(inflater, container, false)
+        _binding = FragmentExpertsDetailsBinding.inflate(inflater, container, false)
         return binding.root
     }
 

@@ -29,16 +29,13 @@ class MainActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-
         _binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
-
-
 
         if (savedInstanceState == null) {
             supportFragmentManager
                 .beginTransaction()
-                .add(R.id.container_for_fragment, CrimesFragment())
+                .add(R.id.container_for_fragment, AuthorisationFragment())
                 .commit()
         }
     }

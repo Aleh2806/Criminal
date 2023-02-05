@@ -11,26 +11,20 @@ import android.text.TextUtils
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Button
-import android.widget.EditText
-import android.widget.TextView
 import android.widget.Toast
-import android.widget.Toast.makeText
-import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.fragment.app.Fragment
-import com.google.android.material.snackbar.Snackbar
 import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.auth.FirebaseUser
 import com.google.firebase.database.DatabaseReference
 import com.google.firebase.database.FirebaseDatabase
 import kotlinx.android.synthetic.main.dialog_registration.view.*
-import kotlinx.android.synthetic.main.fragment_authorisation.*
 
 
 class AuthorisationFragment : Fragment() {
 
-    lateinit var auth: FirebaseAuth
-    lateinit var db: FirebaseDatabase
-    lateinit var users: DatabaseReference
+    private lateinit var auth: FirebaseAuth
+    private lateinit var db: FirebaseDatabase
+    private lateinit var users: DatabaseReference
 
 
     private var _binding: FragmentAuthorisationBinding? = null
@@ -56,7 +50,6 @@ class AuthorisationFragment : Fragment() {
         db = FirebaseDatabase.getInstance()
         users = db.getReference("Users")
 
-
         binding.buttonEntry.setOnClickListener {
             authorisationUser()
         }
@@ -66,20 +59,33 @@ class AuthorisationFragment : Fragment() {
         }
     }
 
+    override fun onStart() {
+        super.onStart()
+
+        val currentUser: FirebaseUser? = auth.currentUser
+        if (currentUser != null) {
+            requireActivity()
+                .supportFragmentManager
+                .beginTransaction()
+                .replace(R.id.container_for_fragment, SeasonsFragment())
+                .addToBackStack("")
+                .commit()
+        }
+    }
+
     private fun authorisationUser() {
 
         val email = binding.logInEmailPerson
         val password = binding.logInPasswordPerson
+
         if (TextUtils.isEmpty(email.text.toString())) {
             Toast.makeText(requireContext(), "Введите ваш e-mail", Toast.LENGTH_SHORT).show()
             return
         }
         if (TextUtils.isEmpty(password.text.toString())) {
             Toast.makeText(requireContext(), "Введите ваш пароль", Toast.LENGTH_SHORT).show()
-
             return
         }
-
         auth.signInWithEmailAndPassword(email.text.toString(), password.text.toString())
             .addOnSuccessListener {
                 requireActivity().supportFragmentManager
@@ -87,15 +93,13 @@ class AuthorisationFragment : Fragment() {
                     .replace(R.id.container_for_fragment, SeasonsFragment())
                     .hide(this)
                     .commit()
-
             }
             .addOnFailureListener {
-                    Toast.makeText(
-                        requireContext(),
-                        "Ошибка авторизации",
-                        Toast.LENGTH_SHORT
-                    ).show()
-
+                Toast.makeText(
+                    requireContext(),
+                    "Ошибка авторизации",
+                    Toast.LENGTH_SHORT
+                ).show()
             }
     }
 
@@ -104,19 +108,27 @@ class AuthorisationFragment : Fragment() {
 
         val dialogBinding = layoutInflater.inflate(R.layout.dialog_registration, null)
         val myDialog = Dialog(requireContext())
+        val email = dialogBinding.registration_edit_email
+        val password = dialogBinding.registration_edit_password
 
         myDialog.setContentView(dialogBinding)
         myDialog.setCancelable(true)
         myDialog.window?.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
         myDialog.show()
 
-        val email = dialogBinding.registration_edit_email
-        val password = dialogBinding.registration_edit_password
-
         dialogBinding.registration_yes.setOnClickListener {
             // Делаю проверку на пустые поля
             if (TextUtils.isEmpty(email.text.toString())) {
                 Toast.makeText(requireContext(), "Введите ваш e-mail", Toast.LENGTH_SHORT)
+                    .show()
+                return@setOnClickListener
+            }
+            if (TextUtils.isEmpty(password.text.toString())) {
+                Toast.makeText(
+                    requireContext(),
+                    "Введите пароль",
+                    Toast.LENGTH_SHORT
+                )
                     .show()
                 return@setOnClickListener
             }
@@ -134,14 +146,24 @@ class AuthorisationFragment : Fragment() {
             auth.createUserWithEmailAndPassword(email.text.toString(), password.text.toString())
                 .addOnSuccessListener {
                     val user = User(email.text.toString(), password.text.toString())
+
+                    // Придумать что можно использовать,как альтернативу ключа для
+                    // авторизации, то что после оператора Элвиса
                     users
-                        // Придумать что можно использовать,как альтернативу ключа для
-                        // авторизации, то что после оператора Элвиса
                         .child(FirebaseAuth.getInstance().currentUser?.uid ?: user.email)
                         .setValue(user)
-                        .addOnSuccessListener {
-                            Toast.makeText(requireContext(),"Регистрация прошла успешо!",Toast.LENGTH_SHORT).show()
-                        }
+                    Toast.makeText(
+                        requireContext(),
+                        "Регистрация прошла успешо!",
+                        Toast.LENGTH_SHORT
+                    ).show()
+                }
+                .addOnFailureListener {
+                    Toast.makeText(
+                        requireContext(),
+                        "Ошибка регистрации",
+                        Toast.LENGTH_SHORT
+                    ).show()
                 }
             myDialog.dismiss()
         }
@@ -155,4 +177,5 @@ class AuthorisationFragment : Fragment() {
         super.onDestroyView()
         _binding = null
     }
+
 }

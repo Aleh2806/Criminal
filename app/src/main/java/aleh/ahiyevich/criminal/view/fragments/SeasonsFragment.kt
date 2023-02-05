@@ -79,6 +79,7 @@ class SeasonsFragment : Fragment(), OnItemClick {
             .beginTransaction()
             .replace(R.id.container_for_fragment, fragment)
             .hide(this)
+            .addToBackStack("")
             .commit()
     }
 

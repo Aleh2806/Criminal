@@ -66,6 +66,14 @@
                 android:layout_marginTop="15dp"
                 android:background="@color/white" />
 
+            <Button
+                android:id="@+id/exit_to_profile"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Выйти из профиля"
+                android:textColor="@color/black"
+                android:layout_gravity="center"/>
+
         </LinearLayout>
 
         <TextView

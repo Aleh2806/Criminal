@@ -103,7 +103,6 @@ class AuthorisationFragment : Fragment() {
             }
     }
 
-
     private fun showRegistrationDialogAndRegistrationUser() {
 
         val dialogBinding = layoutInflater.inflate(R.layout.dialog_registration, null)

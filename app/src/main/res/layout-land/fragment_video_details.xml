@@ -37,13 +37,16 @@
 
     </FrameLayout>
 
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:gravity="center"
+    <ImageView
+        android:id="@+id/video_content"
+        android:layout_width="300dp"
+        android:layout_height="300dp"
+        android:layout_gravity="center"
+        android:layout_marginTop="160dp"
         android:text="Какой-то материал"
         android:textColor="@color/black"
         android:textSize="45sp"
         android:textStyle="bold" />
+
 
 </LinearLayout>

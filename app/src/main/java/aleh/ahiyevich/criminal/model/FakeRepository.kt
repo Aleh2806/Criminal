@@ -7,7 +7,7 @@ import kotlinx.android.parcel.Parcelize
 
 @Parcelize
 data class Crimes(
-    val isOpen: Boolean = true,
+    var isOpen: Boolean,
     val nameCrime: String,
     val descriptionCrime: String,
     @DrawableRes val imageCrime: Int
@@ -15,7 +15,7 @@ data class Crimes(
 
 @Parcelize
 data class Seasons(
-    val isOpenSeason: Boolean = true,
+    val isOpenSeason: Boolean,
     val nameSeason: String,
     @DrawableRes val imageSeason: Int
 ): Parcelable

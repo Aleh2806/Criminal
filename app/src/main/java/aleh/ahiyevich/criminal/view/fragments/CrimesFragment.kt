@@ -15,7 +15,9 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
+import android.widget.EditText
 import android.widget.Toast
+import androidx.appcompat.widget.AppCompatButton
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -55,8 +57,6 @@ class CrimesFragment : Fragment(), OnItemClick {
         recyclerView.adapter = CrimesAdapter(data, this)
         recyclerView.layoutManager = LinearLayoutManager(this.context)
 
-
-
         binding.bottomNavigationView.setOnItemSelectedListener {
             when (it.itemId) {
                 R.id.home_bottom_menu ->
@@ -74,7 +74,7 @@ class CrimesFragment : Fragment(), OnItemClick {
 
         // Закрыл доступ к элементам под замком
         if (!crime.isOpen) {
-            paymentDialog()
+            paymentDialog(position)
         } else {
             replaceFragment(DetailsCrimeFragmentList())
         }
@@ -91,15 +91,101 @@ class CrimesFragment : Fragment(), OnItemClick {
             .commit()
     }
 
-    private fun paymentDialog() {
+    private fun paymentDialog(position: Int) {
         val dialogBinding = layoutInflater.inflate(R.layout.dialog_payment, null)
         val myDialog = Dialog(requireContext())
+        val inviteCode = dialogBinding.findViewById<EditText>(R.id.invite_code)
 
         myDialog.setContentView(dialogBinding)
         myDialog.setCancelable(true)
         myDialog.window?.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
         myDialog.show()
 
+        // Обработка кнопки подтвердить инвайт код (Проверка кодов для каждого дела)
+        dialogBinding.findViewById<AppCompatButton>(R.id.confirm_invite_code).setOnClickListener {
+            if (position == 2 && inviteCode.text.toString() == "QWERTY") {
+                data[position].isOpen = true
+                Toast.makeText(
+                    requireContext(),
+                    "Успешно",
+                    Toast.LENGTH_LONG
+                ).show()
+                myDialog.dismiss()
+                replaceFragment(DetailsCrimeFragmentList())
+            } else if (position == 3 && inviteCode.text.toString() == "QWERTY2") {
+                data[position].isOpen = true
+                Toast.makeText(
+                    requireContext(),
+                    "Успешно",
+                    Toast.LENGTH_LONG
+                ).show()
+                myDialog.dismiss()
+                replaceFragment(DetailsCrimeFragmentList())
+            } else if (position == 4 && inviteCode.text.toString() == "QWERTY3") {
+                data[position].isOpen = true
+                Toast.makeText(
+                    requireContext(),
+                    "Успешно",
+                    Toast.LENGTH_LONG
+                ).show()
+                myDialog.dismiss()
+                replaceFragment(DetailsCrimeFragmentList())
+            } else if (position == 5 && inviteCode.text.toString() == "QWERTY4") {
+                data[position].isOpen = true
+                Toast.makeText(
+                    requireContext(),
+                    "Успешно",
+                    Toast.LENGTH_LONG
+                ).show()
+                myDialog.dismiss()
+                replaceFragment(DetailsCrimeFragmentList())
+            } else if (position == 6 && inviteCode.text.toString() == "QWERTY5") {
+                data[position].isOpen = true
+                Toast.makeText(
+                    requireContext(),
+                    "Успешно",
+                    Toast.LENGTH_LONG
+                ).show()
+                myDialog.dismiss()
+                replaceFragment(DetailsCrimeFragmentList())
+            } else if (position == 7 && inviteCode.text.toString() == "QWERTY6") {
+                data[position].isOpen = true
+                Toast.makeText(
+                    requireContext(),
+                    "Успешно",
+                    Toast.LENGTH_LONG
+                ).show()
+                myDialog.dismiss()
+                replaceFragment(DetailsCrimeFragmentList())
+            } else if (position == 8 && inviteCode.text.toString() == "QWERTY7") {
+                data[position].isOpen = true
+                Toast.makeText(
+                    requireContext(),
+                    "Успешно",
+                    Toast.LENGTH_LONG
+                ).show()
+                myDialog.dismiss()
+                replaceFragment(DetailsCrimeFragmentList())
+            } else if (position == 9 && inviteCode.text.toString() == "QWERTY8") {
+                data[position].isOpen = true
+                Toast.makeText(
+                    requireContext(),
+                    "Успешно",
+                    Toast.LENGTH_LONG
+                ).show()
+                myDialog.dismiss()
+                replaceFragment(DetailsCrimeFragmentList())
+            } else {
+                data[position].isOpen = false
+                Toast.makeText(
+                    requireContext(),
+                    "Неверный Инвайт код",
+                    Toast.LENGTH_LONG
+                ).show()
+            }
+        }
+
+        // Обработка кнопки Да (Подтверждение оплаты)
         dialogBinding.findViewById<Button>(R.id.alert_yes_payment_dialog).setOnClickListener {
             myDialog.dismiss()
             Toast.makeText(
@@ -109,6 +195,7 @@ class CrimesFragment : Fragment(), OnItemClick {
             ).show()
         }
 
+        // Обработка кнопки Отмена (Закрытие диалогового окна)
         dialogBinding.findViewById<Button>(R.id.alert_no_payment_dialog).setOnClickListener {
             myDialog.dismiss()
         }

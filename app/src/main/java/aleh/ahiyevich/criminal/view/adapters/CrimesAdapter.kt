@@ -1,8 +1,7 @@
 package aleh.ahiyevich.criminal.view.adapters
 
-import aleh.ahiyevich.criminal.model.Crimes
 import aleh.ahiyevich.criminal.R
-import aleh.ahiyevich.criminal.model.CrimeId
+import aleh.ahiyevich.criminal.model.Crimes
 import aleh.ahiyevich.criminal.model.OnItemClick
 import android.view.LayoutInflater
 import android.view.View

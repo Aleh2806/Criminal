@@ -12,4 +12,13 @@
     <string name="tile_change_layout">Плитка</string>
     <string name="dummy_button">Dummy Button</string>
     <string name="dummy_content">DUMMY\nCONTENT</string>
+
+    <string-array name="details_crime_list">
+        <item>Фото</item>
+        <item>Видео</item>
+        <item>Материалы допроса</item>
+        <item>Подозреваемые</item>
+        <item>Отчеты экспертов</item>
+        <item>Показания свидетелей</item>
+    </string-array>
 </resources>

@@ -36,18 +36,18 @@ class DetailsCrimeFragmentTile : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         binding.apply {
-            photo.setOnClickListener { replaceFragment(PhotoDetailsFragment()) }
-            video.setOnClickListener { replaceFragment(VideoDetailsFragment()) }
-            questions.setOnClickListener { replaceFragment(QuestionsDetailsFragment()) }
-            suspected.setOnClickListener { replaceFragment(SuspectedDetailsFragment()) }
-            experts.setOnClickListener { replaceFragment(ExpertsDetailsFragment()) }
-            deponents.setOnClickListener { replaceFragment(DeponentsDetailsFragment()) }
+//            photo.setOnClickListener { replaceFragment(DescriptionsDetailsFragment()) }
+//            video.setOnClickListener { replaceFragment(VideoDetailsFragment()) }
+//            questions.setOnClickListener { replaceFragment(QuestionsDetailsFragment()) }
+//            suspected.setOnClickListener { replaceFragment(SuspectedDetailsFragment()) }
+//            experts.setOnClickListener { replaceFragment(ExpertsDetailsFragment()) }
+//            deponents.setOnClickListener { replaceFragment(DeponentsDetailsFragment()) }
             binding.changerLayouts.setOnClickListener { replaceFragment(DetailsCrimeFragmentList()) }
             detailsBack.setOnClickListener {
                 requireActivity()
                     .supportFragmentManager
                     .beginTransaction()
-                    .replace(R.id.container_for_fragment,CrimesFragment())
+                    .replace(R.id.container_for_fragment, CrimesFragment())
                     .commit()
             }
         }

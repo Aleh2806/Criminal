@@ -11,8 +11,10 @@ import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 
-class SeasonsAdapter(private val data: List<Seasons>, private val listener: OnItemClick) :
-    RecyclerView.Adapter<SeasonsAdapter.ItemSeasonViewHolder>() {
+class SeasonsAdapter(
+    private val data: List<Seasons>,
+    private val listener: OnItemClick
+) : RecyclerView.Adapter<SeasonsAdapter.ItemSeasonViewHolder>() {
 
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ItemSeasonViewHolder {
@@ -32,6 +34,7 @@ class SeasonsAdapter(private val data: List<Seasons>, private val listener: OnIt
 
         holder.nameSeason.text = season.nameSeason
         holder.imageSeason.setImageResource(season.imageSeason)
+
     }
 
     override fun getItemCount(): Int {

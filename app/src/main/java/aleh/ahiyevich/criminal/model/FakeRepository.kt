@@ -3,7 +3,24 @@ package aleh.ahiyevich.criminal.model
 import aleh.ahiyevich.criminal.R
 import android.os.Parcelable
 import androidx.annotation.DrawableRes
+import com.google.firebase.database.DatabaseReference
+import com.google.firebase.database.FirebaseDatabase
 import kotlinx.android.parcel.Parcelize
+
+//@Parcelize
+//data class Crimes(
+//    var isOpen: Boolean,
+//    val nameCrime: String,
+//    val descriptionCrime: String,
+//    @DrawableRes val imageCrime: Int
+//) : Parcelable
+//
+//@Parcelize
+//data class Seasons(
+//    val isOpenSeason: Boolean,
+//    val nameSeason: String,
+//    @DrawableRes val imageSeason: Int
+//): Parcelable
 
 @Parcelize
 data class Crimes(
@@ -16,9 +33,9 @@ data class Crimes(
 @Parcelize
 data class Seasons(
     val isOpenSeason: Boolean,
-    val nameSeason: String,
-    @DrawableRes val imageSeason: Int
-): Parcelable
+    @DrawableRes val imageSeason: Int,
+    val nameSeason: String
+) : Parcelable
 
 
 object FakeRepository {
@@ -50,16 +67,16 @@ object FakeRepository {
     )
 
     val imageCrime = mapOf(
-        CrimeId.ONE to R.drawable.details_img,
-        CrimeId.TWO to R.drawable.crime_1,
-        CrimeId.THREE to R.drawable.crime_2,
-        CrimeId.FOUR to R.drawable.crime_3,
-        CrimeId.FIVE to R.drawable.crime_4,
-        CrimeId.SIX to R.drawable.crime_5,
-        CrimeId.SEVEN to R.drawable.crime_6,
-        CrimeId.EIGHT to R.drawable.crime_7,
-        CrimeId.NINE to R.drawable.crime_8,
-        CrimeId.TEN to R.drawable.crime_9
+        CrimeId.ONE to R.drawable.ic_baseline_home_24,
+        CrimeId.TWO to R.drawable.ic_launcher_foreground,
+        CrimeId.THREE to R.drawable.ic_launcher_foreground,
+        CrimeId.FOUR to R.drawable.ic_launcher_foreground,
+        CrimeId.FIVE to R.drawable.ic_launcher_foreground,
+        CrimeId.SIX to R.drawable.ic_launcher_foreground,
+        CrimeId.SEVEN to R.drawable.ic_launcher_foreground,
+        CrimeId.EIGHT to R.drawable.ic_launcher_foreground,
+        CrimeId.NINE to R.drawable.ic_launcher_foreground,
+        CrimeId.TEN to R.drawable.ic_launcher_foreground
     )
 
     val isOpen = mapOf(
@@ -89,16 +106,16 @@ object FakeRepository {
     )
 
     val imageSeason = mapOf(
-        SeasonsId.ONE to R.drawable.details_img,
-        SeasonsId.TWO to R.drawable.crime_1,
-        SeasonsId.THREE to R.drawable.crime_2,
-        SeasonsId.FOUR to R.drawable.crime_3,
-        SeasonsId.FIVE to R.drawable.crime_4,
-        SeasonsId.SIX to R.drawable.crime_5,
-        SeasonsId.SEVEN to R.drawable.crime_6,
-        SeasonsId.EIGHT to R.drawable.crime_7,
-        SeasonsId.NINE to R.drawable.crime_8,
-        SeasonsId.TEN to R.drawable.crime_9
+        SeasonsId.ONE to R.drawable.ic_baseline_home_24,
+        SeasonsId.TWO to R.drawable.ic_launcher_foreground,
+        SeasonsId.THREE to R.drawable.ic_launcher_foreground,
+        SeasonsId.FOUR to R.drawable.ic_launcher_foreground,
+        SeasonsId.FIVE to R.drawable.ic_launcher_foreground,
+        SeasonsId.SIX to R.drawable.ic_launcher_foreground,
+        SeasonsId.SEVEN to R.drawable.ic_launcher_foreground,
+        SeasonsId.EIGHT to R.drawable.ic_launcher_foreground,
+        SeasonsId.NINE to R.drawable.ic_launcher_foreground,
+        SeasonsId.TEN to R.drawable.ic_launcher_foreground
     )
 
     val isOpenSeason = mapOf(

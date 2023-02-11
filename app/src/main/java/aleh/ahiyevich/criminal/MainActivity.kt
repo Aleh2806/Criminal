@@ -1,23 +1,15 @@
 package aleh.ahiyevich.criminal
 
 import aleh.ahiyevich.criminal.databinding.ActivityMainBinding
-import aleh.ahiyevich.criminal.model.Crimes
-import aleh.ahiyevich.criminal.view.fragments.*
+import aleh.ahiyevich.criminal.view.fragments.AuthorisationFragment
 import android.app.Dialog
-import android.content.Context
-import android.content.SharedPreferences
 import android.graphics.Color
 import android.graphics.drawable.ColorDrawable
 import android.os.Build
 import android.os.Bundle
 import android.view.View
-import android.view.Window
-import android.view.WindowManager
 import android.widget.Button
 import androidx.appcompat.app.AppCompatActivity
-import kotlinx.android.synthetic.main.activity_main.*
-import kotlinx.android.synthetic.main.fragment_authorisation.*
-import kotlinx.android.synthetic.main.fragment_crimes_list.*
 
 
 class MainActivity : AppCompatActivity() {
@@ -60,32 +52,6 @@ class MainActivity : AppCompatActivity() {
         exitDialog()
     }
 
-    // Проверка на первый запуск приложения
-    private fun checkFirstStart() {
-        val sp: SharedPreferences = getSharedPreferences("hasVisited", Context.MODE_PRIVATE)
-        val hasVisited: Boolean = sp.getBoolean("hasVisited", false)
-
-        if (!hasVisited) {
-            // Сработает, если Вход в приложение первый
-            // Ставим метку,что вход уже был
-            val e: SharedPreferences.Editor = sp.edit()
-            e.putBoolean("hasVisited", true)
-            e.apply()
-
-            // Запускаем Активити/Фрагмент который нужнен при Первом входе
-            supportFragmentManager
-                .beginTransaction()
-                .add(R.id.container_for_fragment, AuthorisationFragment())
-                .commit()
-        } else {
-            // Срабатывает, если вход в приложение уже был
-            // Запускаем Активити/Фрагмент который нужнен при Последующих входах
-            supportFragmentManager
-                .beginTransaction()
-                .add(R.id.container_for_fragment, CrimesFragment())
-                .commit()
-        }
-    }
 
     // Вызов полноэкранного режима
     private fun callFullScreen() {

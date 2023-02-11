@@ -179,7 +179,7 @@ class CrimesFragment : Fragment(), OnItemClick {
                 data[position].isOpen = false
                 Toast.makeText(
                     requireContext(),
-                    "Неверный Инвайт код",
+                    "Неверный код",
                     Toast.LENGTH_LONG
                 ).show()
             }

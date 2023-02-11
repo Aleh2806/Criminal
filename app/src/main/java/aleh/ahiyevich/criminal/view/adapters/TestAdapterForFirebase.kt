@@ -1,4 +1,5 @@
 package aleh.ahiyevich.criminal.view.adapters
+
 import aleh.ahiyevich.criminal.R
 import aleh.ahiyevich.criminal.model.ImageU
 import android.content.Context
@@ -10,11 +11,11 @@ import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import kotlinx.android.synthetic.main.item_details_crime.view.*
 
-class QuestionsAdapter(
+class TestAdapterForFirebase(
     private val imagesList: ArrayList<ImageU>,
     private val context: Context
 ) :
-    RecyclerView.Adapter<QuestionsAdapter.QuestionsViewHolder>() {
+    RecyclerView.Adapter<TestAdapterForFirebase.QuestionsViewHolder>() {
 
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): QuestionsViewHolder {

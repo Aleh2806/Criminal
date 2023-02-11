@@ -44,23 +44,22 @@ class SeasonsFragment : Fragment(), OnItemClick {
 
         val recyclerView: RecyclerView = binding.recyclerViewSeasons
         recyclerView.setHasFixedSize(true)
-        recyclerView.adapter = SeasonsAdapter(data, this)
+        val adapter = SeasonsAdapter(data, this)
+        recyclerView.adapter = adapter
         recyclerView.layoutManager = GridLayoutManager(requireContext(), 2)
 
 
         binding.bottomNavigationView.setOnItemSelectedListener {
             when (it.itemId) {
                 R.id.home_bottom_menu ->
-                    Toast.makeText(requireContext(),"Вы на главной странице",Toast.LENGTH_LONG).show()
+                    Toast.makeText(requireContext(), "Вы на главной странице", Toast.LENGTH_LONG)
+                        .show()
                 R.id.profile_bottom_menu ->
                     replaceFragment(ProfileFragment())
             }
             true
         }
     }
-
-
-
 
     override fun onItemClick(position: Int) {
         val season = data[position]
@@ -85,27 +84,28 @@ class SeasonsFragment : Fragment(), OnItemClick {
 
 
     private fun createData(): ArrayList<Seasons> {
+
+        val seasonsData = ArrayList<Seasons>()
+
         // Получаем данные из импровизированной базы данных
         val namesSeasons = FakeRepository.nameSeason
         val imagesSeasons = FakeRepository.imageSeason
         val isOpenSeasons = FakeRepository.isOpenSeason
-
-        val seasonsData = ArrayList<Seasons>()
 
         SeasonsId.values().forEach { seasonsId ->
             if (containsId(seasonsId, namesSeasons, imagesSeasons, isOpenSeasons)) {
                 seasonsData.add(
                     Seasons(
                         isOpenSeason = isOpenSeasons[seasonsId]!!,
-                        nameSeason = namesSeasons[seasonsId]!!,
-                        imageSeason = imagesSeasons[seasonsId]!!
+                        imageSeason = imagesSeasons[seasonsId]!!,
+                        nameSeason = namesSeasons[seasonsId]!!
+
                     )
                 )
             }
         }
         return seasonsData
     }
-
 
     private fun containsId(seasonsId: SeasonsId, vararg maps: Map<SeasonsId, Any>): Boolean {
         maps.forEach {
@@ -115,6 +115,4 @@ class SeasonsFragment : Fragment(), OnItemClick {
         }
         return true
     }
-
-
 }

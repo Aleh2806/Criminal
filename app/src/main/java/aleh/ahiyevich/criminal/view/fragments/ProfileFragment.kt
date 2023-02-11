@@ -12,7 +12,7 @@ import com.google.firebase.auth.FirebaseAuth
 
 class ProfileFragment : Fragment() {
 
-    val auth: FirebaseAuth = FirebaseAuth.getInstance()
+    private val auth: FirebaseAuth = FirebaseAuth.getInstance()
 
     private var _binding: FragmentProfileBinding? = null
     private val binding: FragmentProfileBinding
@@ -44,7 +44,7 @@ class ProfileFragment : Fragment() {
             requireActivity()
                 .supportFragmentManager
                 .beginTransaction()
-                .replace(R.id.container_for_fragment,AuthorisationFragment())
+                .replace(R.id.container_for_fragment, AuthorisationFragment())
                 .hide(this)
                 .commit()
         }

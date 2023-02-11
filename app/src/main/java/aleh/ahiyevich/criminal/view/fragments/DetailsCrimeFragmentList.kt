@@ -2,14 +2,21 @@ package aleh.ahiyevich.criminal.view.fragments
 
 import aleh.ahiyevich.criminal.R
 import aleh.ahiyevich.criminal.databinding.FragmentDetailsCrimeListBinding
+import aleh.ahiyevich.criminal.model.OnItemClick
+import aleh.ahiyevich.criminal.view.adapters.DetailsAdapter
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
+import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 
 
-class DetailsCrimeFragmentList : Fragment() {
+class DetailsCrimeFragmentList : Fragment(), OnItemClick {
+
+    private val listDetails: ArrayList<String> = ArrayList()
+
 
     private var _binding: FragmentDetailsCrimeListBinding? = null
     private val binding: FragmentDetailsCrimeListBinding
@@ -35,13 +42,9 @@ class DetailsCrimeFragmentList : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        initRecyclerView()
+
         binding.apply {
-            photo.setOnClickListener { replaceFragment(PhotoDetailsFragment()) }
-            video.setOnClickListener { replaceFragment(VideoDetailsFragment()) }
-            questions.setOnClickListener { replaceFragment(QuestionsDetailsFragment()) }
-            suspected.setOnClickListener { replaceFragment(SuspectedDetailsFragment()) }
-            experts.setOnClickListener { replaceFragment(ExpertsDetailsFragment()) }
-            deponents.setOnClickListener { replaceFragment(DeponentsDetailsFragment()) }
             changerLayouts.setOnClickListener { replaceFragment(DetailsCrimeFragmentTile()) }
             detailsBack.setOnClickListener {
                 requireActivity()
@@ -49,19 +52,32 @@ class DetailsCrimeFragmentList : Fragment() {
                     .popBackStack()
             }
         }
-
-
     }
 
+    private fun initRecyclerView() {
+        val arrayNameDetails = resources.getStringArray(R.array.details_crime_list)
+        for (i in arrayNameDetails) {
+            listDetails.add(i)
+        }
+        val recyclerView: RecyclerView = binding.recyclerViewDetails
+        recyclerView.setHasFixedSize(true)
+        recyclerView.layoutManager = LinearLayoutManager(this.context)
+        recyclerView.adapter = DetailsAdapter(listDetails, requireContext(), this)
+    }
 
     private fun replaceFragment(fragment: Fragment) {
         requireActivity()
             .supportFragmentManager
             .beginTransaction()
-            .replace(R.id.container_for_fragment, fragment)
+            .add(R.id.container_for_fragment, fragment)
             .addToBackStack("")
             .hide(this)
             .commit()
+    }
+
+    override fun onItemClick(position: Int) {
+        val description = listDetails[position]
+        replaceFragment(DescriptionsDetailsFragment.newInstance(description))
     }
 }
 

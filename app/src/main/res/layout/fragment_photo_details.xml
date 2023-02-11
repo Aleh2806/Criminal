@@ -3,6 +3,7 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    xmlns:tools="http://schemas.android.com/tools"
     android:orientation="vertical">
 
     <FrameLayout
@@ -26,10 +27,10 @@
             android:background="@drawable/ic_round_arrow_back_24" />
 
         <TextView
+            android:id="@+id/description_details"
             android:layout_width="wrap_content"
             android:layout_height="35dp"
             android:layout_gravity="center"
-            android:text="Фото отчет"
             android:textColor="@color/black"
             android:textSize="25sp"
             android:textStyle="bold" />
@@ -37,13 +38,10 @@
 
     </FrameLayout>
 
-    <TextView
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/recycler_view_descriptions"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:gravity="center"
-        android:text="Какой-то материал"
-        android:textColor="@color/black"
-        android:textSize="45sp"
-        android:textStyle="bold" />
+        tools:listitem="@layout/item_details_crime"/>
 
 </LinearLayout>

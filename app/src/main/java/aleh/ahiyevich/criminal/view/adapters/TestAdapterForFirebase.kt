@@ -9,7 +9,7 @@ import android.view.ViewGroup
 import android.widget.ImageView
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
-import kotlinx.android.synthetic.main.item_details_crime.view.*
+import kotlinx.android.synthetic.main.item_descriptions_details_crime.view.*
 
 class TestAdapterForFirebase(
     private val imagesList: ArrayList<ImageU>,
@@ -20,7 +20,7 @@ class TestAdapterForFirebase(
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): QuestionsViewHolder {
         val inflatedView =
-            LayoutInflater.from(parent.context).inflate(R.layout.item_details_crime, parent, false)
+            LayoutInflater.from(parent.context).inflate(R.layout.item_descriptions_details_crime, parent, false)
         return QuestionsViewHolder(inflatedView)
     }
 

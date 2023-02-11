@@ -8,17 +8,17 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
-import kotlinx.android.synthetic.main.item_details.view.*
+import kotlinx.android.synthetic.main.item_details_list.view.*
 
-class DetailsAdapter(
+class DetailsAdapterList(
     private val listDetails: ArrayList<String>,
     private val context: Context,
     private val listener: OnItemClick
-) : RecyclerView.Adapter<DetailsAdapter.ItemDetailsViewHolder>() {
+) : RecyclerView.Adapter<DetailsAdapterList.ItemDetailsViewHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ItemDetailsViewHolder {
         val inflatedView =
-            LayoutInflater.from(parent.context).inflate(R.layout.item_details, parent, false)
+            LayoutInflater.from(parent.context).inflate(R.layout.item_details_list, parent, false)
         return ItemDetailsViewHolder(inflatedView)
     }
 
@@ -32,9 +32,10 @@ class DetailsAdapter(
         return listDetails.size
     }
 
+
     inner class ItemDetailsViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView),
         View.OnClickListener {
-        val nameDetails: TextView = itemView.name_details
+        val nameDetails: TextView = itemView.name_details_list
 
         init {
             itemView.setOnClickListener(this)

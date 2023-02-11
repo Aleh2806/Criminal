@@ -7,21 +7,6 @@ import com.google.firebase.database.DatabaseReference
 import com.google.firebase.database.FirebaseDatabase
 import kotlinx.android.parcel.Parcelize
 
-//@Parcelize
-//data class Crimes(
-//    var isOpen: Boolean,
-//    val nameCrime: String,
-//    val descriptionCrime: String,
-//    @DrawableRes val imageCrime: Int
-//) : Parcelable
-//
-//@Parcelize
-//data class Seasons(
-//    val isOpenSeason: Boolean,
-//    val nameSeason: String,
-//    @DrawableRes val imageSeason: Int
-//): Parcelable
-
 @Parcelize
 data class Crimes(
     var isOpen: Boolean,
@@ -33,9 +18,11 @@ data class Crimes(
 @Parcelize
 data class Seasons(
     val isOpenSeason: Boolean,
-    @DrawableRes val imageSeason: Int,
-    val nameSeason: String
-) : Parcelable
+    val nameSeason: String,
+    @DrawableRes val imageSeason: Int
+): Parcelable
+
+
 
 
 object FakeRepository {

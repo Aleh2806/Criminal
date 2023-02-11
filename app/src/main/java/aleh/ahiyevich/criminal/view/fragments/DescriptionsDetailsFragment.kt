@@ -1,6 +1,6 @@
 package aleh.ahiyevich.criminal.view.fragments
 
-import aleh.ahiyevich.criminal.databinding.FragmentPhotoDetailsBinding
+import aleh.ahiyevich.criminal.databinding.FragmentDescriptionsDetailsBinding
 import aleh.ahiyevich.criminal.model.ImageU
 import aleh.ahiyevich.criminal.view.adapters.TestAdapterForFirebase
 import android.content.res.Configuration
@@ -23,8 +23,8 @@ class DescriptionsDetailsFragment : Fragment() {
     lateinit var recyclerView: RecyclerView
     lateinit var firebaseDatabase: FirebaseDatabase
 
-    private var _binding: FragmentPhotoDetailsBinding? = null
-    private val binding: FragmentPhotoDetailsBinding
+    private var _binding: FragmentDescriptionsDetailsBinding? = null
+    private val binding: FragmentDescriptionsDetailsBinding
         get() {
             return _binding!!
         }
@@ -34,7 +34,7 @@ class DescriptionsDetailsFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        _binding = FragmentPhotoDetailsBinding.inflate(inflater, container, false)
+        _binding = FragmentDescriptionsDetailsBinding.inflate(inflater, container, false)
         return binding.root
     }
 
@@ -84,7 +84,7 @@ class DescriptionsDetailsFragment : Fragment() {
         firebaseDatabase = FirebaseDatabase.getInstance()
 
 
-        firebaseDatabase.reference.child("images").addListenerForSingleValueEvent(object :
+        firebaseDatabase.reference.child("seasons").addListenerForSingleValueEvent(object :
             ValueEventListener {
             override fun onDataChange(snapshot: DataSnapshot) {
                 for (dataSnapshot in snapshot.children) {

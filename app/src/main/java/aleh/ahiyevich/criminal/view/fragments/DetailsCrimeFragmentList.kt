@@ -3,7 +3,7 @@ package aleh.ahiyevich.criminal.view.fragments
 import aleh.ahiyevich.criminal.R
 import aleh.ahiyevich.criminal.databinding.FragmentDetailsCrimeListBinding
 import aleh.ahiyevich.criminal.model.OnItemClick
-import aleh.ahiyevich.criminal.view.adapters.DetailsAdapter
+import aleh.ahiyevich.criminal.view.adapters.DetailsAdapterList
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -45,7 +45,7 @@ class DetailsCrimeFragmentList : Fragment(), OnItemClick {
         initRecyclerView()
 
         binding.apply {
-            changerLayouts.setOnClickListener { replaceFragment(DetailsCrimeFragmentTile()) }
+            changeLayouts.setOnClickListener { replaceFragment(DetailsCrimeFragmentTile()) }
             detailsBack.setOnClickListener {
                 requireActivity()
                     .supportFragmentManager
@@ -62,7 +62,7 @@ class DetailsCrimeFragmentList : Fragment(), OnItemClick {
         val recyclerView: RecyclerView = binding.recyclerViewDetails
         recyclerView.setHasFixedSize(true)
         recyclerView.layoutManager = LinearLayoutManager(this.context)
-        recyclerView.adapter = DetailsAdapter(listDetails, requireContext(), this)
+        recyclerView.adapter = DetailsAdapterList(listDetails, requireContext(), this)
     }
 
     private fun replaceFragment(fragment: Fragment) {

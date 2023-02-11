@@ -1,10 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/details_list"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content"
+    android:layout_height="match_parent"
+    xmlns:tools="http://schemas.android.com/tools"
     android:orientation="vertical">
 
     <FrameLayout
@@ -13,7 +12,7 @@
         android:background="#EDEDED">
 
         <ImageView
-            android:id="@+id/details_back"
+            android:id="@+id/btn_back"
             android:layout_width="33dp"
             android:layout_height="33dp"
             android:layout_gravity="start|center"
@@ -28,32 +27,21 @@
             android:background="@drawable/ic_round_arrow_back_24" />
 
         <TextView
+            android:id="@+id/description_details"
             android:layout_width="wrap_content"
             android:layout_height="35dp"
-            android:layout_gravity="center|top"
-            android:text="Материалы дела"
+            android:layout_gravity="center"
             android:textColor="@color/black"
-            android:textSize="30sp"
+            android:textSize="25sp"
             android:textStyle="bold" />
 
-        <ImageView
-            android:id="@+id/change_layouts"
-            android:layout_width="33dp"
-            android:layout_height="30dp"
-            android:layout_gravity="end|center"
-            android:layout_marginEnd="5dp"
-            android:background="@drawable/import_export_24" />
 
     </FrameLayout>
 
-
     <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/recycler_view_details"
+        android:id="@+id/recycler_view_descriptions"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        tools:listitem="@layout/item_details_list" />
-
-
+        tools:listitem="@layout/item_descriptions_details_crime"/>
 
 </LinearLayout>
-

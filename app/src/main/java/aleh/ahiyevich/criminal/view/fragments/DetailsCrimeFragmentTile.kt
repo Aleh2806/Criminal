@@ -4,12 +4,14 @@ import aleh.ahiyevich.criminal.R
 import aleh.ahiyevich.criminal.databinding.FragmentDetailsCrimeTileBinding
 import aleh.ahiyevich.criminal.model.OnItemClick
 import aleh.ahiyevich.criminal.view.adapters.DetailsAdapterTile
+import android.content.res.Configuration
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.GridLayoutManager
+import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 
 
@@ -28,7 +30,7 @@ class DetailsCrimeFragmentTile : Fragment(),OnItemClick {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        _binding = FragmentDetailsCrimeTileBinding.inflate(inflater, container, false)
+        _binding = FragmentDetailsCrimeTileBinding.inflate(inflater,container, false)
         return binding.root
     }
 
@@ -43,11 +45,9 @@ class DetailsCrimeFragmentTile : Fragment(),OnItemClick {
         initRecyclerView()
 
         binding.apply {
-            changeLayouts.setOnClickListener { replaceFragment(DetailsCrimeFragmentTile()) }
+            changeLayouts.setOnClickListener { replaceFragment(DetailsCrimeFragmentList()) }
             detailsBack.setOnClickListener {
-                requireActivity()
-                    .supportFragmentManager
-                    .popBackStack()
+               replaceFragment(CrimesFragment())
             }
         }
     }
@@ -61,6 +61,10 @@ class DetailsCrimeFragmentTile : Fragment(),OnItemClick {
         recyclerView.setHasFixedSize(true)
         recyclerView.layoutManager = GridLayoutManager(requireContext(),2)
         recyclerView.adapter = DetailsAdapterTile(listDetails, requireContext(), this)
+
+        if (resources.configuration.orientation == Configuration.ORIENTATION_LANDSCAPE){
+            recyclerView.layoutManager = LinearLayoutManager(requireContext(),RecyclerView.HORIZONTAL,false)
+        }
     }
 
     private fun replaceFragment(fragment: Fragment) {

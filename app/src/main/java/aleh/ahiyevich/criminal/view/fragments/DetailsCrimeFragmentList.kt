@@ -47,7 +47,7 @@ class DetailsCrimeFragmentList : Fragment(), OnItemClick {
         binding.apply {
             changeLayouts.setOnClickListener { replaceFragment(DetailsCrimeFragmentTile()) }
             detailsBack.setOnClickListener {
-                replaceFragment(CrimesFragment())
+                requireActivity().supportFragmentManager.popBackStack()
             }
         }
     }

@@ -101,80 +101,35 @@ class CrimesFragment : Fragment(), OnItemClick {
         myDialog.window?.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
         myDialog.show()
 
+        fun unlockCrime(){
+            data[position].isOpen = true
+            Toast.makeText(
+                requireContext(),
+                "Успешно",
+                Toast.LENGTH_LONG
+            ).show()
+            myDialog.dismiss()
+            replaceFragment(DetailsCrimeFragmentList())
+        }
+
         // Обработка кнопки подтвердить инвайт код (Проверка кодов для каждого дела)
         dialogBinding.findViewById<AppCompatButton>(R.id.confirm_invite_code).setOnClickListener {
             if (position == 2 && inviteCode.text.toString() == "QWERTY") {
-                data[position].isOpen = true
-                Toast.makeText(
-                    requireContext(),
-                    "Успешно",
-                    Toast.LENGTH_LONG
-                ).show()
-                myDialog.dismiss()
-                replaceFragment(DetailsCrimeFragmentList())
+                unlockCrime()
             } else if (position == 3 && inviteCode.text.toString() == "QWERTY2") {
-                data[position].isOpen = true
-                Toast.makeText(
-                    requireContext(),
-                    "Успешно",
-                    Toast.LENGTH_LONG
-                ).show()
-                myDialog.dismiss()
-                replaceFragment(DetailsCrimeFragmentList())
+                unlockCrime()
             } else if (position == 4 && inviteCode.text.toString() == "QWERTY3") {
-                data[position].isOpen = true
-                Toast.makeText(
-                    requireContext(),
-                    "Успешно",
-                    Toast.LENGTH_LONG
-                ).show()
-                myDialog.dismiss()
-                replaceFragment(DetailsCrimeFragmentList())
+                unlockCrime()
             } else if (position == 5 && inviteCode.text.toString() == "QWERTY4") {
-                data[position].isOpen = true
-                Toast.makeText(
-                    requireContext(),
-                    "Успешно",
-                    Toast.LENGTH_LONG
-                ).show()
-                myDialog.dismiss()
-                replaceFragment(DetailsCrimeFragmentList())
+                unlockCrime()
             } else if (position == 6 && inviteCode.text.toString() == "QWERTY5") {
-                data[position].isOpen = true
-                Toast.makeText(
-                    requireContext(),
-                    "Успешно",
-                    Toast.LENGTH_LONG
-                ).show()
-                myDialog.dismiss()
-                replaceFragment(DetailsCrimeFragmentList())
+                unlockCrime()
             } else if (position == 7 && inviteCode.text.toString() == "QWERTY6") {
-                data[position].isOpen = true
-                Toast.makeText(
-                    requireContext(),
-                    "Успешно",
-                    Toast.LENGTH_LONG
-                ).show()
-                myDialog.dismiss()
-                replaceFragment(DetailsCrimeFragmentList())
+                unlockCrime()
             } else if (position == 8 && inviteCode.text.toString() == "QWERTY7") {
-                data[position].isOpen = true
-                Toast.makeText(
-                    requireContext(),
-                    "Успешно",
-                    Toast.LENGTH_LONG
-                ).show()
-                myDialog.dismiss()
-                replaceFragment(DetailsCrimeFragmentList())
+                unlockCrime()
             } else if (position == 9 && inviteCode.text.toString() == "QWERTY8") {
-                data[position].isOpen = true
-                Toast.makeText(
-                    requireContext(),
-                    "Успешно",
-                    Toast.LENGTH_LONG
-                ).show()
-                myDialog.dismiss()
-                replaceFragment(DetailsCrimeFragmentList())
+                unlockCrime()
             } else {
                 data[position].isOpen = false
                 Toast.makeText(
@@ -184,7 +139,6 @@ class CrimesFragment : Fragment(), OnItemClick {
                 ).show()
             }
         }
-
         // Обработка кнопки Да (Подтверждение оплаты)
         dialogBinding.findViewById<Button>(R.id.alert_yes_payment_dialog).setOnClickListener {
             myDialog.dismiss()
@@ -194,7 +148,6 @@ class CrimesFragment : Fragment(), OnItemClick {
                 Toast.LENGTH_LONG
             ).show()
         }
-
         // Обработка кнопки Отмена (Закрытие диалогового окна)
         dialogBinding.findViewById<Button>(R.id.alert_no_payment_dialog).setOnClickListener {
             myDialog.dismiss()
@@ -205,7 +158,7 @@ class CrimesFragment : Fragment(), OnItemClick {
     private fun createData(): ArrayList<Crimes> {
         // Получаем данные из импровизированной базы данных
         val namesCrimes = FakeRepository.nameCrime
-        val descriptionsCrimes = FakeRepository.descriptionCrime
+
         val imagesCrimes = FakeRepository.imageCrime
         val isOpen = FakeRepository.isOpen
 
@@ -213,12 +166,11 @@ class CrimesFragment : Fragment(), OnItemClick {
 
 
         CrimeId.values().forEach { crimeId ->
-            if (containsId(crimeId, namesCrimes, descriptionsCrimes, imagesCrimes, isOpen)) {
+            if (containsId(crimeId, namesCrimes, imagesCrimes, isOpen)) {
                 crimesData.add(
                     Crimes(
                         isOpen = isOpen[crimeId]!!,
                         nameCrime = namesCrimes[crimeId]!!,
-                        descriptionCrime = descriptionsCrimes[crimeId]!!,
                         imageCrime = imagesCrimes[crimeId]!!
                     )
                 )

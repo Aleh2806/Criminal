@@ -1,7 +1,7 @@
 package aleh.ahiyevich.criminal.view.fragments
 
 import aleh.ahiyevich.criminal.databinding.FragmentDescriptionsDetailsBinding
-import aleh.ahiyevich.criminal.model.ImageU
+import aleh.ahiyevich.criminal.model.SeasonsU
 import aleh.ahiyevich.criminal.view.adapters.TestAdapterForFirebase
 import android.content.res.Configuration
 import android.os.Bundle
@@ -72,7 +72,7 @@ class DescriptionsDetailsFragment : Fragment() {
     }
 
     private fun createData() {
-        val imagesList: ArrayList<ImageU> = ArrayList()
+        val imagesList: ArrayList<SeasonsU> = ArrayList()
 
         recyclerView = binding.recyclerViewDescriptions
         recyclerView.layoutManager = LinearLayoutManager(requireContext())
@@ -90,7 +90,7 @@ class DescriptionsDetailsFragment : Fragment() {
             ValueEventListener {
             override fun onDataChange(snapshot: DataSnapshot) {
                 for (dataSnapshot in snapshot.children) {
-                    val data: ImageU? = dataSnapshot.getValue(ImageU::class.java)
+                    val data: SeasonsU? = dataSnapshot.getValue(SeasonsU::class.java)
                     imagesList.add(data!!)
                 }
                 recyclerView.adapter = adapter

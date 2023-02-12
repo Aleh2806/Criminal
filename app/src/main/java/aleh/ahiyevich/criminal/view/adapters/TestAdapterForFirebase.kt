@@ -1,7 +1,7 @@
 package aleh.ahiyevich.criminal.view.adapters
 
 import aleh.ahiyevich.criminal.R
-import aleh.ahiyevich.criminal.model.ImageU
+import aleh.ahiyevich.criminal.model.SeasonsU
 import android.content.Context
 import android.view.LayoutInflater
 import android.view.View
@@ -12,7 +12,7 @@ import com.bumptech.glide.Glide
 import kotlinx.android.synthetic.main.item_descriptions_details_crime.view.*
 
 class TestAdapterForFirebase(
-    private val imagesList: ArrayList<ImageU>,
+    private val imagesList: ArrayList<SeasonsU>,
     private val context: Context
 ) :
     RecyclerView.Adapter<TestAdapterForFirebase.TestViewHolder>() {

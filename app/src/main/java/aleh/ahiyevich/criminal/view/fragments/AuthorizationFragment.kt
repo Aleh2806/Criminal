@@ -20,7 +20,7 @@ import com.google.firebase.database.FirebaseDatabase
 import kotlinx.android.synthetic.main.dialog_registration.view.*
 
 
-class AuthorisationFragment : Fragment() {
+class AuthorizationFragment : Fragment() {
 
     private lateinit var auth: FirebaseAuth
     private lateinit var db: FirebaseDatabase

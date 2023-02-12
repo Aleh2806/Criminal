@@ -3,8 +3,6 @@ package aleh.ahiyevich.criminal.model
 import aleh.ahiyevich.criminal.R
 import android.os.Parcelable
 import androidx.annotation.DrawableRes
-import com.google.firebase.database.DatabaseReference
-import com.google.firebase.database.FirebaseDatabase
 import kotlinx.android.parcel.Parcelize
 
 @Parcelize

@@ -1,7 +1,7 @@
 package aleh.ahiyevich.criminal
 
 import aleh.ahiyevich.criminal.databinding.ActivityMainBinding
-import aleh.ahiyevich.criminal.view.fragments.AuthorisationFragment
+import aleh.ahiyevich.criminal.view.fragments.AuthorizationFragment
 import android.app.Dialog
 import android.graphics.Color
 import android.graphics.drawable.ColorDrawable
@@ -29,7 +29,7 @@ class MainActivity : AppCompatActivity() {
         if (savedInstanceState == null) {
             supportFragmentManager
                 .beginTransaction()
-                .add(R.id.container_for_fragment, AuthorisationFragment())
+                .add(R.id.container_for_fragment, AuthorizationFragment())
                 .commit()
         }
     }

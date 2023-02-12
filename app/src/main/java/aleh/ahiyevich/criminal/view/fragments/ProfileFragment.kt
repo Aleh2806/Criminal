@@ -44,7 +44,7 @@ class ProfileFragment : Fragment() {
             requireActivity()
                 .supportFragmentManager
                 .beginTransaction()
-                .replace(R.id.container_for_fragment, AuthorisationFragment())
+                .replace(R.id.container_for_fragment, AuthorizationFragment())
                 .hide(this)
                 .commit()
         }

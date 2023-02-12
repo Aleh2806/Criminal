@@ -46,14 +46,7 @@ class DescriptionsDetailsFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        recyclerView = binding.recyclerViewDescriptions
-        recyclerView.layoutManager = LinearLayoutManager(requireContext())
-        if (resources.configuration.orientation == Configuration.ORIENTATION_LANDSCAPE) {
-            recyclerView.layoutManager = LinearLayoutManager(
-                requireContext(),
-                LinearLayoutManager.HORIZONTAL, false
-            )
-        }
+
 
         createData()
 
@@ -64,7 +57,7 @@ class DescriptionsDetailsFragment : Fragment() {
         }
 
         val tittleDescriptions = arguments?.getString("DESCRIPTION")
-        binding.descriptionDetails?.text = tittleDescriptions
+        binding.descriptionDetails.text = tittleDescriptions
 
     }
 
@@ -80,6 +73,15 @@ class DescriptionsDetailsFragment : Fragment() {
 
     private fun createData() {
         val imagesList: ArrayList<ImageU> = ArrayList()
+
+        recyclerView = binding.recyclerViewDescriptions
+        recyclerView.layoutManager = LinearLayoutManager(requireContext())
+        if (resources.configuration.orientation == Configuration.ORIENTATION_LANDSCAPE) {
+            recyclerView.layoutManager = LinearLayoutManager(
+                requireContext(),
+                LinearLayoutManager.HORIZONTAL, false
+            )
+        }
         val adapter = TestAdapterForFirebase(imagesList, requireContext())
         firebaseDatabase = FirebaseDatabase.getInstance()
 

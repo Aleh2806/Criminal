@@ -14,7 +14,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 
 class SeasonsAdapter(
-    private val data: List<SeasonsU>,
+    private val data: ArrayList<SeasonsU>,
     private val listener: OnItemClick,
     private val context: Context
 ) : RecyclerView.Adapter<SeasonsAdapter.ItemSeasonViewHolder>() {
@@ -36,7 +36,7 @@ class SeasonsAdapter(
         }
 
         holder.nameSeason.text = season.nameSeason
-        Glide.with(context).load(season.imageUrl).into(holder.image)
+        Glide.with(context).load(season.imageSeason).into(holder.image)
 
 
     }

@@ -27,7 +27,7 @@ class TestAdapterForFirebase(
     override fun onBindViewHolder(holder: TestViewHolder, position: Int) {
         val currentImage = imagesList[position]
 
-        Glide.with(context).load(currentImage.imageUrl).into(holder.image)
+        Glide.with(context).load(currentImage.imageSeason).into(holder.image)
     }
 
     override fun getItemCount(): Int {

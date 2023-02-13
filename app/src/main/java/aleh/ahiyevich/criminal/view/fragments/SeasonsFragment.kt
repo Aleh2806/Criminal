@@ -13,10 +13,7 @@ import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import com.google.firebase.database.DataSnapshot
-import com.google.firebase.database.DatabaseError
-import com.google.firebase.database.FirebaseDatabase
-import com.google.firebase.database.ValueEventListener
+import com.google.firebase.database.*
 
 class SeasonsFragment : Fragment(), OnItemClick {
 
@@ -89,7 +86,7 @@ class SeasonsFragment : Fragment(), OnItemClick {
 
         val recyclerView: RecyclerView = binding.recyclerViewSeasons
         recyclerView.setHasFixedSize(true)
-        val adapter = SeasonsAdapter(seasonsList, this,requireContext())
+        val adapter = SeasonsAdapter(seasonsList, this, requireContext())
         recyclerView.adapter = adapter
         recyclerView.layoutManager = GridLayoutManager(requireContext(), 2)
 
@@ -98,7 +95,7 @@ class SeasonsFragment : Fragment(), OnItemClick {
         firebaseDatabase.reference.child("seasons").addListenerForSingleValueEvent(object :
             ValueEventListener {
             override fun onDataChange(snapshot: DataSnapshot) {
-                if (snapshot.exists()){
+                if (snapshot.exists()) {
                     for (dataSnapshot in snapshot.children) {
                         val data: SeasonsU? = dataSnapshot.getValue(SeasonsU::class.java)
                         seasonsList.add(data!!)

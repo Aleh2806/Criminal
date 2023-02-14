@@ -29,11 +29,12 @@ class SeasonsAdapter(
     override fun onBindViewHolder(holder: ItemSeasonViewHolder, position: Int) {
         val season = data[position]
 
-        if (season.openSeason) {
+        // Повесил обработку отображения замков на сезонах
+//        if (!season.openSeason) {
             holder.lockSeason.visibility = View.GONE
-        } else {
-            holder.lockSeason.visibility = View.VISIBLE
-        }
+//        } else {
+//            holder.lockSeason.visibility = View.VISIBLE
+//        }
 
         holder.nameSeason.text = season.nameSeason
         Glide.with(context).load(season.imageSeason).into(holder.image)

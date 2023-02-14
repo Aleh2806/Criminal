@@ -8,6 +8,7 @@ import aleh.ahiyevich.criminal.model.FakeRepository
 import aleh.ahiyevich.criminal.model.OnItemClick
 import aleh.ahiyevich.criminal.view.adapters.CrimesAdapter
 import android.app.Dialog
+import android.app.ProgressDialog
 import android.graphics.Color
 import android.graphics.drawable.ColorDrawable
 import android.os.Bundle
@@ -49,7 +50,6 @@ class CrimesFragment : Fragment(), OnItemClick {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-
 
         val recyclerView: RecyclerView = binding.recyclerViewCrimes
         // Эта установка служит для повышения производительности системы
@@ -188,5 +188,12 @@ class CrimesFragment : Fragment(), OnItemClick {
             }
         }
         return true
+    }
+
+
+    companion object{
+        fun newInstance(){
+
+        }
     }
 }

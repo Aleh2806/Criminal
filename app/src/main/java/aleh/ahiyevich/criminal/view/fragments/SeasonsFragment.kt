@@ -2,8 +2,9 @@ package aleh.ahiyevich.criminal.view.fragments
 
 import aleh.ahiyevich.criminal.R
 import aleh.ahiyevich.criminal.databinding.FragmentSeassonsBinding
-import aleh.ahiyevich.criminal.model.SeasonsU
+import aleh.ahiyevich.criminal.model.CrimesU
 import aleh.ahiyevich.criminal.model.OnItemClick
+import aleh.ahiyevich.criminal.model.SeasonsU
 import aleh.ahiyevich.criminal.view.adapters.SeasonsAdapter
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -13,12 +14,13 @@ import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import com.google.firebase.database.*
+import com.google.firebase.database.DataSnapshot
+import com.google.firebase.database.DatabaseError
+import com.google.firebase.database.FirebaseDatabase
+import com.google.firebase.database.ValueEventListener
 
 class SeasonsFragment : Fragment(), OnItemClick {
 
-    //    private val data = createData()
-    lateinit var recyclerView: RecyclerView
     private lateinit var firebaseDatabase: FirebaseDatabase
     private val seasonsList: ArrayList<SeasonsU> = ArrayList()
 
@@ -44,8 +46,13 @@ class SeasonsFragment : Fragment(), OnItemClick {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        val recyclerView: RecyclerView = binding.recyclerViewSeasons
+        recyclerView.setHasFixedSize(true)
+        val adapter = SeasonsAdapter(seasonsList, this, requireContext())
+        recyclerView.adapter = adapter
+        recyclerView.layoutManager = GridLayoutManager(requireContext(), 2)
 
-        createData()
+        createData(adapter)
 
         binding.bottomNavigationView.setOnItemSelectedListener {
             when (it.itemId) {
@@ -59,15 +66,27 @@ class SeasonsFragment : Fragment(), OnItemClick {
         }
     }
 
+
     override fun onItemClick(position: Int) {
         val season = seasonsList[position]
+        // TODO: Сюда думаю всунуть запросы на получение данных (списка дел с фото) из
+        //  базы данных (На уровне ниже засунуть такие же запросы на материалы дела )
+        when (position in 0..9) {
+            (position == 0) -> replaceFragment(CrimesFragment())
+            (position == 1) -> replaceFragment(SeasonsFragment())
+            (position == 2) -> replaceFragment(ProfileFragment())
+
+
+            else -> {}
+        }
+
 
         // Закрыл доступ к элементам под замком
-        if (!season.openSeason) {
-            Toast.makeText(requireContext(), "Сезон закрыт", Toast.LENGTH_SHORT).show()
-        } else {
-            replaceFragment(CrimesFragment())
-        }
+//        if (!season.openSeason) {
+//            Toast.makeText(requireContext(), "Сезон закрыт", Toast.LENGTH_SHORT).show()
+//        } else {
+//            replaceFragment(CrimesFragment())
+//        }
     }
 
     private fun replaceFragment(fragment: Fragment) {
@@ -81,14 +100,8 @@ class SeasonsFragment : Fragment(), OnItemClick {
     }
 
 
-    //Загрузка данных из FireBase и сразу отрисовка в RecyclerView
-    private fun createData(): ArrayList<SeasonsU> {
-
-        val recyclerView: RecyclerView = binding.recyclerViewSeasons
-        recyclerView.setHasFixedSize(true)
-        val adapter = SeasonsAdapter(seasonsList, this, requireContext())
-        recyclerView.adapter = adapter
-        recyclerView.layoutManager = GridLayoutManager(requireContext(), 2)
+    //Загрузка данных из Firebase
+    private fun createData(adapter: SeasonsAdapter) {
 
         firebaseDatabase = FirebaseDatabase.getInstance()
 
@@ -101,7 +114,6 @@ class SeasonsFragment : Fragment(), OnItemClick {
                         seasonsList.add(data!!)
                     }
                 }
-                recyclerView.adapter = adapter
                 adapter.notifyDataSetChanged()
             }
 
@@ -110,6 +122,5 @@ class SeasonsFragment : Fragment(), OnItemClick {
             }
 
         })
-        return seasonsList
     }
 }

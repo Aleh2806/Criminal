@@ -1,8 +1,10 @@
 package aleh.ahiyevich.criminal.view.fragments
 
 import aleh.ahiyevich.criminal.databinding.FragmentDescriptionsDetailsBinding
-import aleh.ahiyevich.criminal.model.SeasonsU
+import aleh.ahiyevich.criminal.model.CrimesU
+import aleh.ahiyevich.criminal.model.FireBaseHelper
 import aleh.ahiyevich.criminal.view.adapters.TestAdapterForFirebase
+import android.app.ProgressDialog
 import android.content.res.Configuration
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -20,8 +22,11 @@ import com.google.firebase.database.ValueEventListener
 
 class DescriptionsDetailsFragment : Fragment() {
 
-    lateinit var recyclerView: RecyclerView
-    lateinit var firebaseDatabase: FirebaseDatabase
+    private val crimesList: ArrayList<CrimesU> = ArrayList()
+    private val fireBaseHelper = FireBaseHelper()
+    val adapter = TestAdapterForFirebase(crimesList)
+
+
 
     private var _binding: FragmentDescriptionsDetailsBinding? = null
     private val binding: FragmentDescriptionsDetailsBinding
@@ -46,9 +51,9 @@ class DescriptionsDetailsFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        initRecyclerView(adapter)
 
-
-        createData()
+        fireBaseHelper.getCrimesList(adapter,requireContext(),crimesList,"1")
 
         binding.btnBack.setOnClickListener {
             requireActivity()
@@ -58,7 +63,19 @@ class DescriptionsDetailsFragment : Fragment() {
 
         val tittleDescriptions = arguments?.getString("DESCRIPTION")
         binding.descriptionDetails.text = tittleDescriptions
+    }
 
+    private fun initRecyclerView(adapter: TestAdapterForFirebase){
+        val recyclerView = binding.recyclerViewDescriptions
+        recyclerView.layoutManager = LinearLayoutManager(requireContext())
+        recyclerView.adapter = adapter
+
+        if (resources.configuration.orientation == Configuration.ORIENTATION_LANDSCAPE) {
+            recyclerView.layoutManager = LinearLayoutManager(
+                requireContext(),
+                LinearLayoutManager.HORIZONTAL, false
+            )
+        }
     }
 
     companion object {
@@ -70,40 +87,6 @@ class DescriptionsDetailsFragment : Fragment() {
             return fragment
         }
     }
-
-    private fun createData() {
-        val imagesList: ArrayList<SeasonsU> = ArrayList()
-
-        recyclerView = binding.recyclerViewDescriptions
-        recyclerView.layoutManager = LinearLayoutManager(requireContext())
-        if (resources.configuration.orientation == Configuration.ORIENTATION_LANDSCAPE) {
-            recyclerView.layoutManager = LinearLayoutManager(
-                requireContext(),
-                LinearLayoutManager.HORIZONTAL, false
-            )
-        }
-        val adapter = TestAdapterForFirebase(imagesList, requireContext())
-        firebaseDatabase = FirebaseDatabase.getInstance()
-
-
-        firebaseDatabase.reference.child("seasons").addListenerForSingleValueEvent(object :
-            ValueEventListener {
-            override fun onDataChange(snapshot: DataSnapshot) {
-                for (dataSnapshot in snapshot.children) {
-                    val data: SeasonsU? = dataSnapshot.getValue(SeasonsU::class.java)
-                    imagesList.add(data!!)
-                }
-                recyclerView.adapter = adapter
-                adapter.notifyDataSetChanged()
-            }
-
-            override fun onCancelled(error: DatabaseError) {
-                Toast.makeText(requireContext(), "Ошибка загрузки", Toast.LENGTH_SHORT).show()
-            }
-
-        })
-    }
-
 }
 
 

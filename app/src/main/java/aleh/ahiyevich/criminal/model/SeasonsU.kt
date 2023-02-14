@@ -1,7 +1,13 @@
 package aleh.ahiyevich.criminal.model
 
 data class SeasonsU(
-    val imageSeason: String = "",
-    val openSeason: Boolean = false,
-    val nameSeason: String = ""
+    var imageSeason: String = "",
+    var openSeason: Boolean = false,
+    var nameSeason: String = ""
+)
+
+data class CrimesU (
+    var imageCrime: String = "",
+    var nameCrime: String = "",
+    var openCrime: Boolean = false
 )

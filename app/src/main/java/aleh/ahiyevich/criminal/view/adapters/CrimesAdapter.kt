@@ -1,7 +1,7 @@
 package aleh.ahiyevich.criminal.view.adapters
 
 import aleh.ahiyevich.criminal.R
-import aleh.ahiyevich.criminal.model.Crimes
+import aleh.ahiyevich.criminal.model.CrimesU
 import aleh.ahiyevich.criminal.model.OnItemClick
 import android.view.LayoutInflater
 import android.view.View
@@ -10,12 +10,12 @@ import android.widget.FrameLayout
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
+import com.bumptech.glide.Glide
 
 class CrimesAdapter(
-    private val data: List<Crimes>,
+    private val data: ArrayList<CrimesU>,
     private val listener: OnItemClick
-) :
-    RecyclerView.Adapter<CrimesAdapter.ItemCrimesViewHolder>() {
+): RecyclerView.Adapter<CrimesAdapter.ItemCrimesViewHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ItemCrimesViewHolder {
         val inflatedView = LayoutInflater.from(parent.context)
@@ -26,15 +26,15 @@ class CrimesAdapter(
 
 
     override fun onBindViewHolder(holder: ItemCrimesViewHolder, position: Int) {
-        val crime: Crimes = data[position]
+        val crime: CrimesU = data[position]
 
-        if (crime.isOpen) {
+        if (crime.openCrime) {
             holder.lockCrime.visibility = View.GONE
         } else {
             holder.lockCrime.visibility = View.VISIBLE
         }
         holder.nameCrime.text = crime.nameCrime
-        holder.imageCrime.setImageResource(crime.imageCrime)
+        Glide.with(holder.itemView.context).load(crime.imageCrime).into(holder.imageCrime)
 
     }
 

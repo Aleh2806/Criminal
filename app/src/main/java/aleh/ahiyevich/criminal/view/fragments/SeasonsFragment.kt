@@ -2,10 +2,12 @@ package aleh.ahiyevich.criminal.view.fragments
 
 import aleh.ahiyevich.criminal.R
 import aleh.ahiyevich.criminal.databinding.FragmentSeassonsBinding
-import aleh.ahiyevich.criminal.model.CrimesU
+import aleh.ahiyevich.criminal.model.FireBaseHelper
 import aleh.ahiyevich.criminal.model.OnItemClick
 import aleh.ahiyevich.criminal.model.SeasonsU
 import aleh.ahiyevich.criminal.view.adapters.SeasonsAdapter
+import aleh.ahiyevich.criminal.view.adapters.TestAdapterForFirebase
+import android.app.ProgressDialog
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -21,8 +23,9 @@ import com.google.firebase.database.ValueEventListener
 
 class SeasonsFragment : Fragment(), OnItemClick {
 
-    private lateinit var firebaseDatabase: FirebaseDatabase
+    private val fireBaseHelper = FireBaseHelper()
     private val seasonsList: ArrayList<SeasonsU> = ArrayList()
+    private val adapter = SeasonsAdapter(seasonsList, this)
 
 
     private var _binding: FragmentSeassonsBinding? = null
@@ -46,14 +49,21 @@ class SeasonsFragment : Fragment(), OnItemClick {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
+        initRecyclerView()
+        fireBaseHelper.getSeasonsList(adapter, requireContext(), seasonsList)
+        processingBottomMenu()
+    }
+
+
+    private fun initRecyclerView() {
         val recyclerView: RecyclerView = binding.recyclerViewSeasons
         recyclerView.setHasFixedSize(true)
-        val adapter = SeasonsAdapter(seasonsList, this, requireContext())
         recyclerView.adapter = adapter
-        recyclerView.layoutManager = GridLayoutManager(requireContext(), 2)
+        recyclerView.layoutManager = GridLayoutManager(this.context, 2)
+    }
 
-        createData(adapter)
-
+    private fun processingBottomMenu() {
         binding.bottomNavigationView.setOnItemSelectedListener {
             when (it.itemId) {
                 R.id.home_bottom_menu ->
@@ -66,15 +76,21 @@ class SeasonsFragment : Fragment(), OnItemClick {
         }
     }
 
-
     override fun onItemClick(position: Int) {
-        val season = seasonsList[position]
         // TODO: Сюда думаю всунуть запросы на получение данных (списка дел с фото) из
         //  базы данных (На уровне ниже засунуть такие же запросы на материалы дела )
+
         when (position in 0..9) {
-            (position == 0) -> replaceFragment(CrimesFragment())
-            (position == 1) -> replaceFragment(SeasonsFragment())
-            (position == 2) -> replaceFragment(ProfileFragment())
+            (position == 0) -> replaceFragment(CrimesFragment.newInstance("1"))
+            (position == 1) -> replaceFragment(CrimesFragment.newInstance("2"))
+            (position == 2) -> replaceFragment(CrimesFragment.newInstance("3"))
+            (position == 3) -> replaceFragment(CrimesFragment.newInstance("4"))
+            (position == 4) -> replaceFragment(CrimesFragment.newInstance("5"))
+            (position == 5) -> replaceFragment(CrimesFragment.newInstance("6"))
+            (position == 6) -> replaceFragment(CrimesFragment.newInstance("7"))
+            (position == 7) -> replaceFragment(CrimesFragment.newInstance("8"))
+            (position == 8) -> replaceFragment(CrimesFragment.newInstance("9"))
+            (position == 9) -> replaceFragment(CrimesFragment.newInstance("10"))
 
 
             else -> {}
@@ -97,30 +113,5 @@ class SeasonsFragment : Fragment(), OnItemClick {
             .hide(this)
             .addToBackStack("")
             .commit()
-    }
-
-
-    //Загрузка данных из Firebase
-    private fun createData(adapter: SeasonsAdapter) {
-
-        firebaseDatabase = FirebaseDatabase.getInstance()
-
-        firebaseDatabase.reference.child("seasons").addListenerForSingleValueEvent(object :
-            ValueEventListener {
-            override fun onDataChange(snapshot: DataSnapshot) {
-                if (snapshot.exists()) {
-                    for (dataSnapshot in snapshot.children) {
-                        val data: SeasonsU? = dataSnapshot.getValue(SeasonsU::class.java)
-                        seasonsList.add(data!!)
-                    }
-                }
-                adapter.notifyDataSetChanged()
-            }
-
-            override fun onCancelled(error: DatabaseError) {
-                Toast.makeText(requireContext(), "Ошибка загрузки", Toast.LENGTH_SHORT).show()
-            }
-
-        })
     }
 }

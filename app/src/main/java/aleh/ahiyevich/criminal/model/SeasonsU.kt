@@ -6,8 +6,12 @@ data class SeasonsU(
     var nameSeason: String = ""
 )
 
-data class CrimesU (
+data class CrimesU(
     var imageCrime: String = "",
     var nameCrime: String = "",
     var openCrime: Boolean = false
+)
+
+data class Materials(
+    var photo: String = ""
 )

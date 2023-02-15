@@ -2,13 +2,9 @@ package aleh.ahiyevich.criminal.view.fragments
 
 import aleh.ahiyevich.criminal.R
 import aleh.ahiyevich.criminal.databinding.FragmentCrimesListBinding
-import aleh.ahiyevich.criminal.model.CrimeId
-import aleh.ahiyevich.criminal.model.Crimes
-import aleh.ahiyevich.criminal.model.FakeRepository
-import aleh.ahiyevich.criminal.model.OnItemClick
+import aleh.ahiyevich.criminal.model.*
 import aleh.ahiyevich.criminal.view.adapters.CrimesAdapter
 import android.app.Dialog
-import android.app.ProgressDialog
 import android.graphics.Color
 import android.graphics.drawable.ColorDrawable
 import android.os.Bundle
@@ -25,7 +21,9 @@ import androidx.recyclerview.widget.RecyclerView
 
 class CrimesFragment : Fragment(), OnItemClick {
 
-    private val data = createData()
+    private val fireBaseHelper = FireBaseHelper()
+    private val crimesList: ArrayList<CrimesU> = ArrayList()
+    private val adapter = CrimesAdapter(crimesList, this)
 
     private var _binding: FragmentCrimesListBinding? = null
     private val binding: FragmentCrimesListBinding
@@ -50,44 +48,39 @@ class CrimesFragment : Fragment(), OnItemClick {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-
-        val recyclerView: RecyclerView = binding.recyclerViewCrimes
-        // Эта установка служит для повышения производительности системы
-        recyclerView.setHasFixedSize(true)
-        recyclerView.adapter = CrimesAdapter(data, this)
-        recyclerView.layoutManager = LinearLayoutManager(this.context)
-
-        binding.bottomNavigationView.setOnItemSelectedListener {
-            when (it.itemId) {
-                R.id.home_bottom_menu ->
-                    replaceFragment(SeasonsFragment())
-                R.id.profile_bottom_menu ->
-                    replaceFragment(ProfileFragment())
-            }
-            true
-        }
+        initRecyclerView()
+        val numberSeason = arguments?.getString("KEY_SEASON")
+        fireBaseHelper.getCrimesList(adapter,requireContext(),crimesList,numberSeason!!)
+        processingBottomMenu()
     }
 
 
     override fun onItemClick(position: Int) {
-        val crime = data[position]
+        val crime = crimesList[position]
 
         // Закрыл доступ к элементам под замком
-        if (!crime.isOpen) {
+        if (!crime.openCrime) {
             paymentDialog(position)
         } else {
-            replaceFragment(DetailsCrimeFragmentList())
+            replaceFragment(DescriptionsDetailsFragment())
         }
     }
 
+    private fun initRecyclerView(){
+        val recyclerView: RecyclerView = binding.recyclerViewCrimes
+        // Эта установка служит для повышения производительности системы
+        recyclerView.setHasFixedSize(true)
+        recyclerView.adapter = adapter
+        recyclerView.layoutManager = LinearLayoutManager(this.context)
+    }
 
     private fun replaceFragment(fragment: Fragment) {
         requireActivity()
             .supportFragmentManager
             .beginTransaction()
-            .replace(R.id.container_for_fragment, fragment)
-            .addToBackStack("")
+            .add(R.id.container_for_fragment, fragment)
             .hide(this)
+            .addToBackStack("")
             .commit()
     }
 
@@ -102,7 +95,7 @@ class CrimesFragment : Fragment(), OnItemClick {
         myDialog.show()
 
         fun unlockCrime(){
-            data[position].isOpen = true
+            crimesList[position].openCrime = true
             Toast.makeText(
                 requireContext(),
                 "Успешно",
@@ -131,7 +124,7 @@ class CrimesFragment : Fragment(), OnItemClick {
             } else if (position == 9 && inviteCode.text.toString() == "QWERTY8") {
                 unlockCrime()
             } else {
-                data[position].isOpen = false
+                crimesList[position].openCrime = false
                 Toast.makeText(
                     requireContext(),
                     "Неверный код",
@@ -154,46 +147,26 @@ class CrimesFragment : Fragment(), OnItemClick {
         }
     }
 
-
-    private fun createData(): ArrayList<Crimes> {
-        // Получаем данные из импровизированной базы данных
-        val namesCrimes = FakeRepository.nameCrime
-
-        val imagesCrimes = FakeRepository.imageCrime
-        val isOpen = FakeRepository.isOpen
-
-        val crimesData = ArrayList<Crimes>()
-
-
-        CrimeId.values().forEach { crimeId ->
-            if (containsId(crimeId, namesCrimes, imagesCrimes, isOpen)) {
-                crimesData.add(
-                    Crimes(
-                        isOpen = isOpen[crimeId]!!,
-                        nameCrime = namesCrimes[crimeId]!!,
-                        imageCrime = imagesCrimes[crimeId]!!
-                    )
-                )
-
+    private fun processingBottomMenu(){
+        binding.bottomNavigationView.setOnItemSelectedListener {
+            when (it.itemId) {
+                R.id.home_bottom_menu ->
+                    replaceFragment(SeasonsFragment())
+                R.id.profile_bottom_menu ->
+                    replaceFragment(ProfileFragment())
             }
+            true
         }
-        return crimesData
     }
-
-
-    private fun containsId(crimesId: CrimeId, vararg maps: Map<CrimeId, Any>): Boolean {
-        maps.forEach {
-            if (crimesId !in it.keys) {
-                return false
-            }
-        }
-        return true
-    }
-
 
     companion object{
-        fun newInstance(){
 
+        fun newInstance(numberSeason:String): CrimesFragment{
+            val bundle = Bundle()
+            bundle.putString("KEY_SEASON",numberSeason)
+            val fragment = CrimesFragment()
+            fragment.arguments = bundle
+            return fragment
         }
     }
 }

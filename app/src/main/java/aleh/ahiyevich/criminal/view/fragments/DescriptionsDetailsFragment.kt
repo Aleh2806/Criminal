@@ -3,30 +3,22 @@ package aleh.ahiyevich.criminal.view.fragments
 import aleh.ahiyevich.criminal.databinding.FragmentDescriptionsDetailsBinding
 import aleh.ahiyevich.criminal.model.CrimesU
 import aleh.ahiyevich.criminal.model.FireBaseHelper
+import aleh.ahiyevich.criminal.model.Materials
 import aleh.ahiyevich.criminal.view.adapters.TestAdapterForFirebase
-import android.app.ProgressDialog
 import android.content.res.Configuration
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
-import androidx.recyclerview.widget.RecyclerView
-import com.google.firebase.database.DataSnapshot
-import com.google.firebase.database.DatabaseError
-import com.google.firebase.database.FirebaseDatabase
-import com.google.firebase.database.ValueEventListener
 
 
 class DescriptionsDetailsFragment : Fragment() {
 
-    private val crimesList: ArrayList<CrimesU> = ArrayList()
+    private val materialsList: ArrayList<Materials> = ArrayList()
     private val fireBaseHelper = FireBaseHelper()
-    val adapter = TestAdapterForFirebase(crimesList)
-
-
+    val adapter = TestAdapterForFirebase(materialsList)
 
     private var _binding: FragmentDescriptionsDetailsBinding? = null
     private val binding: FragmentDescriptionsDetailsBinding
@@ -51,9 +43,13 @@ class DescriptionsDetailsFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        initRecyclerView(adapter)
 
-        fireBaseHelper.getCrimesList(adapter,requireContext(),crimesList,"1")
+        val tittleDescriptions = arguments?.getString("DESCRIPTION")
+        binding.descriptionDetails.text = tittleDescriptions
+
+        initRecyclerView()
+
+//        fireBaseHelper.getMaterialsCrime(adapter, requireContext(), materialsList,"1",)
 
         binding.btnBack.setOnClickListener {
             requireActivity()
@@ -61,11 +57,11 @@ class DescriptionsDetailsFragment : Fragment() {
                 .popBackStack()
         }
 
-        val tittleDescriptions = arguments?.getString("DESCRIPTION")
-        binding.descriptionDetails.text = tittleDescriptions
+
     }
 
-    private fun initRecyclerView(adapter: TestAdapterForFirebase){
+
+    private fun initRecyclerView() {
         val recyclerView = binding.recyclerViewDescriptions
         recyclerView.layoutManager = LinearLayoutManager(requireContext())
         recyclerView.adapter = adapter

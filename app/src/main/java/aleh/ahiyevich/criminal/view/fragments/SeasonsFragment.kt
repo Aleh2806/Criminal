@@ -2,12 +2,10 @@ package aleh.ahiyevich.criminal.view.fragments
 
 import aleh.ahiyevich.criminal.R
 import aleh.ahiyevich.criminal.databinding.FragmentSeassonsBinding
-import aleh.ahiyevich.criminal.model.FireBaseHelper
 import aleh.ahiyevich.criminal.model.OnItemClick
 import aleh.ahiyevich.criminal.model.SeasonsU
+import aleh.ahiyevich.criminal.repository.FireBaseHelper
 import aleh.ahiyevich.criminal.view.adapters.SeasonsAdapter
-import aleh.ahiyevich.criminal.view.adapters.TestAdapterForFirebase
-import android.app.ProgressDialog
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -16,10 +14,6 @@ import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import com.google.firebase.database.DataSnapshot
-import com.google.firebase.database.DatabaseError
-import com.google.firebase.database.FirebaseDatabase
-import com.google.firebase.database.ValueEventListener
 
 class SeasonsFragment : Fragment(), OnItemClick {
 
@@ -49,7 +43,6 @@ class SeasonsFragment : Fragment(), OnItemClick {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-
         initRecyclerView()
         fireBaseHelper.getSeasonsList(adapter, requireContext(), seasonsList)
         processingBottomMenu()
@@ -79,6 +72,7 @@ class SeasonsFragment : Fragment(), OnItemClick {
     override fun onItemClick(position: Int) {
         // TODO: Сюда думаю всунуть запросы на получение данных (списка дел с фото) из
         //  базы данных (На уровне ниже засунуть такие же запросы на материалы дела )
+        val season = seasonsList[position]
 
         when (position in 0..9) {
             (position == 0) -> replaceFragment(CrimesFragment.newInstance("1"))
@@ -98,11 +92,11 @@ class SeasonsFragment : Fragment(), OnItemClick {
 
 
         // Закрыл доступ к элементам под замком
-//        if (!season.openSeason) {
-//            Toast.makeText(requireContext(), "Сезон закрыт", Toast.LENGTH_SHORT).show()
-//        } else {
-//            replaceFragment(CrimesFragment())
-//        }
+        if (!season.openSeason) {
+            Toast.makeText(requireContext(), "Сезон закрыт", Toast.LENGTH_SHORT).show()
+        } else {
+            replaceFragment(CrimesFragment())
+        }
     }
 
     private fun replaceFragment(fragment: Fragment) {
@@ -110,8 +104,6 @@ class SeasonsFragment : Fragment(), OnItemClick {
             .supportFragmentManager
             .beginTransaction()
             .replace(R.id.container_for_fragment, fragment)
-            .hide(this)
-            .addToBackStack("")
             .commit()
     }
 }

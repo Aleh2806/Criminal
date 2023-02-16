@@ -2,7 +2,9 @@ package aleh.ahiyevich.criminal.view.fragments
 
 import aleh.ahiyevich.criminal.R
 import aleh.ahiyevich.criminal.databinding.FragmentCrimesListBinding
-import aleh.ahiyevich.criminal.model.*
+import aleh.ahiyevich.criminal.model.CrimesU
+import aleh.ahiyevich.criminal.model.OnItemClick
+import aleh.ahiyevich.criminal.repository.FireBaseHelper
 import aleh.ahiyevich.criminal.view.adapters.CrimesAdapter
 import android.app.Dialog
 import android.graphics.Color
@@ -24,6 +26,7 @@ class CrimesFragment : Fragment(), OnItemClick {
     private val fireBaseHelper = FireBaseHelper()
     private val crimesList: ArrayList<CrimesU> = ArrayList()
     private val adapter = CrimesAdapter(crimesList, this)
+    private lateinit var numberSeason: String
 
     private var _binding: FragmentCrimesListBinding? = null
     private val binding: FragmentCrimesListBinding
@@ -48,9 +51,10 @@ class CrimesFragment : Fragment(), OnItemClick {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
         initRecyclerView()
-        val numberSeason = arguments?.getString("KEY_SEASON")
-        fireBaseHelper.getCrimesList(adapter,requireContext(),crimesList,numberSeason!!)
+        numberSeason = arguments?.getString("KEY_SEASON").toString()
+        fireBaseHelper.getCrimesList(adapter, requireContext(), crimesList, numberSeason)
         processingBottomMenu()
     }
 
@@ -62,11 +66,24 @@ class CrimesFragment : Fragment(), OnItemClick {
         if (!crime.openCrime) {
             paymentDialog(position)
         } else {
-            replaceFragment(DescriptionsDetailsFragment())
+            when (position in 0..9) {
+                (position == 0) -> replaceFragment(DetailsCrimeFragmentList.newInstance(numberSeason,"1"))
+                (position == 2) -> replaceFragment(DetailsCrimeFragmentList.newInstance(numberSeason,"2"))
+                (position == 2) -> replaceFragment(DetailsCrimeFragmentList.newInstance(numberSeason,"3"))
+                (position == 3) -> replaceFragment(DetailsCrimeFragmentList.newInstance(numberSeason,"4"))
+                (position == 4) -> replaceFragment(DetailsCrimeFragmentList.newInstance(numberSeason,"5"))
+                (position == 5) -> replaceFragment(DetailsCrimeFragmentList.newInstance(numberSeason,"6"))
+                (position == 6) -> replaceFragment(DetailsCrimeFragmentList.newInstance(numberSeason,"7"))
+                (position == 7) -> replaceFragment(DetailsCrimeFragmentList.newInstance(numberSeason,"8"))
+                (position == 8) -> replaceFragment(DetailsCrimeFragmentList.newInstance(numberSeason,"9"))
+                (position == 9) -> replaceFragment(DetailsCrimeFragmentList.newInstance(numberSeason,"10"))
+                else -> {}
+            }
         }
     }
 
-    private fun initRecyclerView(){
+    private fun initRecyclerView() {
+        crimesList.removeAll(crimesList.toSet())
         val recyclerView: RecyclerView = binding.recyclerViewCrimes
         // Эта установка служит для повышения производительности системы
         recyclerView.setHasFixedSize(true)
@@ -78,8 +95,7 @@ class CrimesFragment : Fragment(), OnItemClick {
         requireActivity()
             .supportFragmentManager
             .beginTransaction()
-            .add(R.id.container_for_fragment, fragment)
-            .hide(this)
+            .replace(R.id.container_for_fragment, fragment)
             .addToBackStack("")
             .commit()
     }
@@ -94,7 +110,7 @@ class CrimesFragment : Fragment(), OnItemClick {
         myDialog.window?.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
         myDialog.show()
 
-        fun unlockCrime(){
+        fun unlockCrime() {
             crimesList[position].openCrime = true
             Toast.makeText(
                 requireContext(),
@@ -147,7 +163,7 @@ class CrimesFragment : Fragment(), OnItemClick {
         }
     }
 
-    private fun processingBottomMenu(){
+    private fun processingBottomMenu() {
         binding.bottomNavigationView.setOnItemSelectedListener {
             when (it.itemId) {
                 R.id.home_bottom_menu ->
@@ -159,11 +175,11 @@ class CrimesFragment : Fragment(), OnItemClick {
         }
     }
 
-    companion object{
+    companion object {
 
-        fun newInstance(numberSeason:String): CrimesFragment{
+        fun newInstance(numberSeason: String): CrimesFragment {
             val bundle = Bundle()
-            bundle.putString("KEY_SEASON",numberSeason)
+            bundle.putString("KEY_SEASON", numberSeason)
             val fragment = CrimesFragment()
             fragment.arguments = bundle
             return fragment

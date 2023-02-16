@@ -1,11 +1,7 @@
 package aleh.ahiyevich.criminal.view.adapters
 
 import aleh.ahiyevich.criminal.R
-import aleh.ahiyevich.criminal.model.CrimesU
 import aleh.ahiyevich.criminal.model.Materials
-import aleh.ahiyevich.criminal.model.OnItemClick
-import aleh.ahiyevich.criminal.model.SeasonsU
-import android.content.Context
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -14,10 +10,10 @@ import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import kotlinx.android.synthetic.main.item_descriptions_details_crime.view.*
 
-class TestAdapterForFirebase(
-    private val imagesList: ArrayList<Materials>
+class DescriptionsDetailsAdapter(
+    private val materialsList: ArrayList<Materials>
 ) :
-    RecyclerView.Adapter<TestAdapterForFirebase.TestViewHolder>() {
+    RecyclerView.Adapter<DescriptionsDetailsAdapter.TestViewHolder>() {
 
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): TestViewHolder {
@@ -28,13 +24,13 @@ class TestAdapterForFirebase(
     }
 
     override fun onBindViewHolder(holder: TestViewHolder, position: Int) {
-        val currentImage = imagesList[position]
+        val currentMaterial = materialsList[position]
 
-        Glide.with(holder.itemView.context).load(currentImage.photo).into(holder.photo)
+        Glide.with(holder.itemView.context).load(currentMaterial.material).into(holder.photo)
     }
 
     override fun getItemCount(): Int {
-        return imagesList.size
+        return materialsList.size
     }
 
     inner class TestViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView),

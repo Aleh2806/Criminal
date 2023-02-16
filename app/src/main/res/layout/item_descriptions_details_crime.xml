@@ -10,7 +10,7 @@
         android:layout_gravity="center"
         android:layout_marginBottom="10dp"
         android:layout_marginTop="20dp"
-        android:background="#959595" />
+        android:scaleType="centerCrop"/>
 
     <TextView
         android:id="@+id/name_season"

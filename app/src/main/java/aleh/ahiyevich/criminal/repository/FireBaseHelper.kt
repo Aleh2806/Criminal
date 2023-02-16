@@ -1,8 +1,11 @@
-package aleh.ahiyevich.criminal.model
+package aleh.ahiyevich.criminal.repository
 
+import aleh.ahiyevich.criminal.model.CrimesU
+import aleh.ahiyevich.criminal.model.Materials
+import aleh.ahiyevich.criminal.model.SeasonsU
 import aleh.ahiyevich.criminal.view.adapters.CrimesAdapter
+import aleh.ahiyevich.criminal.view.adapters.DescriptionsDetailsAdapter
 import aleh.ahiyevich.criminal.view.adapters.SeasonsAdapter
-import aleh.ahiyevich.criminal.view.adapters.TestAdapterForFirebase
 import android.content.Context
 import android.widget.Toast
 import com.google.firebase.database.DataSnapshot
@@ -10,7 +13,6 @@ import com.google.firebase.database.DatabaseError
 import com.google.firebase.database.FirebaseDatabase
 import com.google.firebase.database.ValueEventListener
 
-// TODO: Подумать, как засунуть сюда запросы в базу данных Firebase
 class FireBaseHelper {
 
     private val firebaseDatabase = FirebaseDatabase.getInstance()
@@ -48,10 +50,10 @@ class FireBaseHelper {
         adapter: CrimesAdapter,
         context: Context,
         listCrimes: ArrayList<CrimesU>,
-        numberCrime: String
+        numberSeason: String
     ) {
 
-        firebaseDatabase.reference.child("seasons").child(numberCrime).child("crimes")
+        firebaseDatabase.reference.child("seasons").child(numberSeason).child("crimes")
             .addListenerForSingleValueEvent(object :
                 ValueEventListener {
                 override fun onDataChange(snapshot: DataSnapshot) {
@@ -73,15 +75,21 @@ class FireBaseHelper {
     }
 
 
-    fun getMaterialsCrime(
-        adapter: TestAdapterForFirebase,
+    // Получаю список материалов дела(Фото, Видео и т.д)
+    fun getMaterials(
+        adapter: DescriptionsDetailsAdapter,
         context: Context,
-        listMaterials: ArrayList<Materials>,
+        listCrimes: ArrayList<Materials>,
+        numberSeason: String,
         numberCrime: String,
-        nameMaterials: String
+        materialName: String
     ) {
-
-        firebaseDatabase.reference.child("seasons").child(numberCrime).child("crimes").child(nameMaterials)
+        firebaseDatabase.reference
+            .child("seasons")
+            .child(numberSeason)
+            .child("crimes")
+            .child(numberCrime)
+            .child(materialName)
             .addListenerForSingleValueEvent(object :
                 ValueEventListener {
                 override fun onDataChange(snapshot: DataSnapshot) {
@@ -89,7 +97,7 @@ class FireBaseHelper {
                     if (snapshot.exists()) {
                         for (dataSnapshot in snapshot.children) {
                             val data = dataSnapshot.getValue(Materials::class.java)
-                            listMaterials.add(data!!)
+                            listCrimes.add(data!!)
                         }
                     }
                     adapter.notifyDataSetChanged()
@@ -100,5 +108,6 @@ class FireBaseHelper {
                 }
 
             })
+
     }
 }

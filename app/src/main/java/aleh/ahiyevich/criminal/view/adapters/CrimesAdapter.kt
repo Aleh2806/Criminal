@@ -15,7 +15,7 @@ import com.bumptech.glide.Glide
 class CrimesAdapter(
     private val data: ArrayList<CrimesU>,
     private val listener: OnItemClick
-): RecyclerView.Adapter<CrimesAdapter.ItemCrimesViewHolder>() {
+) : RecyclerView.Adapter<CrimesAdapter.ItemCrimesViewHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ItemCrimesViewHolder {
         val inflatedView = LayoutInflater.from(parent.context)
@@ -43,16 +43,16 @@ class CrimesAdapter(
     }
 
 
-    inner class ItemCrimesViewHolder(view: View) : RecyclerView.ViewHolder(view),
+    inner class ItemCrimesViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView),
         View.OnClickListener {
 
-        val nameCrime: TextView = view.findViewById(R.id.name_crime)
-        val imageCrime: ImageView = view.findViewById(R.id.image_crime)
-        val lockCrime: FrameLayout = view.findViewById(R.id.lock_crime)
+        val nameCrime: TextView = itemView.findViewById(R.id.name_crime)
+        val imageCrime: ImageView = itemView.findViewById(R.id.image_crime)
+        val lockCrime: FrameLayout = itemView.findViewById(R.id.lock_crime)
 
 
         init {
-            view.setOnClickListener(this)
+            itemView.setOnClickListener(this)
         }
 
         override fun onClick(v: View?) {

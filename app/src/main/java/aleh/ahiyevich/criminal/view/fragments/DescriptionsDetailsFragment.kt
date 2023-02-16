@@ -1,10 +1,9 @@
 package aleh.ahiyevich.criminal.view.fragments
 
 import aleh.ahiyevich.criminal.databinding.FragmentDescriptionsDetailsBinding
-import aleh.ahiyevich.criminal.model.CrimesU
-import aleh.ahiyevich.criminal.model.FireBaseHelper
 import aleh.ahiyevich.criminal.model.Materials
-import aleh.ahiyevich.criminal.view.adapters.TestAdapterForFirebase
+import aleh.ahiyevich.criminal.repository.FireBaseHelper
+import aleh.ahiyevich.criminal.view.adapters.DescriptionsDetailsAdapter
 import android.content.res.Configuration
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -18,14 +17,13 @@ class DescriptionsDetailsFragment : Fragment() {
 
     private val materialsList: ArrayList<Materials> = ArrayList()
     private val fireBaseHelper = FireBaseHelper()
-    val adapter = TestAdapterForFirebase(materialsList)
+    val adapter = DescriptionsDetailsAdapter(materialsList)
 
     private var _binding: FragmentDescriptionsDetailsBinding? = null
     private val binding: FragmentDescriptionsDetailsBinding
         get() {
             return _binding!!
         }
-
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -43,23 +41,29 @@ class DescriptionsDetailsFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-
-        val tittleDescriptions = arguments?.getString("DESCRIPTION")
+        val numberSeason = arguments?.getString("KEY_SEASON")
+        val numberCrime = arguments?.getString("KEY_CRIME")
+        val materialName = arguments?.getString("KEY_MATERIAL")
+        val tittleDescriptions = arguments?.getString("KEY_TITTLE")
         binding.descriptionDetails.text = tittleDescriptions
 
-        initRecyclerView()
+        fireBaseHelper.getMaterials(
+            adapter,
+            requireContext(),
+            materialsList,
+            numberSeason!!,
+            numberCrime!!,
+            materialName!!
+        )
 
-//        fireBaseHelper.getMaterialsCrime(adapter, requireContext(), materialsList,"1",)
+        initRecyclerView()
 
         binding.btnBack.setOnClickListener {
             requireActivity()
                 .supportFragmentManager
                 .popBackStack()
         }
-
-
     }
-
 
     private fun initRecyclerView() {
         val recyclerView = binding.recyclerViewDescriptions
@@ -75,9 +79,17 @@ class DescriptionsDetailsFragment : Fragment() {
     }
 
     companion object {
-        fun newInstance(descriptionTitle: String): DescriptionsDetailsFragment {
+        fun newInstance(
+            numberSeason: String,
+            numberCrime: String,
+            descriptionTitle: String,
+            materialName: String
+        ): DescriptionsDetailsFragment {
             val bundle = Bundle()
-            bundle.putString("DESCRIPTION", descriptionTitle)
+            bundle.putString("KEY_TITTLE", descriptionTitle)
+            bundle.putString("KEY_SEASON", numberSeason)
+            bundle.putString("KEY_CRIME", numberCrime)
+            bundle.putString("KEY_MATERIAL", materialName)
             val fragment = DescriptionsDetailsFragment()
             fragment.arguments = bundle
             return fragment

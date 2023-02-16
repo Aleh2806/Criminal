@@ -13,5 +13,5 @@ data class CrimesU(
 )
 
 data class Materials(
-    var photo: String = ""
+    var material: String = ""
 )

@@ -15,7 +15,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 
 
-class DetailsCrimeFragmentTile : Fragment(),OnItemClick {
+class DetailsCrimeFragmentTile : Fragment(), OnItemClick {
 
     private val listDetails: ArrayList<String> = ArrayList()
 
@@ -30,7 +30,7 @@ class DetailsCrimeFragmentTile : Fragment(),OnItemClick {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        _binding = FragmentDetailsCrimeTileBinding.inflate(inflater,container, false)
+        _binding = FragmentDetailsCrimeTileBinding.inflate(inflater, container, false)
         return binding.root
     }
 
@@ -47,7 +47,7 @@ class DetailsCrimeFragmentTile : Fragment(),OnItemClick {
         binding.apply {
             changeLayouts.setOnClickListener { replaceFragment(DetailsCrimeFragmentList()) }
             detailsBack.setOnClickListener {
-               requireActivity().supportFragmentManager.popBackStack()
+                requireActivity().supportFragmentManager.popBackStack()
             }
         }
     }
@@ -59,11 +59,12 @@ class DetailsCrimeFragmentTile : Fragment(),OnItemClick {
         }
         val recyclerView: RecyclerView = binding.recyclerViewDetails
         recyclerView.setHasFixedSize(true)
-        recyclerView.layoutManager = GridLayoutManager(requireContext(),2)
+        recyclerView.layoutManager = GridLayoutManager(requireContext(), 2)
         recyclerView.adapter = DetailsAdapterTile(listDetails, requireContext(), this)
 
-        if (resources.configuration.orientation == Configuration.ORIENTATION_LANDSCAPE){
-            recyclerView.layoutManager = LinearLayoutManager(requireContext(),RecyclerView.HORIZONTAL,false)
+        if (resources.configuration.orientation == Configuration.ORIENTATION_LANDSCAPE) {
+            recyclerView.layoutManager =
+                LinearLayoutManager(requireContext(), RecyclerView.HORIZONTAL, false)
         }
     }
 
@@ -79,6 +80,6 @@ class DetailsCrimeFragmentTile : Fragment(),OnItemClick {
 
     override fun onItemClick(position: Int) {
         val description = listDetails[position]
-        replaceFragment(DescriptionsDetailsFragment.newInstance(description))
+//        replaceFragment(DescriptionsDetailsFragment.newInstance(description))
     }
 }

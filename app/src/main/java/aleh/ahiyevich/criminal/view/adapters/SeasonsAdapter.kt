@@ -1,9 +1,8 @@
 package aleh.ahiyevich.criminal.view.adapters
 
 import aleh.ahiyevich.criminal.R
-import aleh.ahiyevich.criminal.model.SeasonsU
 import aleh.ahiyevich.criminal.model.OnItemClick
-import android.content.Context
+import aleh.ahiyevich.criminal.model.SeasonsU
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -29,11 +28,11 @@ class SeasonsAdapter(
         val season = data[position]
 
         // Повесил обработку отображения замков на сезонах
-//        if (!season.openSeason) {
+        if (!season.openSeason) {
             holder.lockSeason.visibility = View.GONE
-//        } else {
-//            holder.lockSeason.visibility = View.VISIBLE
-//        }
+        } else {
+            holder.lockSeason.visibility = View.VISIBLE
+        }
 
         holder.nameSeason.text = season.nameSeason
         Glide.with(holder.itemView.context).load(season.imageSeason).into(holder.image)

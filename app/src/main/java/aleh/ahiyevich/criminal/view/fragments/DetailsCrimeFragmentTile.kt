@@ -18,8 +18,6 @@ import androidx.recyclerview.widget.RecyclerView
 class DetailsCrimeFragmentTile : Fragment(), OnItemClick {
 
     private val listDetails: ArrayList<String> = ArrayList()
-    private lateinit var numberSeason: String
-    private lateinit var numberCrime: String
 
     private var _binding: FragmentDetailsCrimeTileBinding? = null
     private val binding: FragmentDetailsCrimeTileBinding
@@ -45,7 +43,8 @@ class DetailsCrimeFragmentTile : Fragment(), OnItemClick {
         super.onViewCreated(view, savedInstanceState)
 
         initRecyclerView()
-
+        val numberSeason = arguments?.getString("KEY_SEASON").toString()
+        val numberCrime = arguments?.getString("KEY_CRIME").toString()
         binding.apply {
             changeLayouts.setOnClickListener { replaceFragment(DetailsCrimeFragmentList.newInstance(numberSeason,numberCrime)) }
             detailsBack.setOnClickListener {
@@ -84,8 +83,8 @@ class DetailsCrimeFragmentTile : Fragment(), OnItemClick {
 
     override fun onItemClick(position: Int) {
         val description = listDetails[position]
-        numberSeason = arguments?.getString("KEY_SEASON").toString()
-        numberCrime = arguments?.getString("KEY_CRIME").toString()
+        val numberSeason = arguments?.getString("KEY_SEASON").toString()
+        val numberCrime = arguments?.getString("KEY_CRIME").toString()
 
         when(position in 0..5){
             (position == 0) -> replaceFragment(DescriptionsDetailsFragment.newInstance(numberSeason,numberCrime,description,"photo"))

@@ -41,14 +41,14 @@ class DetailsCrimeFragmentList : Fragment(), OnItemClick {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        initRecyclerView()
         val numberSeason = arguments?.getString("KEY_SEASON").toString()
         val numberCrime = arguments?.getString("KEY_CRIME").toString()
+
+        initRecyclerView()
+
         binding.apply {
             changeLayouts.setOnClickListener { replaceFragment(DetailsCrimeFragmentTile.newInstance(numberSeason,numberCrime)) }
-            detailsBack.setOnClickListener {
-                requireActivity().supportFragmentManager.popBackStack()
-            }
+            detailsBack.setOnClickListener {replaceFragment(CrimesFragment.newInstance(numberSeason))}
         }
     }
 

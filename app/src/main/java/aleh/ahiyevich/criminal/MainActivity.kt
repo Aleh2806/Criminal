@@ -2,6 +2,7 @@ package aleh.ahiyevich.criminal
 
 import aleh.ahiyevich.criminal.databinding.ActivityMainBinding
 import aleh.ahiyevich.criminal.view.fragments.AuthorizationFragment
+import aleh.ahiyevich.criminal.view.fragments.DetailsCrimeFragmentList
 import android.app.Dialog
 import android.graphics.Color
 import android.graphics.drawable.ColorDrawable

@@ -74,28 +74,24 @@ class SeasonsFragment : Fragment(), OnItemClick {
         //  базы данных (На уровне ниже засунуть такие же запросы на материалы дела )
         val season = seasonsList[position]
 
-        when (position in 0..9) {
-            (position == 0) -> replaceFragment(CrimesFragment.newInstance("1"))
-            (position == 1) -> replaceFragment(CrimesFragment.newInstance("2"))
-            (position == 2) -> replaceFragment(CrimesFragment.newInstance("3"))
-            (position == 3) -> replaceFragment(CrimesFragment.newInstance("4"))
-            (position == 4) -> replaceFragment(CrimesFragment.newInstance("5"))
-            (position == 5) -> replaceFragment(CrimesFragment.newInstance("6"))
-            (position == 6) -> replaceFragment(CrimesFragment.newInstance("7"))
-            (position == 7) -> replaceFragment(CrimesFragment.newInstance("8"))
-            (position == 8) -> replaceFragment(CrimesFragment.newInstance("9"))
-            (position == 9) -> replaceFragment(CrimesFragment.newInstance("10"))
-
-
-            else -> {}
-        }
-
-
         // Закрыл доступ к элементам под замком
         if (!season.openSeason) {
             Toast.makeText(requireContext(), "Сезон закрыт", Toast.LENGTH_SHORT).show()
         } else {
-            replaceFragment(CrimesFragment())
+            when (position in 0..9) {
+                (position == 0) -> replaceFragment(CrimesFragment.newInstance("1"))
+                (position == 1) -> replaceFragment(CrimesFragment.newInstance("2"))
+                (position == 2) -> replaceFragment(CrimesFragment.newInstance("3"))
+                (position == 3) -> replaceFragment(CrimesFragment.newInstance("4"))
+                (position == 4) -> replaceFragment(CrimesFragment.newInstance("5"))
+                (position == 5) -> replaceFragment(CrimesFragment.newInstance("6"))
+                (position == 6) -> replaceFragment(CrimesFragment.newInstance("7"))
+                (position == 7) -> replaceFragment(CrimesFragment.newInstance("8"))
+                (position == 8) -> replaceFragment(CrimesFragment.newInstance("9"))
+                (position == 9) -> replaceFragment(CrimesFragment.newInstance("10"))
+
+                else -> {}
+            }
         }
     }
 

@@ -1,6 +1,7 @@
 package aleh.ahiyevich.criminal.view.adapters
 
 import aleh.ahiyevich.criminal.R
+import aleh.ahiyevich.criminal.model.Materials
 import aleh.ahiyevich.criminal.model.OnItemClick
 import android.content.Context
 import android.view.LayoutInflater
@@ -12,7 +13,6 @@ import kotlinx.android.synthetic.main.item_details_tile.view.*
 
 class DetailsAdapterTile(
     private val listDetails: ArrayList<String>,
-    private val context: Context,
     private val listener: OnItemClick
 ) : RecyclerView.Adapter<DetailsAdapterTile.ItemDetailsViewHolder>() {
 

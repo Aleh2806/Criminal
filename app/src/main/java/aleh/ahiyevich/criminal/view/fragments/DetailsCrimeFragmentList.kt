@@ -16,7 +16,8 @@ import androidx.recyclerview.widget.RecyclerView
 class DetailsCrimeFragmentList : Fragment(), OnItemClick {
 
     private val listDetails: ArrayList<String> = ArrayList()
-
+    private lateinit var numberSeason: String
+    private lateinit var numberCrime: String
 
     private var _binding: FragmentDetailsCrimeListBinding? = null
     private val binding: FragmentDetailsCrimeListBinding
@@ -45,7 +46,7 @@ class DetailsCrimeFragmentList : Fragment(), OnItemClick {
         initRecyclerView()
 
         binding.apply {
-            changeLayouts.setOnClickListener { replaceFragment(DetailsCrimeFragmentTile()) }
+            changeLayouts.setOnClickListener { replaceFragment(DetailsCrimeFragmentTile.newInstance(numberSeason,numberCrime)) }
             detailsBack.setOnClickListener {
                 requireActivity()
                     .supportFragmentManager
@@ -66,7 +67,7 @@ class DetailsCrimeFragmentList : Fragment(), OnItemClick {
         val recyclerView: RecyclerView = binding.recyclerViewDetails
         recyclerView.setHasFixedSize(true)
         recyclerView.layoutManager = LinearLayoutManager(this.context)
-        recyclerView.adapter = DetailsAdapterList(listDetails, requireContext(), this)
+        recyclerView.adapter = DetailsAdapterList(listDetails, this)
     }
 
     private fun replaceFragment(fragment: Fragment) {
@@ -81,53 +82,54 @@ class DetailsCrimeFragmentList : Fragment(), OnItemClick {
 
     override fun onItemClick(position: Int) {
         val description = listDetails[position]
-        val numberSeason = arguments?.getString("KEY_SEASON")
-        val numberCrime = arguments?.getString("KEY_CRIME")
+        numberSeason = arguments?.getString("KEY_SEASON").toString()
+        numberCrime = arguments?.getString("KEY_CRIME").toString()
+
         when (position in 0..5) {
             (position == 0) -> replaceFragment(
                 DescriptionsDetailsFragment.newInstance(
-                    numberSeason!!,
-                    numberCrime!!,
+                    numberSeason,
+                    numberCrime,
                     description,
                     "photo"
                 )
             )
             (position == 1) -> replaceFragment(
                 DescriptionsDetailsFragment.newInstance(
-                    numberSeason!!,
-                    numberCrime!!,
+                    numberSeason,
+                    numberCrime,
                     description,
                     "video"
                 )
             )
             (position == 2) -> replaceFragment(
                 DescriptionsDetailsFragment.newInstance(
-                    numberSeason!!,
-                    numberCrime!!,
+                    numberSeason,
+                    numberCrime,
                     description,
                     "questions"
                 )
             )
             (position == 3) -> replaceFragment(
                 DescriptionsDetailsFragment.newInstance(
-                    numberSeason!!,
-                    numberCrime!!,
+                    numberSeason,
+                    numberCrime,
                     description,
                     "suspects"
                 )
             )
             (position == 4) -> replaceFragment(
                 DescriptionsDetailsFragment.newInstance(
-                    numberSeason!!,
-                    numberCrime!!,
+                    numberSeason,
+                    numberCrime,
                     description,
                     "experts"
                 )
             )
             (position == 5) -> replaceFragment(
                 DescriptionsDetailsFragment.newInstance(
-                    numberSeason!!,
-                    numberCrime!!,
+                    numberSeason,
+                    numberCrime,
                     description,
                     "deponents"
                 )

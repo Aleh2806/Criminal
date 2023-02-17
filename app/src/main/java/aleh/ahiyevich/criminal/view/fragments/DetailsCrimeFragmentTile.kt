@@ -18,6 +18,8 @@ import androidx.recyclerview.widget.RecyclerView
 class DetailsCrimeFragmentTile : Fragment(), OnItemClick {
 
     private val listDetails: ArrayList<String> = ArrayList()
+    private lateinit var numberSeason: String
+    private lateinit var numberCrime: String
 
     private var _binding: FragmentDetailsCrimeTileBinding? = null
     private val binding: FragmentDetailsCrimeTileBinding
@@ -45,7 +47,7 @@ class DetailsCrimeFragmentTile : Fragment(), OnItemClick {
         initRecyclerView()
 
         binding.apply {
-            changeLayouts.setOnClickListener { replaceFragment(DetailsCrimeFragmentList()) }
+            changeLayouts.setOnClickListener { replaceFragment(DetailsCrimeFragmentList.newInstance(numberSeason,numberCrime)) }
             detailsBack.setOnClickListener {
                 requireActivity().supportFragmentManager.popBackStack()
             }
@@ -54,13 +56,15 @@ class DetailsCrimeFragmentTile : Fragment(), OnItemClick {
 
     private fun initRecyclerView() {
         val arrayNameDetails = resources.getStringArray(R.array.details_crime_list)
+        listDetails.removeAll(listDetails.toSet())
+
         for (i in arrayNameDetails) {
             listDetails.add(i)
         }
         val recyclerView: RecyclerView = binding.recyclerViewDetails
         recyclerView.setHasFixedSize(true)
         recyclerView.layoutManager = GridLayoutManager(requireContext(), 2)
-        recyclerView.adapter = DetailsAdapterTile(listDetails, requireContext(), this)
+        recyclerView.adapter = DetailsAdapterTile(listDetails, this)
 
         if (resources.configuration.orientation == Configuration.ORIENTATION_LANDSCAPE) {
             recyclerView.layoutManager =
@@ -72,7 +76,7 @@ class DetailsCrimeFragmentTile : Fragment(), OnItemClick {
         requireActivity()
             .supportFragmentManager
             .beginTransaction()
-            .add(R.id.container_for_fragment, fragment)
+            .replace(R.id.container_for_fragment, fragment)
             .addToBackStack("")
             .hide(this)
             .commit()
@@ -80,6 +84,29 @@ class DetailsCrimeFragmentTile : Fragment(), OnItemClick {
 
     override fun onItemClick(position: Int) {
         val description = listDetails[position]
-//        replaceFragment(DescriptionsDetailsFragment.newInstance(description))
+        numberSeason = arguments?.getString("KEY_SEASON").toString()
+        numberCrime = arguments?.getString("KEY_CRIME").toString()
+
+        when(position in 0..5){
+            (position == 0) -> replaceFragment(DescriptionsDetailsFragment.newInstance(numberSeason,numberCrime,description,"photo"))
+            (position == 1) -> replaceFragment(DescriptionsDetailsFragment.newInstance(numberSeason,numberCrime,description,"video"))
+            (position == 2) -> replaceFragment(DescriptionsDetailsFragment.newInstance(numberSeason,numberCrime,description,"questions"))
+            (position == 3) -> replaceFragment(DescriptionsDetailsFragment.newInstance(numberSeason,numberCrime,description,"suspects"))
+            (position == 4) -> replaceFragment(DescriptionsDetailsFragment.newInstance(numberSeason,numberCrime,description,"experts"))
+            (position == 5) -> replaceFragment(DescriptionsDetailsFragment.newInstance(numberSeason,numberCrime,description,"deponents"))
+
+            else -> {}
+        }
+    }
+
+    companion object {
+        fun newInstance(numberSeason: String, numberCrime: String): DetailsCrimeFragmentTile {
+            val bundle = Bundle()
+            bundle.putString("KEY_SEASON", numberSeason)
+            bundle.putString("KEY_CRIME", numberCrime)
+            val fragment = DetailsCrimeFragmentTile()
+            fragment.arguments = bundle
+            return fragment
+        }
     }
 }

@@ -12,43 +12,42 @@ import kotlinx.android.synthetic.main.item_details_list.view.*
 
 class DetailsAdapterList(
     private val listDetails: ArrayList<String>,
-    private val context: Context,
     private val listener: OnItemClick
 ) : RecyclerView.Adapter<DetailsAdapterList.ItemDetailsViewHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ItemDetailsViewHolder {
         val inflatedView =
             LayoutInflater.from(parent.context).inflate(R.layout.item_details_list, parent, false)
-        return ItemDetailsViewHolder(inflatedView)
+    return ItemDetailsViewHolder(inflatedView)
+}
+
+override fun onBindViewHolder(holder: ItemDetailsViewHolder, position: Int) {
+    val nameDetails = listDetails[position]
+
+    holder.nameDetails.text = nameDetails
+}
+
+override fun getItemCount(): Int {
+    return listDetails.size
+}
+
+
+inner class ItemDetailsViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView),
+    View.OnClickListener {
+    val nameDetails: TextView = itemView.name_details_list
+
+    init {
+        itemView.setOnClickListener(this)
     }
 
-    override fun onBindViewHolder(holder: ItemDetailsViewHolder, position: Int) {
-        val nameDetails = listDetails[position]
+    override fun onClick(v: View?) {
+        val position = adapterPosition
 
-        holder.nameDetails.text = nameDetails
-    }
-
-    override fun getItemCount(): Int {
-        return listDetails.size
-    }
-
-
-    inner class ItemDetailsViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView),
-        View.OnClickListener {
-        val nameDetails: TextView = itemView.name_details_list
-
-        init {
-            itemView.setOnClickListener(this)
+        if (position != RecyclerView.NO_POSITION) {
+            listener.onItemClick(position)
         }
-
-        override fun onClick(v: View?) {
-            val position = adapterPosition
-
-            if (position != RecyclerView.NO_POSITION) {
-                listener.onItemClick(position)
-            }
-        }
-
-
     }
+
+
+}
 }

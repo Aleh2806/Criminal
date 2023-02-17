@@ -28,7 +28,7 @@ class SeasonsAdapter(
         val season = data[position]
 
         // Повесил обработку отображения замков на сезонах
-        if (!season.openSeason) {
+        if (season.openSeason) {
             holder.lockSeason.visibility = View.GONE
         } else {
             holder.lockSeason.visibility = View.VISIBLE

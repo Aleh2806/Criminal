@@ -51,7 +51,7 @@
         android:id="@+id/recycler_view_details"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_marginHorizontal="12dp"
+        android:layout_marginHorizontal="10dp"
         tools:listitem="@layout/item_details_tile" />
 
 </LinearLayout>

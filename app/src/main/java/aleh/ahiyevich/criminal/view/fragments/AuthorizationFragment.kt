@@ -6,6 +6,7 @@ import aleh.ahiyevich.criminal.model.User
 import android.app.Dialog
 import android.graphics.Color
 import android.graphics.drawable.ColorDrawable
+import android.os.Build
 import android.os.Bundle
 import android.text.TextUtils
 import android.view.LayoutInflater
@@ -63,6 +64,7 @@ class AuthorizationFragment : Fragment() {
     // Проверка, авторизован пользователь или нет
     override fun onStart() {
         super.onStart()
+        callFullScreen()
 
         val currentUser: FirebaseUser? = auth.currentUser
         if (currentUser != null) {
@@ -180,5 +182,16 @@ class AuthorizationFragment : Fragment() {
         super.onDestroyView()
         _binding = null
     }
+
+    private fun callFullScreen() {
+        if (Build.VERSION.SDK_INT > 11 && Build.VERSION.SDK_INT < 19) { // для ранних версий API
+            requireActivity().window.decorView.systemUiVisibility = View.GONE
+        } else if (Build.VERSION.SDK_INT >= 19) {
+            // для более поздних версий API
+            requireActivity().window.decorView.systemUiVisibility =
+                View.SYSTEM_UI_FLAG_HIDE_NAVIGATION or View.SYSTEM_UI_FLAG_IMMERSIVE_STICKY
+        }
+    }
+
 
 }

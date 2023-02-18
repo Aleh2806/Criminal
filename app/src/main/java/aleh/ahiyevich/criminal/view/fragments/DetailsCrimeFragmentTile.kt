@@ -5,6 +5,7 @@ import aleh.ahiyevich.criminal.databinding.FragmentDetailsCrimeTileBinding
 import aleh.ahiyevich.criminal.model.OnItemClick
 import aleh.ahiyevich.criminal.view.adapters.DetailsAdapterTile
 import android.content.res.Configuration
+import android.os.Build
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -107,5 +108,20 @@ class DetailsCrimeFragmentTile : Fragment(), OnItemClick {
             fragment.arguments = bundle
             return fragment
         }
+    }
+
+    private fun callFullScreen() {
+        if (Build.VERSION.SDK_INT > 11 && Build.VERSION.SDK_INT < 19) { // для ранних версий API
+            requireActivity().window.decorView.systemUiVisibility = View.GONE
+        } else if (Build.VERSION.SDK_INT >= 19) {
+            // для более поздних версий API
+            requireActivity().window.decorView.systemUiVisibility =
+                View.SYSTEM_UI_FLAG_HIDE_NAVIGATION or View.SYSTEM_UI_FLAG_IMMERSIVE_STICKY
+        }
+    }
+
+    override fun onStart() {
+        super.onStart()
+        callFullScreen()
     }
 }

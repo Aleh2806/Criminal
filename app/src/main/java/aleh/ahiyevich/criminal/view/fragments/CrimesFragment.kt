@@ -28,6 +28,7 @@ class CrimesFragment : Fragment(), OnItemClick {
     private val adapter = CrimesAdapter(crimesList, this)
     private lateinit var numberSeason: String
 
+
     private var _binding: FragmentCrimesListBinding? = null
     private val binding: FragmentCrimesListBinding
         get() {

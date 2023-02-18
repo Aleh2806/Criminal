@@ -43,8 +43,9 @@ class MainActivity : AppCompatActivity() {
     }
 
     // При пересоздании активити вызываем функцию ФуллСкрин
-    override fun onResume() {
-        super.onResume()
+
+    override fun onStart() {
+        super.onStart()
         callFullScreen()
     }
 

@@ -118,7 +118,7 @@ class CrimesFragment : Fragment(), OnItemClick {
                 Toast.LENGTH_LONG
             ).show()
             myDialog.dismiss()
-            replaceFragment(DetailsCrimeFragmentList())
+            replaceFragment(DetailsCrimeFragmentList.newInstance(numberSeason,crimesList[position+1].toString()))
         }
 
         // Обработка кнопки подтвердить инвайт код (Проверка кодов для каждого дела)

@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="160dp"
+    android:layout_height="160dp"
+    android:layout_marginStart="5dp"
+    android:layout_marginTop="10dp"
+    app:cardCornerRadius="20dp">
+
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="#0C1E3A">
+
+
+        <ImageView
+            android:id="@+id/image_crime"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:scaleType="centerCrop" />
+
+        <TextView
+            android:id="@+id/name_crime"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:text="Название преступления"
+            android:textAlignment="center"
+            android:textColor="@color/white"
+            android:textSize="40sp"
+            android:textStyle="bold" />
+
+        <FrameLayout
+            android:id="@+id/lock_crime"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_gravity="center"
+            android:background="#88605F5F">
+
+            <ImageView
+                android:layout_width="120dp"
+                android:layout_height="110dp"
+                android:layout_gravity="center"
+                android:background="@drawable/ic_round_lock_24" />
+        </FrameLayout>
+    </FrameLayout>
+
+</androidx.cardview.widget.CardView>

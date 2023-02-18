@@ -45,7 +45,7 @@ class AuthorizationFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-
+        // Получение всех ссылок на базу данных Firebase
         auth = FirebaseAuth.getInstance()
         db = FirebaseDatabase.getInstance()
         users = db.getReference("Users")
@@ -57,8 +57,10 @@ class AuthorizationFragment : Fragment() {
         binding.buttonRegistration.setOnClickListener {
             showRegistrationDialogAndRegistrationUser()
         }
+
     }
 
+    // Проверка, авторизован пользователь или нет
     override fun onStart() {
         super.onStart()
 
@@ -73,6 +75,7 @@ class AuthorizationFragment : Fragment() {
         }
     }
 
+    // Авторизация пользователя
     private fun authorisationUser() {
 
         val email = binding.logInEmailPerson
@@ -103,6 +106,7 @@ class AuthorizationFragment : Fragment() {
             }
     }
 
+    // Регистрация пользователя
     private fun showRegistrationDialogAndRegistrationUser() {
 
         val dialogBinding = layoutInflater.inflate(R.layout.dialog_registration, null)

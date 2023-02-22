@@ -54,14 +54,21 @@
         <entry key="..\:/Production/Criminal/app/src/main/res/layout-land/item_details_tile.xml" value="0.1" />
         <entry key="..\:/Production/Criminal/app/src/main/res/layout-land/item_tile.xml" value="0.21770833333333334" />
         <entry key="..\:/Production/Criminal/app/src/main/res/layout-land/my_custom_dialog_exit.xml" value="0.21711711711711712" />
-        <entry key="..\:/Production/Criminal/app/src/main/res/layout-large/fragment_authorisation.xml" value="0.65625" />
-        <entry key="..\:/Production/Criminal/app/src/main/res/layout-large/fragment_crimes_list.xml" value="0.5126953125" />
+        <entry key="..\:/Production/Criminal/app/src/main/res/layout-large/fragment_authorisation.xml" value="0.375" />
+        <entry key="..\:/Production/Criminal/app/src/main/res/layout-large/fragment_crimes_list.xml" value="0.325497287522604" />
+        <entry key="..\:/Production/Criminal/app/src/main/res/layout-large/fragment_seassons.xml" value="0.1936978683966636" />
+        <entry key="..\:/Production/Criminal/app/src/main/res/layout-large/item_details_list.xml" value="0.1936978683966636" />
+        <entry key="..\:/Production/Criminal/app/src/main/res/layout-large/item_details_tile.xml" value="0.1936978683966636" />
+        <entry key="..\:/Production/Criminal/app/src/main/res/layout-large/item_list.xml" value="0.1936978683966636" />
+        <entry key="..\:/Production/Criminal/app/src/main/res/layout-large/item_tile.xml" value="0.1936978683966636" />
         <entry key="..\:/Production/Criminal/app/src/main/res/layout-ldpi/fragment_authorisation.xml" value="0.6578947368421053" />
         <entry key="..\:/Production/Criminal/app/src/main/res/layout-mdpi/fragment_authorisation.xml" value="0.22435897435897437" />
-        <entry key="..\:/Production/Criminal/app/src/main/res/layout-normal/fragment_authorisation.xml" value="0.25" />
+        <entry key="..\:/Production/Criminal/app/src/main/res/layout-normal/fragment_authorisation.xml" value="0.165" />
         <entry key="..\:/Production/Criminal/app/src/main/res/layout-normal/fragment_crimes_list.xml" value="0.1580135440180587" />
+        <entry key="..\:/Production/Criminal/app/src/main/res/layout-normal/fragment_descriptions_details.xml" value="0.25" />
         <entry key="..\:/Production/Criminal/app/src/main/res/layout-normal/fragment_details_crime_list.xml" value="0.41015625" />
-        <entry key="..\:/Production/Criminal/app/src/main/res/layout-normal/fragment_details_crime_tile.xml" value="0.24041811846689895" />
+        <entry key="..\:/Production/Criminal/app/src/main/res/layout-normal/fragment_details_crime_tile.xml" value="0.45" />
+        <entry key="..\:/Production/Criminal/app/src/main/res/layout-normal/fragment_profile.xml" value="0.22445489525438223" />
         <entry key="..\:/Production/Criminal/app/src/main/res/layout-normal/fragment_seassons.xml" value="0.24642857142857144" />
         <entry key="..\:/Production/Criminal/app/src/main/res/layout-normal/item_details_list.xml" value="0.22161249472351202" />
         <entry key="..\:/Production/Criminal/app/src/main/res/layout-normal/item_details_tile.xml" value="0.39166666666666666" />
@@ -91,7 +98,7 @@
         <entry key="..\:/Production/Criminal/app/src/main/res/layout/fragment_crimes_list.xml" value="0.375" />
         <entry key="..\:/Production/Criminal/app/src/main/res/layout/fragment_crimes_tile.xml" value="0.165" />
         <entry key="..\:/Production/Criminal/app/src/main/res/layout/fragment_deponents_details.xml" value="0.2734375" />
-        <entry key="..\:/Production/Criminal/app/src/main/res/layout/fragment_descriptions_details.xml" value="0.11864406779661017" />
+        <entry key="..\:/Production/Criminal/app/src/main/res/layout/fragment_descriptions_details.xml" value="0.75" />
         <entry key="..\:/Production/Criminal/app/src/main/res/layout/fragment_details_crime.xml" value="0.25" />
         <entry key="..\:/Production/Criminal/app/src/main/res/layout/fragment_details_crime_list.xml" value="0.165" />
         <entry key="..\:/Production/Criminal/app/src/main/res/layout/fragment_details_crime_tile.xml" value="0.375" />

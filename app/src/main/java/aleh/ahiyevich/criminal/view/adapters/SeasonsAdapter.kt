@@ -20,7 +20,7 @@ class SeasonsAdapter(
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ItemSeasonViewHolder {
         val inflatedView =
-            LayoutInflater.from(parent.context).inflate(R.layout.item_tile, parent, false)
+            LayoutInflater.from(parent.context).inflate(R.layout.item_seasons_recycler_view, parent, false)
         return ItemSeasonViewHolder(inflatedView)
     }
 

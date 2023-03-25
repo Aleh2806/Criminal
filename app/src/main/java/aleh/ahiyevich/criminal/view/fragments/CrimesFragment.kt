@@ -19,14 +19,12 @@ import android.widget.EditText
 import android.widget.Toast
 import androidx.appcompat.widget.AppCompatButton
 import androidx.fragment.app.Fragment
-import androidx.recyclerview.widget.LinearLayoutManager
-import androidx.recyclerview.widget.RecyclerView
 
 class CrimesFragment : Fragment(), OnItemClick {
 
     private val fireBaseHelper = FireBaseHelper()
     private val crimesList: ArrayList<CrimesU> = ArrayList()
-    private val adapter = CrimesAdapter(crimesList, this)
+    private val adapterCrimes = CrimesAdapter(crimesList, this)
     private lateinit var numberSeason: String
 
 
@@ -54,10 +52,13 @@ class CrimesFragment : Fragment(), OnItemClick {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        initRecyclerView()
+        initCarouselViewCrimes()
         numberSeason = arguments?.getString("KEY_SEASON").toString()
-        fireBaseHelper.getCrimesList(adapter, requireContext(), crimesList, numberSeason)
-        processingBottomMenu()
+        if (arguments == null){
+            fireBaseHelper.getCrimesList(adapterCrimes, requireContext(), crimesList, "1")
+        } else {
+            fireBaseHelper.getCrimesList(adapterCrimes, requireContext(), crimesList, numberSeason)
+        }
     }
 
 
@@ -69,28 +70,29 @@ class CrimesFragment : Fragment(), OnItemClick {
             paymentDialog(position)
         } else {
             when (position in 0..9) {
-                (position == 0) -> replaceFragment(DetailsCrimeFragmentList.newInstance(numberSeason,"1"))
-                (position == 2) -> replaceFragment(DetailsCrimeFragmentList.newInstance(numberSeason,"2"))
-                (position == 2) -> replaceFragment(DetailsCrimeFragmentList.newInstance(numberSeason,"3"))
-                (position == 3) -> replaceFragment(DetailsCrimeFragmentList.newInstance(numberSeason,"4"))
-                (position == 4) -> replaceFragment(DetailsCrimeFragmentList.newInstance(numberSeason,"5"))
-                (position == 5) -> replaceFragment(DetailsCrimeFragmentList.newInstance(numberSeason,"6"))
-                (position == 6) -> replaceFragment(DetailsCrimeFragmentList.newInstance(numberSeason,"7"))
-                (position == 7) -> replaceFragment(DetailsCrimeFragmentList.newInstance(numberSeason,"8"))
-                (position == 8) -> replaceFragment(DetailsCrimeFragmentList.newInstance(numberSeason,"9"))
-                (position == 9) -> replaceFragment(DetailsCrimeFragmentList.newInstance(numberSeason,"10"))
+                (position == 0) -> replaceFragment(DetailsCrimeFragmentTile.newInstance(numberSeason,"1"))
+                (position == 1) -> replaceFragment(DetailsCrimeFragmentTile.newInstance(numberSeason,"2"))
+                (position == 2) -> replaceFragment(DetailsCrimeFragmentTile.newInstance(numberSeason,"3"))
+                (position == 3) -> replaceFragment(DetailsCrimeFragmentTile.newInstance(numberSeason,"4"))
+                (position == 4) -> replaceFragment(DetailsCrimeFragmentTile.newInstance(numberSeason,"5"))
+                (position == 5) -> replaceFragment(DetailsCrimeFragmentTile.newInstance(numberSeason,"6"))
+                (position == 6) -> replaceFragment(DetailsCrimeFragmentTile.newInstance(numberSeason,"7"))
+                (position == 7) -> replaceFragment(DetailsCrimeFragmentTile.newInstance(numberSeason,"8"))
+                (position == 8) -> replaceFragment(DetailsCrimeFragmentTile.newInstance(numberSeason,"9"))
+                (position == 9) -> replaceFragment(DetailsCrimeFragmentTile.newInstance(numberSeason,"10"))
                 else -> {}
             }
         }
     }
 
-    private fun initRecyclerView() {
+     private fun initCarouselViewCrimes() {
         crimesList.removeAll(crimesList.toSet())
-        val recyclerView: RecyclerView = binding.recyclerViewCrimes
-        // Эта установка служит для повышения производительности системы
-        recyclerView.setHasFixedSize(true)
-        recyclerView.adapter = adapter
-        recyclerView.layoutManager = LinearLayoutManager(this.context)
+        binding.apply {
+            carouselRecyclerView.adapter = adapterCrimes
+            carouselRecyclerView.set3DItem(false)
+            carouselRecyclerView.setAlpha(true)
+            carouselRecyclerView.setInfinite(true)
+        }
     }
 
     private fun replaceFragment(fragment: Fragment) {
@@ -165,17 +167,6 @@ class CrimesFragment : Fragment(), OnItemClick {
         }
     }
 
-    private fun processingBottomMenu() {
-        binding.bottomNavigationView.setOnItemSelectedListener {
-            when (it.itemId) {
-                R.id.home_bottom_menu ->
-                    replaceFragment(SeasonsFragment())
-                R.id.profile_bottom_menu ->
-                    replaceFragment(ProfileFragment())
-            }
-            true
-        }
-    }
 
     private fun callFullScreen() {
         if (Build.VERSION.SDK_INT > 11 && Build.VERSION.SDK_INT < 19) { // для ранних версий API

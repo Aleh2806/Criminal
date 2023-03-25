@@ -50,7 +50,7 @@ class DetailsCrimeFragmentTile : Fragment(), OnItemClick {
 
         binding.apply {
             changeLayouts.setOnClickListener { replaceFragment(DetailsCrimeFragmentList.newInstance(numberSeason,numberCrime)) }
-            detailsBack.setOnClickListener {replaceFragment(CrimesFragment.newInstance(numberSeason))}
+            detailsBack.setOnClickListener {replaceFragment(SeasonsFragment.newInstance(numberSeason))}
         }
     }
 

@@ -13,15 +13,14 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import androidx.fragment.app.Fragment
-import androidx.recyclerview.widget.GridLayoutManager
+import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 
 class SeasonsFragment : Fragment(), OnItemClick {
 
     private val fireBaseHelper = FireBaseHelper()
     private val seasonsList: ArrayList<SeasonsU> = ArrayList()
-    private val adapter = SeasonsAdapter(seasonsList, this)
-
+    private val adapterSeasons = SeasonsAdapter(seasonsList, this)
 
     private var _binding: FragmentSeassonsBinding? = null
     private val binding: FragmentSeassonsBinding
@@ -44,35 +43,28 @@ class SeasonsFragment : Fragment(), OnItemClick {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        initRecyclerView()
-        fireBaseHelper.getSeasonsList(adapter, requireContext(), seasonsList)
-        processingBottomMenu()
-    }
 
-
-    private fun initRecyclerView() {
-        val recyclerView: RecyclerView = binding.recyclerViewSeasons
-        recyclerView.setHasFixedSize(true)
-        recyclerView.adapter = adapter
-        recyclerView.layoutManager = GridLayoutManager(this.context, 2)
-    }
-
-    private fun processingBottomMenu() {
-        binding.bottomNavigationView.setOnItemSelectedListener {
-            when (it.itemId) {
-                R.id.home_bottom_menu ->
-                    Toast.makeText(requireContext(), "Вы на главной странице", Toast.LENGTH_LONG)
-                        .show()
-                R.id.profile_bottom_menu ->
-                    replaceFragment(ProfileFragment())
-            }
-            true
+        initRecyclerViewSeasons()
+        fireBaseHelper.getSeasonsList(adapterSeasons, requireContext(), seasonsList)
+        if (arguments == null){
+            replaceFragment(CrimesFragment.newInstance("1"))
+        } else {
+            val numberSeason = arguments?.getString("KEY_SEASON")
+            replaceFragment(CrimesFragment.newInstance(numberSeason.toString()))
         }
     }
 
+
+    private fun initRecyclerViewSeasons() {
+        val recyclerView: RecyclerView = binding.recyclerViewSeasons
+        recyclerView.setHasFixedSize(true)
+        recyclerView.adapter = adapterSeasons
+        recyclerView.layoutManager =
+            LinearLayoutManager(this.context, RecyclerView.HORIZONTAL, false)
+    }
+
+
     override fun onItemClick(position: Int) {
-        // TODO: Сюда думаю всунуть запросы на получение данных (списка дел с фото) из
-        //  базы данных (На уровне ниже засунуть такие же запросы на материалы дела )
         val season = seasonsList[position]
 
         // Закрыл доступ к элементам под замком
@@ -96,11 +88,12 @@ class SeasonsFragment : Fragment(), OnItemClick {
         }
     }
 
+
     private fun replaceFragment(fragment: Fragment) {
         requireActivity()
             .supportFragmentManager
             .beginTransaction()
-            .replace(R.id.container_for_fragment, fragment)
+            .replace(R.id.container_for_crimes_list, fragment)
             .commit()
     }
 
@@ -117,6 +110,17 @@ class SeasonsFragment : Fragment(), OnItemClick {
     override fun onStart() {
         super.onStart()
         callFullScreen()
+    }
+
+    companion object {
+
+        fun newInstance(numberSeason: String): SeasonsFragment {
+            val bundle = Bundle()
+            bundle.putString("KEY_SEASON", numberSeason)
+            val fragment = SeasonsFragment()
+            fragment.arguments = bundle
+            return fragment
+        }
     }
 
 }

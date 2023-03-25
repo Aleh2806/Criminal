@@ -19,7 +19,7 @@ class CrimesAdapter(
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ItemCrimesViewHolder {
         val inflatedView = LayoutInflater.from(parent.context)
-            .inflate(R.layout.item_list, parent, false)
+            .inflate(R.layout.item_carousel_crime_item, parent, false)
 
         return ItemCrimesViewHolder(inflatedView)
     }

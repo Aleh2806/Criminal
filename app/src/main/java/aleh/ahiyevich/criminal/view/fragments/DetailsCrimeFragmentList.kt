@@ -4,11 +4,13 @@ import aleh.ahiyevich.criminal.R
 import aleh.ahiyevich.criminal.databinding.FragmentDetailsCrimeListBinding
 import aleh.ahiyevich.criminal.model.OnItemClick
 import aleh.ahiyevich.criminal.view.adapters.DetailsAdapterList
+import android.content.SharedPreferences
 import android.os.Build
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.FrameLayout
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -48,8 +50,12 @@ class DetailsCrimeFragmentList : Fragment(), OnItemClick {
         initRecyclerView()
 
         binding.apply {
-            changeLayouts.setOnClickListener { replaceFragment(DetailsCrimeFragmentTile.newInstance(numberSeason,numberCrime)) }
-            detailsBack.setOnClickListener {replaceFragment(CrimesFragment.newInstance(numberSeason))}
+            changeLayouts.setOnClickListener {
+                replaceFragment(DetailsCrimeFragmentTile.newInstance(numberSeason, numberCrime))
+            }
+            detailsBack.setOnClickListener {
+                replaceFragment(SeasonsFragment.newInstance(numberSeason))
+            }
         }
     }
 
@@ -67,6 +73,7 @@ class DetailsCrimeFragmentList : Fragment(), OnItemClick {
         recyclerView.layoutManager = LinearLayoutManager(this.context)
         recyclerView.adapter = DetailsAdapterList(listDetails, this)
     }
+
 
     private fun replaceFragment(fragment: Fragment) {
         requireActivity()

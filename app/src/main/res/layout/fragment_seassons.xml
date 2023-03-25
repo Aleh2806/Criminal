@@ -26,43 +26,26 @@
             android:textSize="35sp" />
 
     </LinearLayout>
-
-
-    <androidx.coordinatorlayout.widget.CoordinatorLayout
+    <FrameLayout
+        android:id="@+id/container_for_crimes_list"
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        android:layout_weight="1">
+
+    </FrameLayout>
+
+    <FrameLayout
+        android:id="@+id/container_for_seasons_list"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_weight="4">
+
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/recycler_view_seasons"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            tools:listitem="@layout/item_tile" />
-
-
-        <com.google.android.material.bottomappbar.BottomAppBar
-            android:id="@+id/bottom_app_bar"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_gravity="bottom"
-            android:backgroundTint="@color/black"
-            app:hideOnScroll="true">
-
-
-            <com.google.android.material.bottomnavigation.BottomNavigationView
-                android:id="@+id/bottom_navigation_view"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginHorizontal="60dp"
-                android:animateLayoutChanges="true"
-                android:background="@android:color/transparent"
-                app:itemIconTint="@color/white"
-                app:itemRippleColor="@color/white"
-                app:itemTextColor="@color/white"
-                app:labelVisibilityMode="labeled"
-                app:menu="@menu/bottom_menu" />
-
-        </com.google.android.material.bottomappbar.BottomAppBar>
-
-    </androidx.coordinatorlayout.widget.CoordinatorLayout>
+            tools:listitem="@layout/item_seasons_recycler_view" />
+    </FrameLayout>
 
 </LinearLayout>

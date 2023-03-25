@@ -2,7 +2,6 @@ package aleh.ahiyevich.criminal.view.adapters
 
 import aleh.ahiyevich.criminal.R
 import aleh.ahiyevich.criminal.model.OnItemClick
-import android.content.Context
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup

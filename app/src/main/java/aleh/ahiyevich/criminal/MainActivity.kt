@@ -3,6 +3,7 @@ package aleh.ahiyevich.criminal
 import aleh.ahiyevich.criminal.databinding.ActivityMainBinding
 import aleh.ahiyevich.criminal.view.fragments.AuthorizationFragment
 import aleh.ahiyevich.criminal.view.fragments.DetailsCrimeFragmentList
+import aleh.ahiyevich.criminal.view.fragments.SeasonsFragment
 import android.app.Dialog
 import android.graphics.Color
 import android.graphics.drawable.ColorDrawable
@@ -11,6 +12,7 @@ import android.os.Bundle
 import android.view.View
 import android.widget.Button
 import androidx.appcompat.app.AppCompatActivity
+import androidx.fragment.app.Fragment
 
 
 class MainActivity : AppCompatActivity() {

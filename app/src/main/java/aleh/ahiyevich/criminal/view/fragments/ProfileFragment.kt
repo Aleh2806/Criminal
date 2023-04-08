@@ -8,12 +8,12 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
-import com.google.firebase.auth.FirebaseAuth
+//import com.google.firebase.auth.FirebaseAuth
 
 
 class ProfileFragment : Fragment() {
 
-    private val auth: FirebaseAuth = FirebaseAuth.getInstance()
+//    private val auth: FirebaseAuth = FirebaseAuth.getInstance()
 
     private var _binding: FragmentProfileBinding? = null
     private val binding: FragmentProfileBinding
@@ -41,13 +41,13 @@ class ProfileFragment : Fragment() {
         }
 
         binding.exitToProfile.setOnClickListener {
-            auth.signOut()
-            requireActivity()
-                .supportFragmentManager
-                .beginTransaction()
-                .replace(R.id.container_for_fragment, AuthorizationFragment())
-                .hide(this)
-                .commit()
+//            auth.signOut()
+//            requireActivity()
+//                .supportFragmentManager
+//                .beginTransaction()
+//                .replace(R.id.container_for_fragment, AuthorizationFragment())
+//                .hide(this)
+//                .commit()
         }
     }
 

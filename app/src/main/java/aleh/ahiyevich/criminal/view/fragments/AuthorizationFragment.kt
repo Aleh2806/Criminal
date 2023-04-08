@@ -8,10 +8,7 @@ import android.graphics.Color
 import android.graphics.drawable.ColorDrawable
 import android.os.Build
 import android.os.Bundle
-import android.os.Handler
-import android.os.Looper
 import android.text.TextUtils
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -21,14 +18,7 @@ import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.FirebaseUser
 import com.google.firebase.database.DatabaseReference
 import com.google.firebase.database.FirebaseDatabase
-import com.google.firebase.firestore.util.Assert
-import com.google.gson.JsonObject
-import com.google.gson.JsonParser
 import kotlinx.android.synthetic.main.dialog_registration.view.*
-import okhttp3.*
-import okhttp3.MediaType.Companion.toMediaTypeOrNull
-import okhttp3.RequestBody.Companion.toRequestBody
-import java.io.IOException
 
 
 class AuthorizationFragment : Fragment() {
@@ -36,7 +26,6 @@ class AuthorizationFragment : Fragment() {
     private lateinit var auth: FirebaseAuth
     private lateinit var db: FirebaseDatabase
     private lateinit var users: DatabaseReference
-    private val basePath = "https://crime.api.unmodum.com/api/"
 
 
     private var _binding: FragmentAuthorisationBinding? = null
@@ -82,7 +71,7 @@ class AuthorizationFragment : Fragment() {
             requireActivity()
                 .supportFragmentManager
                 .beginTransaction()
-                .replace(R.id.container_for_fragment, SeasonsFragment())
+                .replace(R.id.container_for_fragment, SeasonsFragment.newInstance("1"))
                 .addToBackStack("")
                 .commit()
         }

@@ -1,18 +1,25 @@
 package aleh.ahiyevich.criminal
 
 import aleh.ahiyevich.criminal.databinding.ActivityMainBinding
+import aleh.ahiyevich.criminal.repository.BaseRequest
 import aleh.ahiyevich.criminal.view.fragments.AuthorizationFragment
-import aleh.ahiyevich.criminal.view.fragments.DetailsCrimeFragmentList
-import aleh.ahiyevich.criminal.view.fragments.SeasonsFragment
+import aleh.ahiyevich.retrofit.api.auth.*
+import aleh.ahiyevich.retrofit.api.cases.Cases
+import aleh.ahiyevich.retrofit.api.cases.CasesApi
+import aleh.ahiyevich.retrofit.api.seasons.SeasonsApi
 import android.app.Dialog
+import android.content.SharedPreferences
 import android.graphics.Color
 import android.graphics.drawable.ColorDrawable
 import android.os.Build
 import android.os.Bundle
 import android.view.View
 import android.widget.Button
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
-import androidx.fragment.app.Fragment
+import retrofit2.Call
+import retrofit2.Callback
+import retrofit2.Response
 
 
 class MainActivity : AppCompatActivity() {

@@ -4,44 +4,57 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     xmlns:tools="http://schemas.android.com/tools"
+    android:background="@color/background_app"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical">
 
     <FrameLayout
         android:layout_width="match_parent"
-        android:layout_height="37dp"
-        android:background="#EDEDED">
-
-        <ImageView
-            android:id="@+id/btn_back"
-            android:layout_width="33dp"
-            android:layout_height="33dp"
-            android:layout_gravity="start|center"
-            android:layout_marginStart="5dp"
-            android:background="@drawable/btn_back_details" />
-
-        <ImageView
-            android:layout_width="33dp"
-            android:layout_height="30dp"
-            android:layout_gravity="start|center"
-            android:layout_marginStart="5dp"
-            android:background="@drawable/ic_round_arrow_back_24" />
+        android:layout_height="37dp">
 
         <TextView
             android:id="@+id/description_details"
             android:layout_width="wrap_content"
             android:layout_height="35dp"
             android:layout_gravity="center"
-            android:textColor="@color/black"
+            android:textColor="@color/white"
             android:textSize="25sp"
             android:textStyle="bold" />
 
 
     </FrameLayout>
 
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/recycler_view_descriptions"
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        tools:listitem="@layout/item_descriptions_details_crime"/>
+        android:orientation="vertical">
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/recycler_view_descriptions"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_gravity="center"
+            android:layout_marginHorizontal="5dp"
+            tools:listitem="@layout/item_descriptions_details_crime"
+            android:layout_weight="2"
+            />
+
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/back_btn"
+            android:layout_width="170dp"
+            android:layout_height="wrap_content"
+            android:text="Назад"
+            android:layout_marginBottom="20dp"
+            android:layout_gravity="center"
+            android:background="@drawable/btn_back_details" />
+
+    </LinearLayout>
+
+
+
+
+
+
+
 
 </LinearLayout>

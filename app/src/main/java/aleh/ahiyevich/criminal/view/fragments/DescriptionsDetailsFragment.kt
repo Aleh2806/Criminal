@@ -2,7 +2,7 @@ package aleh.ahiyevich.criminal.view.fragments
 
 import aleh.ahiyevich.criminal.databinding.FragmentDescriptionsDetailsBinding
 import aleh.ahiyevich.criminal.model.Materials
-import aleh.ahiyevich.criminal.repository.FireBaseHelper
+//import aleh.ahiyevich.criminal.repository.FireBaseHelper
 import aleh.ahiyevich.criminal.view.adapters.DescriptionsDetailsAdapter
 import android.content.res.Configuration
 import android.os.Build
@@ -11,13 +11,14 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
+import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
 
 
 class DescriptionsDetailsFragment : Fragment() {
 
     private val materialsList: ArrayList<Materials> = ArrayList()
-    private val fireBaseHelper = FireBaseHelper()
+//    private val fireBaseHelper = FireBaseHelper()
     val adapter = DescriptionsDetailsAdapter(materialsList)
 
     private var _binding: FragmentDescriptionsDetailsBinding? = null
@@ -48,18 +49,18 @@ class DescriptionsDetailsFragment : Fragment() {
         val tittleDescriptions = arguments?.getString("KEY_TITTLE")
         binding.descriptionDetails.text = tittleDescriptions
 
-        fireBaseHelper.getMaterials(
-            adapter,
-            requireContext(),
-            materialsList,
-            numberSeason!!,
-            numberCrime!!,
-            materialName!!
-        )
+//        fireBaseHelper.getMaterials(
+//            adapter,
+//            requireContext(),
+//            materialsList,
+//            numberSeason!!,
+//            numberCrime!!,
+//            materialName!!
+//        )
 
         initRecyclerView()
 
-        binding.btnBack.setOnClickListener {
+        binding.backBtn.setOnClickListener {
             requireActivity()
                 .supportFragmentManager
                 .popBackStack()
@@ -68,7 +69,7 @@ class DescriptionsDetailsFragment : Fragment() {
 
     private fun initRecyclerView() {
         val recyclerView = binding.recyclerViewDescriptions
-        recyclerView.layoutManager = LinearLayoutManager(requireContext())
+        recyclerView.layoutManager = GridLayoutManager(requireContext(),2)
         recyclerView.adapter = adapter
 
         if (resources.configuration.orientation == Configuration.ORIENTATION_LANDSCAPE) {

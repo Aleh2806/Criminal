@@ -1,10 +1,10 @@
 package aleh.ahiyevich.criminal.view.fragments
 
 import aleh.ahiyevich.criminal.R
-import aleh.ahiyevich.criminal.databinding.FragmentCrimesListBinding
+import aleh.ahiyevich.criminal.databinding.FragmentCrimesBinding
 import aleh.ahiyevich.criminal.model.CrimesU
 import aleh.ahiyevich.criminal.model.OnItemClick
-import aleh.ahiyevich.criminal.repository.FireBaseHelper
+//import aleh.ahiyevich.criminal.repository.FireBaseHelper
 import aleh.ahiyevich.criminal.view.adapters.CrimesAdapter
 import android.app.Dialog
 import android.graphics.Color
@@ -22,14 +22,14 @@ import androidx.fragment.app.Fragment
 
 class CrimesFragment : Fragment(), OnItemClick {
 
-    private val fireBaseHelper = FireBaseHelper()
+//    private val fireBaseHelper = FireBaseHelper()
     private val crimesList: ArrayList<CrimesU> = ArrayList()
     private val adapterCrimes = CrimesAdapter(crimesList, this)
     private lateinit var numberSeason: String
 
 
-    private var _binding: FragmentCrimesListBinding? = null
-    private val binding: FragmentCrimesListBinding
+    private var _binding: FragmentCrimesBinding? = null
+    private val binding: FragmentCrimesBinding
         get() {
             return _binding!!
         }
@@ -39,7 +39,7 @@ class CrimesFragment : Fragment(), OnItemClick {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        _binding = FragmentCrimesListBinding.inflate(inflater, container, false)
+        _binding = FragmentCrimesBinding.inflate(inflater, container, false)
         return binding.root
     }
 
@@ -55,9 +55,9 @@ class CrimesFragment : Fragment(), OnItemClick {
         initCarouselViewCrimes()
         numberSeason = arguments?.getString("KEY_SEASON").toString()
         if (arguments == null){
-            fireBaseHelper.getCrimesList(adapterCrimes, requireContext(), crimesList, "1")
+//            fireBaseHelper.getCrimesList(adapterCrimes, requireContext(), crimesList, "1")
         } else {
-            fireBaseHelper.getCrimesList(adapterCrimes, requireContext(), crimesList, numberSeason)
+//            fireBaseHelper.getCrimesList(adapterCrimes, requireContext(), crimesList, numberSeason)
         }
     }
 
@@ -70,16 +70,16 @@ class CrimesFragment : Fragment(), OnItemClick {
             paymentDialog(position)
         } else {
             when (position in 0..9) {
-                (position == 0) -> replaceFragment(DetailsCrimeFragmentTile.newInstance(numberSeason,"1"))
-                (position == 1) -> replaceFragment(DetailsCrimeFragmentTile.newInstance(numberSeason,"2"))
-                (position == 2) -> replaceFragment(DetailsCrimeFragmentTile.newInstance(numberSeason,"3"))
-                (position == 3) -> replaceFragment(DetailsCrimeFragmentTile.newInstance(numberSeason,"4"))
-                (position == 4) -> replaceFragment(DetailsCrimeFragmentTile.newInstance(numberSeason,"5"))
-                (position == 5) -> replaceFragment(DetailsCrimeFragmentTile.newInstance(numberSeason,"6"))
-                (position == 6) -> replaceFragment(DetailsCrimeFragmentTile.newInstance(numberSeason,"7"))
-                (position == 7) -> replaceFragment(DetailsCrimeFragmentTile.newInstance(numberSeason,"8"))
-                (position == 8) -> replaceFragment(DetailsCrimeFragmentTile.newInstance(numberSeason,"9"))
-                (position == 9) -> replaceFragment(DetailsCrimeFragmentTile.newInstance(numberSeason,"10"))
+                (position == 0) -> replaceFragment(DetailsCrimeFragment.newInstance(numberSeason,"1"))
+                (position == 1) -> replaceFragment(DetailsCrimeFragment.newInstance(numberSeason,"2"))
+                (position == 2) -> replaceFragment(DetailsCrimeFragment.newInstance(numberSeason,"3"))
+                (position == 3) -> replaceFragment(DetailsCrimeFragment.newInstance(numberSeason,"4"))
+                (position == 4) -> replaceFragment(DetailsCrimeFragment.newInstance(numberSeason,"5"))
+                (position == 5) -> replaceFragment(DetailsCrimeFragment.newInstance(numberSeason,"6"))
+                (position == 6) -> replaceFragment(DetailsCrimeFragment.newInstance(numberSeason,"7"))
+                (position == 7) -> replaceFragment(DetailsCrimeFragment.newInstance(numberSeason,"8"))
+                (position == 8) -> replaceFragment(DetailsCrimeFragment.newInstance(numberSeason,"9"))
+                (position == 9) -> replaceFragment(DetailsCrimeFragment.newInstance(numberSeason,"10"))
                 else -> {}
             }
         }
@@ -122,7 +122,7 @@ class CrimesFragment : Fragment(), OnItemClick {
                 Toast.LENGTH_LONG
             ).show()
             myDialog.dismiss()
-            replaceFragment(DetailsCrimeFragmentList.newInstance(numberSeason,crimesList[position+1].toString()))
+            replaceFragment(DetailsCrimeFragment.newInstance(numberSeason,crimesList[position+1].toString()))
         }
 
         // Обработка кнопки подтвердить инвайт код (Проверка кодов для каждого дела)

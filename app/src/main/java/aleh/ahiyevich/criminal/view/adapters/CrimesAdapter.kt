@@ -1,8 +1,8 @@
 package aleh.ahiyevich.criminal.view.adapters
 
 import aleh.ahiyevich.criminal.R
-import aleh.ahiyevich.criminal.model.CrimesU
 import aleh.ahiyevich.criminal.model.OnItemClick
+import aleh.ahiyevich.criminal.api.cases.DataCase
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -11,9 +11,10 @@ import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
+import com.squareup.picasso.Picasso
 
 class CrimesAdapter(
-    private val data: ArrayList<CrimesU>,
+    private val data: ArrayList<DataCase>,
     private val listener: OnItemClick
 ) : RecyclerView.Adapter<CrimesAdapter.ItemCrimesViewHolder>() {
 
@@ -26,15 +27,18 @@ class CrimesAdapter(
 
 
     override fun onBindViewHolder(holder: ItemCrimesViewHolder, position: Int) {
-        val crime: CrimesU = data[position]
+        val crime: DataCase = data[position]
 
-        if (crime.openCrime) {
+        if (crime.id > 0) {
             holder.lockCrime.visibility = View.GONE
         } else {
             holder.lockCrime.visibility = View.VISIBLE
         }
-        holder.nameCrime.text = crime.nameCrime
-        Glide.with(holder.itemView.context).load(crime.imageCrime).into(holder.imageCrime)
+//        holder.nameCrime.text = crime.nameCrime
+//        Glide.with(holder.itemView.context).load(crime.imageCrime).into(holder.imageCrime)
+            holder.nameCrime.text = crime.name
+//            Glide.with(holder.imageCrime.context).load(crime.image).into(holder.imageCrime)
+        Picasso.get().load("https://crime.api.unmodum.com/images/case_image.jpg").into(holder.imageCrime)
 
     }
 

@@ -1,4 +1,4 @@
-package aleh.ahiyevich.retrofit.api.cases
+package aleh.ahiyevich.criminal.api.cases
 
 data class Cases(
     val success: Boolean,
@@ -7,5 +7,6 @@ data class Cases(
 
 data class DataCase(
     val id: Int,
-    val name: String
+    val name: String,
+    val image: String
 )

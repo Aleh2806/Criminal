@@ -5,6 +5,7 @@ import aleh.ahiyevich.criminal.R
 import aleh.ahiyevich.criminal.model.AuthUser
 import aleh.ahiyevich.criminal.model.SeasonData
 import aleh.ahiyevich.criminal.model.SeasonsDB
+import aleh.ahiyevich.criminal.view.adapters.CrimesAdapter
 import aleh.ahiyevich.criminal.view.adapters.SeasonsAdapter
 import aleh.ahiyevich.criminal.view.fragments.AuthorizationFragment
 import aleh.ahiyevich.criminal.view.fragments.SeasonsFragment
@@ -12,8 +13,9 @@ import aleh.ahiyevich.retrofit.api.auth.AuthApi
 import aleh.ahiyevich.retrofit.api.auth.AuthRequest
 import aleh.ahiyevich.retrofit.api.auth.RefreshTokenRequest
 import aleh.ahiyevich.retrofit.api.auth.ResponseToken
-import aleh.ahiyevich.retrofit.api.cases.Cases
+import aleh.ahiyevich.criminal.api.cases.Cases
 import aleh.ahiyevich.retrofit.api.cases.CasesApi
+import aleh.ahiyevich.criminal.api.cases.DataCase
 import aleh.ahiyevich.retrofit.api.seasons.SeasonsApi
 import android.app.Activity
 import android.content.Context
@@ -27,8 +29,6 @@ import retrofit2.Response
 class DataBaseHelper {
 
     private lateinit var sharedPref: SharedPreferences
-    private var authUser: AuthUser? = null
-
     // Авторизация пользователя
     fun login(
         context: Context, email: String, password: String, activity: AppCompatActivity
@@ -64,22 +64,12 @@ class DataBaseHelper {
                             .replace(R.id.container_for_fragment,SeasonsFragment())
                             .commit()
                     } else {
-                        Toast.makeText(
-                            context,
-                            "Ошибка авторизации",
-                            Toast.LENGTH_SHORT
-                        )
-                            .show()
+                        Toast.makeText(context, "Ошибка авторизации", Toast.LENGTH_SHORT).show()
                     }
                 }
 
                 override fun onFailure(call: Call<ResponseToken>, t: Throwable) {
-                    Toast.makeText(
-                        context,
-                        "Ошибка... ${t.message}",
-                        Toast.LENGTH_SHORT
-                    )
-                        .show()
+                    Toast.makeText(context, "Ошибка авторизации", Toast.LENGTH_SHORT).show()
                 }
 
             })
@@ -91,14 +81,14 @@ class DataBaseHelper {
         token: String,
         context: Context,
         sharedPref: SharedPreferences,
-        activity: AppCompatActivity
+        activity: AppCompatActivity,
     ) {
 
         val request = BaseRequest().retrofit.create(AuthApi::class.java)
         val call: Call<AuthUser> = request.getAuthUser("Bearer $token")
         call.enqueue(object : Callback<AuthUser> {
             override fun onResponse(call: Call<AuthUser>, response: Response<AuthUser>) {
-                authUser = response.body()
+                val authUser = response.body()
                 if (response.isSuccessful) {
                     if (authUser?.success == true){
                         // на страницу сезонов
@@ -107,7 +97,6 @@ class DataBaseHelper {
                             .beginTransaction()
                             .replace(R.id.container_for_fragment,SeasonsFragment())
                             .commit()
-                        getSeasons(token, context)
                     } else {
                         // На страницу авторизации
                         activity.supportFragmentManager
@@ -135,12 +124,19 @@ class DataBaseHelper {
     }
 
     // Получение сезонов
-    fun getSeasons(token: String, context: Context){
+    fun getSeasons(adapter: SeasonsAdapter, seasonList: ArrayList<SeasonData>, token: String, context: Context){
+
             val request = BaseRequest().retrofit.create(SeasonsApi::class.java)
             val call = request.getSeasons("Bearer $token")
             call.enqueue(object : Callback<SeasonsDB> {
                 override fun onResponse(call: Call<SeasonsDB>, response: Response<SeasonsDB>) {
                     val data = response.body()!!.data
+                    for (i in data){
+                        seasonList.add(i)
+
+                    }
+                    adapter.notifyDataSetChanged()
+
                     Toast.makeText(context, "Season get", Toast.LENGTH_SHORT).show()
                 }
 
@@ -152,14 +148,17 @@ class DataBaseHelper {
     }
 
     // Получение дел сезона
-    fun getCases(token: String, context: Context) {
+    fun getCases(adapter: CrimesAdapter, crimesList: ArrayList<DataCase>, token: String, context: Context, seasonId: Int) {
 
             val request = BaseRequest().retrofit.create(CasesApi::class.java)
-            val call = request.getCases("Bearer $token", 2)
+            val call = request.getCases("Bearer $token", seasonId)
             call.enqueue(object : Callback<Cases> {
                 override fun onResponse(call: Call<Cases>, response: Response<Cases>) {
                     val data = response.body()!!.data
-
+                    for (i in data){
+                        crimesList.add(i)
+                    }
+                    adapter.notifyDataSetChanged()
                     Toast.makeText(context, "Cases gets", Toast.LENGTH_SHORT).show()
 
                 }

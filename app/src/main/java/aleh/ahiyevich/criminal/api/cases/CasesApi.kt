@@ -1,5 +1,6 @@
 package aleh.ahiyevich.retrofit.api.cases
 
+import aleh.ahiyevich.criminal.api.cases.Cases
 import retrofit2.Call
 import retrofit2.http.*
 

@@ -2,6 +2,7 @@ package aleh.ahiyevich.criminal.view.adapters
 
 import aleh.ahiyevich.criminal.R
 import aleh.ahiyevich.criminal.model.OnItemClick
+import aleh.ahiyevich.criminal.model.SeasonData
 
 import aleh.ahiyevich.criminal.model.SeasonsU
 import android.view.LayoutInflater
@@ -12,9 +13,10 @@ import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
+import com.squareup.picasso.Picasso
 
 class SeasonsAdapter(
-    private val data: ArrayList<SeasonsU>,
+    private val data: ArrayList<SeasonData>,
     private val listener: OnItemClick
 ) : RecyclerView.Adapter<SeasonsAdapter.ItemSeasonViewHolder>() {
 
@@ -29,15 +31,17 @@ class SeasonsAdapter(
         val season = data[position]
 
         // Повесил обработку отображения замков на сезонах
-        if (season.openSeason) {
+        if (season.id > 0) {
             holder.lockSeason.visibility = View.GONE
         } else {
             holder.lockSeason.visibility = View.VISIBLE
         }
-
-        holder.nameSeason.text = season.nameSeason
-        Glide.with(holder.itemView.context).load(season.imageSeason).into(holder.image)
-
+//
+//        holder.nameSeason.text = season.nameSeason
+//        Glide.with(holder.itemView.context).load(season.imageSeason).into(holder.image)
+            holder.nameSeason.text = season.name
+//            Glide.with(holder.itemView.context).load(season.image).into(holder.image)
+        Picasso.get().load("https://crime.api.unmodum.com/images/season_image.jpg").into(holder.image)
 
     }
 

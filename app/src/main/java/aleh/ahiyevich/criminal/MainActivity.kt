@@ -1,12 +1,8 @@
 package aleh.ahiyevich.criminal
 
 import aleh.ahiyevich.criminal.databinding.ActivityMainBinding
-import aleh.ahiyevich.criminal.repository.BaseRequest
+import aleh.ahiyevich.criminal.repository.DataBaseHelper
 import aleh.ahiyevich.criminal.view.fragments.AuthorizationFragment
-import aleh.ahiyevich.retrofit.api.auth.*
-import aleh.ahiyevich.retrofit.api.cases.Cases
-import aleh.ahiyevich.retrofit.api.cases.CasesApi
-import aleh.ahiyevich.retrofit.api.seasons.SeasonsApi
 import android.app.Dialog
 import android.content.SharedPreferences
 import android.graphics.Color
@@ -15,14 +11,11 @@ import android.os.Build
 import android.os.Bundle
 import android.view.View
 import android.widget.Button
-import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
-import retrofit2.Call
-import retrofit2.Callback
-import retrofit2.Response
 
 
 class MainActivity : AppCompatActivity() {
+    private lateinit var sharedPref: SharedPreferences
 
     private var _binding: ActivityMainBinding? = null
     private val binding: ActivityMainBinding
@@ -36,12 +29,22 @@ class MainActivity : AppCompatActivity() {
         _binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        if (savedInstanceState == null) {
+        sharedPref = getPreferences(MODE_PRIVATE)
+
+        val localAccessToken = sharedPref.getString(Constants.ACCESS_TOKEN, "")
+        if (localAccessToken != null) {
+            //запрос на проверку валидности токена
+            DataBaseHelper().getAuthUser(localAccessToken,this,sharedPref, this)
+//если все окей отправляю на страницу сезонов
+        } else {
+            // отправляем на страницу авторизации
             supportFragmentManager
                 .beginTransaction()
-                .add(R.id.container_for_fragment, AuthorizationFragment())
+                .replace(R.id.container_for_fragment,AuthorizationFragment())
                 .commit()
         }
+
+
     }
 
 
@@ -52,7 +55,6 @@ class MainActivity : AppCompatActivity() {
     }
 
     // При пересоздании активити вызываем функцию ФуллСкрин
-
     override fun onStart() {
         super.onStart()
         callFullScreen()
@@ -62,7 +64,6 @@ class MainActivity : AppCompatActivity() {
     override fun onBackPressed() {
         exitDialog()
     }
-
 
     // Вызов полноэкранного режима
     private fun callFullScreen() {

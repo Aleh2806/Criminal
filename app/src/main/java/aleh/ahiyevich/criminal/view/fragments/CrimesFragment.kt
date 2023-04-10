@@ -1,13 +1,15 @@
 package aleh.ahiyevich.criminal.view.fragments
 
+import aleh.ahiyevich.criminal.Constants
 import aleh.ahiyevich.criminal.R
 import aleh.ahiyevich.criminal.databinding.FragmentCrimesBinding
-import aleh.ahiyevich.criminal.model.CrimesU
 import aleh.ahiyevich.criminal.model.OnItemClick
-import aleh.ahiyevich.criminal.repository.FireBaseHelper
+import aleh.ahiyevich.criminal.repository.DataBaseHelper
 //import aleh.ahiyevich.criminal.repository.FireBaseHelper
 import aleh.ahiyevich.criminal.view.adapters.CrimesAdapter
+import aleh.ahiyevich.criminal.api.cases.DataCase
 import android.app.Dialog
+import android.content.SharedPreferences
 import android.graphics.Color
 import android.graphics.drawable.ColorDrawable
 import android.os.Build
@@ -18,15 +20,20 @@ import android.view.ViewGroup
 import android.widget.Button
 import android.widget.EditText
 import android.widget.Toast
+import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.AppCompatButton
 import androidx.fragment.app.Fragment
 
 class CrimesFragment : Fragment(), OnItemClick {
 
-    private val fireBaseHelper = FireBaseHelper()
-    private val crimesList: ArrayList<CrimesU> = ArrayList()
+//    private val fireBaseHelper = FireBaseHelper()
+    private val dataBaseHelper = DataBaseHelper()
+//    private val crimesList: ArrayList<CrimesU> = ArrayList()
+    private val crimesList: ArrayList<DataCase> = ArrayList()
     private val adapterCrimes = CrimesAdapter(crimesList, this)
     private lateinit var numberSeason: String
+
+    private lateinit var sharedPref: SharedPreferences
 
 
     private var _binding: FragmentCrimesBinding? = null
@@ -53,12 +60,18 @@ class CrimesFragment : Fragment(), OnItemClick {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        sharedPref = requireActivity().getPreferences(AppCompatActivity.MODE_PRIVATE)
+        val token = sharedPref.getString(Constants.ACCESS_TOKEN,"")
+
         initCarouselViewCrimes()
         numberSeason = arguments?.getString("KEY_SEASON").toString()
         if (arguments == null){
-            fireBaseHelper.getCrimesList(adapterCrimes, requireContext(), crimesList, "1")
+            dataBaseHelper.getCases(adapterCrimes,crimesList,token!!,requireContext(),1)
+//            fireBaseHelper.getCrimesList(adapterCrimes, requireContext(), crimesList, "1")
         } else {
-            fireBaseHelper.getCrimesList(adapterCrimes, requireContext(), crimesList, numberSeason)
+//            fireBaseHelper.getCrimesList(adapterCrimes, requireContext(), crimesList, numberSeason)
+            dataBaseHelper.getCases(adapterCrimes,crimesList,token!!,requireContext(),numberSeason.toInt())
+
         }
     }
 
@@ -67,9 +80,9 @@ class CrimesFragment : Fragment(), OnItemClick {
         val crime = crimesList[position]
 
         // Закрыл доступ к элементам под замком
-        if (!crime.openCrime) {
-            paymentDialog(position)
-        } else {
+//        if (!crime.openCrime) {
+//            paymentDialog(position)
+//        } else {
             when (position in 0..9) {
                 (position == 0) -> replaceFragment(DetailsCrimeFragment.newInstance(numberSeason,"1"))
                 (position == 1) -> replaceFragment(DetailsCrimeFragment.newInstance(numberSeason,"2"))
@@ -82,7 +95,7 @@ class CrimesFragment : Fragment(), OnItemClick {
                 (position == 8) -> replaceFragment(DetailsCrimeFragment.newInstance(numberSeason,"9"))
                 (position == 9) -> replaceFragment(DetailsCrimeFragment.newInstance(numberSeason,"10"))
                 else -> {}
-            }
+//            }
         }
     }
 
@@ -116,7 +129,7 @@ class CrimesFragment : Fragment(), OnItemClick {
         myDialog.show()
 
         fun unlockCrime() {
-            crimesList[position].openCrime = true
+            crimesList[position]/*.openCrime = true*/
             Toast.makeText(
                 requireContext(),
                 "Успешно",
@@ -145,7 +158,7 @@ class CrimesFragment : Fragment(), OnItemClick {
             } else if (position == 9 && inviteCode.text.toString() == "QWERTY8") {
                 unlockCrime()
             } else {
-                crimesList[position].openCrime = false
+                crimesList[position]/*.openCrime = false*/
                 Toast.makeText(
                     requireContext(),
                     "Неверный код",

@@ -1,25 +1,34 @@
 package aleh.ahiyevich.criminal.view.fragments
 
+import aleh.ahiyevich.criminal.Constants
 import aleh.ahiyevich.criminal.R
 import aleh.ahiyevich.criminal.databinding.FragmentSeassonsBinding
 import aleh.ahiyevich.criminal.model.OnItemClick
+import aleh.ahiyevich.criminal.model.SeasonData
 import aleh.ahiyevich.criminal.model.SeasonsU
+import aleh.ahiyevich.criminal.repository.DataBaseHelper
 import aleh.ahiyevich.criminal.repository.FireBaseHelper
 import aleh.ahiyevich.criminal.view.adapters.SeasonsAdapter
+import android.content.SharedPreferences
 import android.os.Build
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
+import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 
 class SeasonsFragment : Fragment(), OnItemClick {
 
+    private val dataBaseHelper = DataBaseHelper()
     private val fireBaseHelper = FireBaseHelper()
-    private val seasonsList: ArrayList<SeasonsU> = ArrayList()
+    lateinit var sharedPref: SharedPreferences
+
+    //    private val seasonsList: ArrayList<SeasonsU> = ArrayList()
+    private val seasonsList: ArrayList<SeasonData> = ArrayList()
     private val adapterSeasons = SeasonsAdapter(seasonsList, this)
 
     private var _binding: FragmentSeassonsBinding? = null
@@ -43,10 +52,13 @@ class SeasonsFragment : Fragment(), OnItemClick {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        sharedPref = requireActivity().getPreferences(AppCompatActivity.MODE_PRIVATE)
+        val token = sharedPref.getString(Constants.ACCESS_TOKEN,"")
 
         initRecyclerViewSeasons()
-        fireBaseHelper.getSeasonsList(adapterSeasons, requireContext(), seasonsList)
-        if (arguments == null){
+        dataBaseHelper.getSeasons(adapterSeasons, seasonsList, token!!, requireContext())
+
+        if (arguments == null) {
             replaceFragment(CrimesFragment.newInstance("1"))
         } else {
             val numberSeason = arguments?.getString("KEY_SEASON")
@@ -68,23 +80,23 @@ class SeasonsFragment : Fragment(), OnItemClick {
         val season = seasonsList[position]
 
         // Закрыл доступ к элементам под замком
-        if (!season.openSeason) {
-            Toast.makeText(requireContext(), "Сезон закрыт", Toast.LENGTH_SHORT).show()
-        } else {
-            when (position in 0..9) {
-                (position == 0) -> replaceFragment(CrimesFragment.newInstance("1"))
-                (position == 1) -> replaceFragment(CrimesFragment.newInstance("2"))
-                (position == 2) -> replaceFragment(CrimesFragment.newInstance("3"))
-                (position == 3) -> replaceFragment(CrimesFragment.newInstance("4"))
-                (position == 4) -> replaceFragment(CrimesFragment.newInstance("5"))
-                (position == 5) -> replaceFragment(CrimesFragment.newInstance("6"))
-                (position == 6) -> replaceFragment(CrimesFragment.newInstance("7"))
-                (position == 7) -> replaceFragment(CrimesFragment.newInstance("8"))
-                (position == 8) -> replaceFragment(CrimesFragment.newInstance("9"))
-                (position == 9) -> replaceFragment(CrimesFragment.newInstance("10"))
+//        if (!season.openSeason) {
+//            Toast.makeText(requireContext(), "Сезон закрыт", Toast.LENGTH_SHORT).show()
+//        } else {
+        when (position in 0..9) {
+            (position == 0) -> replaceFragment(CrimesFragment.newInstance("1"))
+            (position == 1) -> replaceFragment(CrimesFragment.newInstance("2"))
+            (position == 2) -> replaceFragment(CrimesFragment.newInstance("3"))
+            (position == 3) -> replaceFragment(CrimesFragment.newInstance("4"))
+            (position == 4) -> replaceFragment(CrimesFragment.newInstance("5"))
+            (position == 5) -> replaceFragment(CrimesFragment.newInstance("6"))
+            (position == 6) -> replaceFragment(CrimesFragment.newInstance("7"))
+            (position == 7) -> replaceFragment(CrimesFragment.newInstance("8"))
+            (position == 8) -> replaceFragment(CrimesFragment.newInstance("9"))
+            (position == 9) -> replaceFragment(CrimesFragment.newInstance("10"))
 
-                else -> {}
-            }
+            else -> {}
+//            }
         }
     }
 

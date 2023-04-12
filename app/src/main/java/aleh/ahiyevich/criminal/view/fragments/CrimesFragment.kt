@@ -1,13 +1,13 @@
 package aleh.ahiyevich.criminal.view.fragments
 
+//import aleh.ahiyevich.criminal.repository.FireBaseHelper
 import aleh.ahiyevich.criminal.Constants
 import aleh.ahiyevich.criminal.R
+import aleh.ahiyevich.criminal.api.cases.DataCase
 import aleh.ahiyevich.criminal.databinding.FragmentCrimesBinding
 import aleh.ahiyevich.criminal.model.OnItemClick
 import aleh.ahiyevich.criminal.repository.DataBaseHelper
-//import aleh.ahiyevich.criminal.repository.FireBaseHelper
 import aleh.ahiyevich.criminal.view.adapters.CrimesAdapter
-import aleh.ahiyevich.criminal.api.cases.DataCase
 import android.app.Dialog
 import android.content.SharedPreferences
 import android.graphics.Color

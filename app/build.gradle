@@ -6,7 +6,7 @@ plugins {
 }
 
 android {
-    compileSdk 32
+    compileSdk 33
 
     defaultConfig {
         applicationId "aleh.ahiyevich.criminal"
@@ -70,8 +70,12 @@ dependencies {
     //Carousel RecyclerView
     implementation 'com.github.sparrow007:carouselrecyclerview:1.2.6'
 
-
     //Picasso
     implementation 'com.squareup.picasso:picasso:2.8'
+
+    //ExoPlayer
+    implementation 'com.google.android.exoplayer:exoplayer:2.18.5'
+
+
 
 }

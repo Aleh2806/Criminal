@@ -37,8 +37,10 @@ class CrimesAdapter(
 //        holder.nameCrime.text = crime.nameCrime
 //        Glide.with(holder.itemView.context).load(crime.imageCrime).into(holder.imageCrime)
             holder.nameCrime.text = crime.name
-//            Glide.with(holder.imageCrime.context).load(crime.image).into(holder.imageCrime)
-        Picasso.get().load("https://crime.api.unmodum.com/images/case_image.jpg").into(holder.imageCrime)
+            Glide.with(holder.imageCrime.context).load("https://crime.api.unmodum.com/images/case_image.jpg").into(holder.imageCrime)
+
+        // Пока что загрузка картинки напрямую из сайта
+//        Picasso.get().load().into(holder.imageCrime)
 
     }
 

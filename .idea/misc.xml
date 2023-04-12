@@ -15,7 +15,12 @@
         <entry key="..\:/Production/Criminal/app/src/main/res/drawable/btn_back_details.xml" value="0.1485" />
         <entry key="..\:/Production/Criminal/app/src/main/res/drawable/btn_background_grey.xml" value="0.1795" />
         <entry key="..\:/Production/Criminal/app/src/main/res/drawable/btn_diagonal.xml" value="0.1605" />
+        <entry key="..\:/Production/Criminal/app/src/main/res/drawable/btn_forward.xml" value="0.1575" />
+        <entry key="..\:/Production/Criminal/app/src/main/res/drawable/btn_lock.xml" value="0.1575" />
+        <entry key="..\:/Production/Criminal/app/src/main/res/drawable/btn_lock_open.xml" value="0.1575" />
         <entry key="..\:/Production/Criminal/app/src/main/res/drawable/btn_main_layout.xml" value="0.1605" />
+        <entry key="..\:/Production/Criminal/app/src/main/res/drawable/btn_replay.xml" value="0.1575" />
+        <entry key="..\:/Production/Criminal/app/src/main/res/drawable/btn_rew.xml" value="0.1575" />
         <entry key="..\:/Production/Criminal/app/src/main/res/drawable/btn_start_fragment.xml" value="0.173" />
         <entry key="..\:/Production/Criminal/app/src/main/res/drawable/button_back.xml" value="0.134" />
         <entry key="..\:/Production/Criminal/app/src/main/res/drawable/edit_text_background.xml" value="0.173" />
@@ -71,7 +76,7 @@
         <entry key="..\:/Production/Criminal/app/src/main/res/layout-normal/fragment_crimes.xml" value="0.17100977198697068" />
         <entry key="..\:/Production/Criminal/app/src/main/res/layout-normal/fragment_crimes_list.xml" value="0.1580135440180587" />
         <entry key="..\:/Production/Criminal/app/src/main/res/layout-normal/fragment_descriptions_details.xml" value="0.165" />
-        <entry key="..\:/Production/Criminal/app/src/main/res/layout-normal/fragment_details_crime.xml" value="0.25" />
+        <entry key="..\:/Production/Criminal/app/src/main/res/layout-normal/fragment_details_crime.xml" value="0.165" />
         <entry key="..\:/Production/Criminal/app/src/main/res/layout-normal/fragment_details_crime_list.xml" value="0.41015625" />
         <entry key="..\:/Production/Criminal/app/src/main/res/layout-normal/fragment_details_crime_tile.xml" value="0.45" />
         <entry key="..\:/Production/Criminal/app/src/main/res/layout-normal/fragment_profile.xml" value="0.22445489525438223" />
@@ -96,6 +101,7 @@
         <entry key="..\:/Production/Criminal/app/src/main/res/layout/activity_main.xml" value="0.11" />
         <entry key="..\:/Production/Criminal/app/src/main/res/layout/carousel_crime_item.xml" value="0.17269736842105263" />
         <entry key="..\:/Production/Criminal/app/src/main/res/layout/carousel_crimes_item.xml" value="0.17269736842105263" />
+        <entry key="..\:/Production/Criminal/app/src/main/res/layout/custom_controller.xml" value="0.165" />
         <entry key="..\:/Production/Criminal/app/src/main/res/layout/dialog_exit.xml" value="0.2734375" />
         <entry key="..\:/Production/Criminal/app/src/main/res/layout/dialog_payment.xml" value="0.25" />
         <entry key="..\:/Production/Criminal/app/src/main/res/layout/dialog_registration.xml" value="0.25" />
@@ -111,7 +117,7 @@
         <entry key="..\:/Production/Criminal/app/src/main/res/layout/fragment_crimes_tile.xml" value="0.165" />
         <entry key="..\:/Production/Criminal/app/src/main/res/layout/fragment_deponents_details.xml" value="0.2734375" />
         <entry key="..\:/Production/Criminal/app/src/main/res/layout/fragment_descriptions_details.xml" value="0.165" />
-        <entry key="..\:/Production/Criminal/app/src/main/res/layout/fragment_details_crime.xml" value="1.2666666666666666" />
+        <entry key="..\:/Production/Criminal/app/src/main/res/layout/fragment_details_crime.xml" value="0.24126984126984127" />
         <entry key="..\:/Production/Criminal/app/src/main/res/layout/fragment_details_crime_list.xml" value="0.165" />
         <entry key="..\:/Production/Criminal/app/src/main/res/layout/fragment_details_crime_tile.xml" value="0.165" />
         <entry key="..\:/Production/Criminal/app/src/main/res/layout/fragment_experts_details.xml" value="0.20208333333333334" />

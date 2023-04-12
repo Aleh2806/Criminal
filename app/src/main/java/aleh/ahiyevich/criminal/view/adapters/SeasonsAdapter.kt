@@ -40,8 +40,9 @@ class SeasonsAdapter(
 //        holder.nameSeason.text = season.nameSeason
 //        Glide.with(holder.itemView.context).load(season.imageSeason).into(holder.image)
             holder.nameSeason.text = season.name
-//            Glide.with(holder.itemView.context).load(season.image).into(holder.image)
-        Picasso.get().load("https://crime.api.unmodum.com/images/season_image.jpg").into(holder.image)
+            Glide.with(holder.itemView.context).load("https://crime.api.unmodum.com/images/season_image.jpg").into(holder.image)
+                // Пока что загрузка картинки напрямую из сайта
+//        Picasso.get().load().into(holder.image)
 
     }
 

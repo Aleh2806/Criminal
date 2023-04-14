@@ -24,10 +24,7 @@ import androidx.recyclerview.widget.RecyclerView
 class SeasonsFragment : Fragment(), OnItemClick {
 
     private val dataBaseHelper = DataBaseHelper()
-    private val fireBaseHelper = FireBaseHelper()
     lateinit var sharedPref: SharedPreferences
-
-    //    private val seasonsList: ArrayList<SeasonsU> = ArrayList()
     private val seasonsList: ArrayList<SeasonData> = ArrayList()
     private val adapterSeasons = SeasonsAdapter(seasonsList, this)
 

@@ -34,7 +34,7 @@
             android:id="@+id/player_view"
             android:layout_width="match_parent"
             android:layout_height="230dp"
-            app:controller_layout_id="@layout/custom_controller"
+            app:controller_layout_id="@layout/custom_controller_exo_player"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
@@ -58,12 +58,11 @@
     </androidx.constraintlayout.widget.ConstraintLayout>
 
     <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/video_list"
+        android:id="@+id/recycler_view_video_help_list"
         android:layout_width="match_parent"
-        android:layout_height="70dp"
+        android:layout_height="wrap_content"
         android:layout_marginTop="5dp"
         android:background="@color/black" />
-
 
     <LinearLayout
         android:id="@+id/materials_list"
@@ -83,6 +82,18 @@
             app:spanCount="3"
             tools:listitem="@layout/item_details" />
 
+
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/btn_answer"
+            android:layout_width="220dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginBottom="30dp"
+            android:background="@drawable/btn_back_details"
+            android:text="Ввести ответ" />
+
+
+
         <androidx.appcompat.widget.AppCompatButton
             android:id="@+id/details_back"
             android:layout_width="170dp"
@@ -91,8 +102,9 @@
             android:layout_marginBottom="20dp"
             android:background="@drawable/btn_back_details"
             android:text="Назад" />
-    </LinearLayout>
 
+
+    </LinearLayout>
 
 </LinearLayout>
 

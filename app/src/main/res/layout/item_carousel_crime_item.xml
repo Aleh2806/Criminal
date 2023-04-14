@@ -16,8 +16,7 @@
         <ImageView
             android:id="@+id/image_crime"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:scaleType="centerCrop" />
+            android:layout_height="wrap_content" />
 
         <TextView
             android:id="@+id/name_crime"

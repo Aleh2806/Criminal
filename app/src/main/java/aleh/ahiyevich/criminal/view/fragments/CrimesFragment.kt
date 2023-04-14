@@ -1,6 +1,5 @@
 package aleh.ahiyevich.criminal.view.fragments
 
-//import aleh.ahiyevich.criminal.repository.FireBaseHelper
 import aleh.ahiyevich.criminal.Constants
 import aleh.ahiyevich.criminal.R
 import aleh.ahiyevich.criminal.api.cases.DataCase
@@ -26,9 +25,7 @@ import androidx.fragment.app.Fragment
 
 class CrimesFragment : Fragment(), OnItemClick {
 
-//    private val fireBaseHelper = FireBaseHelper()
     private val dataBaseHelper = DataBaseHelper()
-//    private val crimesList: ArrayList<CrimesU> = ArrayList()
     private val crimesList: ArrayList<DataCase> = ArrayList()
     private val adapterCrimes = CrimesAdapter(crimesList, this)
     private lateinit var numberSeason: String
@@ -67,9 +64,7 @@ class CrimesFragment : Fragment(), OnItemClick {
         numberSeason = arguments?.getString("KEY_SEASON").toString()
         if (arguments == null){
             dataBaseHelper.getCases(adapterCrimes,crimesList,token!!,requireContext(),1)
-//            fireBaseHelper.getCrimesList(adapterCrimes, requireContext(), crimesList, "1")
         } else {
-//            fireBaseHelper.getCrimesList(adapterCrimes, requireContext(), crimesList, numberSeason)
             dataBaseHelper.getCases(adapterCrimes,crimesList,token!!,requireContext(),numberSeason.toInt())
 
         }

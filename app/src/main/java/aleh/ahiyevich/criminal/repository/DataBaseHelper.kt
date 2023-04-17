@@ -20,6 +20,7 @@ import aleh.ahiyevich.retrofit.api.seasons.SeasonsApi
 import android.app.Activity
 import android.content.Context
 import android.content.SharedPreferences
+import android.util.Log
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import retrofit2.Call
@@ -97,6 +98,7 @@ class DataBaseHelper {
                             .beginTransaction()
                             .replace(R.id.container_for_fragment,SeasonsFragment())
                             .commit()
+                        Log.d("Getauthuser","token check")
                     } else {
                         // На страницу авторизации
                         activity.supportFragmentManager

@@ -9,6 +9,7 @@ import android.graphics.Color
 import android.graphics.drawable.ColorDrawable
 import android.os.Build
 import android.os.Bundle
+import android.util.Log
 import android.view.View
 import android.widget.Button
 import androidx.appcompat.app.AppCompatActivity
@@ -28,23 +29,21 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         _binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
-
         sharedPref = getPreferences(MODE_PRIVATE)
 
         val localAccessToken = sharedPref.getString(Constants.ACCESS_TOKEN, "")
         if (localAccessToken != null) {
             //запрос на проверку валидности токена
-            DataBaseHelper().getAuthUser(localAccessToken,this,sharedPref, this)
+            DataBaseHelper().getAuthUser(localAccessToken, this, sharedPref, this)
 //если все окей отправляю на страницу сезонов
         } else {
             // отправляем на страницу авторизации
             supportFragmentManager
                 .beginTransaction()
-                .replace(R.id.container_for_fragment,AuthorizationFragment())
+                .replace(R.id.container_for_fragment, AuthorizationFragment())
                 .commit()
+
         }
-
-
     }
 
 

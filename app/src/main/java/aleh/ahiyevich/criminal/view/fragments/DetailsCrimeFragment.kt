@@ -1,11 +1,15 @@
 package aleh.ahiyevich.criminal.view.fragments
 
+import aleh.ahiyevich.criminal.Constants
+import aleh.ahiyevich.criminal.MainActivity
 import aleh.ahiyevich.criminal.R
 import aleh.ahiyevich.criminal.databinding.FragmentDetailsCrimeBinding
 import aleh.ahiyevich.criminal.model.OnItemClick
+import aleh.ahiyevich.criminal.repository.DataBaseHelper
 import aleh.ahiyevich.criminal.view.adapters.DetailsAdapter
 import aleh.ahiyevich.criminal.view.adapters.VideoListDetailsAdapter
 import android.app.Dialog
+import android.content.SharedPreferences
 import android.content.pm.ActivityInfo
 import android.graphics.Color
 import android.graphics.drawable.ColorDrawable
@@ -16,6 +20,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.*
+import androidx.appcompat.app.AppCompatActivity
 import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
@@ -35,6 +40,8 @@ class DetailsCrimeFragment : Fragment(), OnItemClick {
     private lateinit var playerView: PlayerView
     private var simpleExoPlayer: ExoPlayer? = null
     private val listVideoDetails = ArrayList<String>()
+    private lateinit var sharedPref: SharedPreferences
+
 
 
     private var _binding: FragmentDetailsCrimeBinding? = null
@@ -161,6 +168,9 @@ class DetailsCrimeFragment : Fragment(), OnItemClick {
         binding.apply {
             detailsBack.setOnClickListener {
                 replaceFragment(SeasonsFragment.newInstance(numberSeason))
+                sharedPref = requireActivity().getPreferences(AppCompatActivity.MODE_PRIVATE)
+                val token = sharedPref.getString(Constants.ACCESS_TOKEN,"")
+                DataBaseHelper().getAuthUser(token!!,requireContext(),sharedPref,requireActivity() as AppCompatActivity)
             }
         }
     }

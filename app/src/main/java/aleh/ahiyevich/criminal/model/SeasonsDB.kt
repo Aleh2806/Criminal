@@ -6,9 +6,6 @@ data class SeasonsDB(
 )
 
 data class SeasonData(
-    val id: Int,
     val name: String,
-    val image: String,
-    val created_at: String,
-    val updated_at: String
+    val mobile_image: String
 )

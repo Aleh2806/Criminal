@@ -83,6 +83,7 @@ class DataBaseHelper {
         context: Context,
         sharedPref: SharedPreferences,
         activity: AppCompatActivity,
+        numberSeason: String
     ) {
 
         val request = BaseRequest().retrofit.create(AuthApi::class.java)
@@ -96,9 +97,9 @@ class DataBaseHelper {
                         activity
                             .supportFragmentManager
                             .beginTransaction()
-                            .replace(R.id.container_for_fragment,SeasonsFragment())
+                            .replace(R.id.container_for_fragment,SeasonsFragment.newInstance(numberSeason))
                             .commit()
-                        Log.d("Getauthuser","token check")
+                        Log.d("@@@","token check")
                     } else {
                         // На страницу авторизации
                         activity.supportFragmentManager
@@ -205,6 +206,7 @@ class DataBaseHelper {
                 }
 
                 override fun onFailure(call: Call<ResponseToken>, t: Throwable) {
+                    Log.d("@@",t.message.toString())
                     Toast.makeText(context, t.message.toString(), Toast.LENGTH_SHORT)
                         .show()
                 }

@@ -1,7 +1,6 @@
 package aleh.ahiyevich.criminal.view.fragments
 
 import aleh.ahiyevich.criminal.Constants
-import aleh.ahiyevich.criminal.MainActivity
 import aleh.ahiyevich.criminal.R
 import aleh.ahiyevich.criminal.databinding.FragmentDetailsCrimeBinding
 import aleh.ahiyevich.criminal.model.OnItemClick
@@ -65,22 +64,16 @@ class DetailsCrimeFragment : Fragment(), OnItemClick {
 
         preparePlayer()
         initRecyclerViewTittleMaterials()
-        backWithFragment()
+        backFromFragment()
         initRwHelperListVideo()
-
-        binding.btnAnswer.setOnClickListener {
-            answerDialog()
-            Toast.makeText(
-                requireContext(),
-                "Переход в поле для ответа\nВвсести ответ",
-                Toast.LENGTH_SHORT
-            ).show()
-        }
-
+        answerDialog()
 
     }
 
+
+
     private fun answerDialog() {
+        binding.btnAnswer.setOnClickListener {
         val dialogBinding = layoutInflater.inflate(R.layout.dialog_answer, null)
         val whoCriminal = dialogBinding.findViewById<EditText>(R.id.edit_text_who)
         val howCriminal = dialogBinding.findViewById<EditText>(R.id.edit_text_how)
@@ -145,6 +138,8 @@ class DetailsCrimeFragment : Fragment(), OnItemClick {
             }
         }
     }
+    }
+
 
 
     private fun initRwHelperListVideo() {
@@ -163,14 +158,13 @@ class DetailsCrimeFragment : Fragment(), OnItemClick {
     }
 
 
-    private fun backWithFragment() {
+    private fun backFromFragment() {
         val numberSeason = arguments?.getString("KEY_SEASON").toString()
         binding.apply {
             detailsBack.setOnClickListener {
-                replaceFragment(SeasonsFragment.newInstance(numberSeason))
                 sharedPref = requireActivity().getPreferences(AppCompatActivity.MODE_PRIVATE)
                 val token = sharedPref.getString(Constants.ACCESS_TOKEN,"")
-                DataBaseHelper().getAuthUser(token!!,requireContext(),sharedPref,requireActivity() as AppCompatActivity)
+                DataBaseHelper().getAuthUser(token!!,requireContext(),sharedPref,requireActivity() as AppCompatActivity, numberSeason)
             }
         }
     }

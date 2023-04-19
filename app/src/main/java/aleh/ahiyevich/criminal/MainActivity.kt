@@ -34,8 +34,8 @@ class MainActivity : AppCompatActivity() {
         val localAccessToken = sharedPref.getString(Constants.ACCESS_TOKEN, "")
         if (localAccessToken != null) {
             //запрос на проверку валидности токена
-            DataBaseHelper().getAuthUser(localAccessToken, this, sharedPref, this)
-//если все окей отправляю на страницу сезонов
+            DataBaseHelper().getAuthUser(localAccessToken, this, sharedPref, this,"1")
+            //если все окей отправляю на страницу сезонов
         } else {
             // отправляем на страницу авторизации
             supportFragmentManager

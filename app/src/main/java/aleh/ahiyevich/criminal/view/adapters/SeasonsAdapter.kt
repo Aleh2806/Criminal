@@ -1,5 +1,6 @@
 package aleh.ahiyevich.criminal.view.adapters
 
+import aleh.ahiyevich.criminal.Constants.IMAGE_PATH
 import aleh.ahiyevich.criminal.R
 import aleh.ahiyevich.criminal.model.OnItemClick
 import aleh.ahiyevich.criminal.model.SeasonData
@@ -31,18 +32,14 @@ class SeasonsAdapter(
         val season = data[position]
 
         // Повесил обработку отображения замков на сезонах
-        if (season.id > 0) {
+        if (position > -1) {
             holder.lockSeason.visibility = View.GONE
         } else {
             holder.lockSeason.visibility = View.VISIBLE
         }
-//
-//        holder.nameSeason.text = season.nameSeason
-//        Glide.with(holder.itemView.context).load(season.imageSeason).into(holder.image)
-            holder.nameSeason.text = season.name
-            Glide.with(holder.itemView.context).load("https://crime.api.unmodum.com/images/season_image.jpg").into(holder.image)
-                // Пока что загрузка картинки напрямую из сайта
-//        Picasso.get().load().into(holder.image)
+
+        holder.nameSeason.text = season.name
+        Glide.with(holder.itemView.context).load(IMAGE_PATH + season.mobile_image).into(holder.image)
 
     }
 

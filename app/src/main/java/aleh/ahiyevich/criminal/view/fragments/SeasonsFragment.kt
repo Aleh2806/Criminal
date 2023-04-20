@@ -5,9 +5,7 @@ import aleh.ahiyevich.criminal.R
 import aleh.ahiyevich.criminal.databinding.FragmentSeassonsBinding
 import aleh.ahiyevich.criminal.model.OnItemClick
 import aleh.ahiyevich.criminal.model.SeasonData
-import aleh.ahiyevich.criminal.model.SeasonsU
 import aleh.ahiyevich.criminal.repository.DataBaseHelper
-import aleh.ahiyevich.criminal.repository.FireBaseHelper
 import aleh.ahiyevich.criminal.view.adapters.SeasonsAdapter
 import android.content.SharedPreferences
 import android.os.Build
@@ -15,7 +13,6 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -53,7 +50,7 @@ class SeasonsFragment : Fragment(), OnItemClick {
         val token = sharedPref.getString(Constants.ACCESS_TOKEN,"")
 
         initRecyclerViewSeasons()
-        dataBaseHelper.getSeasons(adapterSeasons, seasonsList, token!!, requireContext())
+        dataBaseHelper.getSeasonsList(adapterSeasons, seasonsList, token!!, requireContext())
 
         if (arguments == null) {
             replaceFragment(CrimesFragment.newInstance("1"))

@@ -63,9 +63,9 @@ class CrimesFragment : Fragment(), OnItemClick {
         initCarouselViewCrimes()
         numberSeason = arguments?.getString("KEY_SEASON").toString()
         if (arguments == null){
-            dataBaseHelper.getCases(adapterCrimes,crimesList,token!!,requireContext(),1)
+            dataBaseHelper.getCasesList(adapterCrimes,crimesList,token!!,requireContext(),1)
         } else {
-            dataBaseHelper.getCases(adapterCrimes,crimesList,token!!,requireContext(),numberSeason.toInt())
+            dataBaseHelper.getCasesList(adapterCrimes,crimesList,token!!,requireContext(),numberSeason.toInt())
 
         }
     }

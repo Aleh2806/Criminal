@@ -36,11 +36,11 @@ import com.google.android.exoplayer2.ui.PlayerView
 class DetailsCrimeFragment : Fragment(), OnItemClick {
 
     private val listDetails: ArrayList<String> = ArrayList()
+    private val adapterNameMaterials = DetailsAdapter(listDetails, this)
     private lateinit var playerView: PlayerView
     private var simpleExoPlayer: ExoPlayer? = null
     private val listVideoDetails = ArrayList<String>()
     private lateinit var sharedPref: SharedPreferences
-
 
 
     private var _binding: FragmentDetailsCrimeBinding? = null
@@ -71,75 +71,75 @@ class DetailsCrimeFragment : Fragment(), OnItemClick {
     }
 
 
-
     private fun answerDialog() {
         binding.btnAnswer.setOnClickListener {
-        val dialogBinding = layoutInflater.inflate(R.layout.dialog_answer, null)
-        val whoCriminal = dialogBinding.findViewById<EditText>(R.id.edit_text_who)
-        val howCriminal = dialogBinding.findViewById<EditText>(R.id.edit_text_how)
-        val whyCriminal = dialogBinding.findViewById<EditText>(R.id.edit_text_why)
-        val cancel = dialogBinding.findViewById<ImageView>(R.id.btn_cancel)
+            val dialogBinding = layoutInflater.inflate(R.layout.dialog_answer, null)
+            val whoCriminal = dialogBinding.findViewById<EditText>(R.id.edit_text_who)
+            val howCriminal = dialogBinding.findViewById<EditText>(R.id.edit_text_how)
+            val whyCriminal = dialogBinding.findViewById<EditText>(R.id.edit_text_why)
+            val cancel = dialogBinding.findViewById<ImageView>(R.id.btn_cancel)
 
-        val myDialog = Dialog(requireContext())
-        myDialog.setContentView(dialogBinding)
-        myDialog.setCancelable(false)
-        myDialog.window?.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
-        myDialog.show()
+            val myDialog = Dialog(requireContext())
+            myDialog.setContentView(dialogBinding)
+            myDialog.setCancelable(false)
+            myDialog.window?.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
+            myDialog.show()
 
-        cancel.setOnClickListener {
-            myDialog.dismiss()
-        }
+            cancel.setOnClickListener {
+                myDialog.dismiss()
+            }
 
-        // Обработка кнопки Подтвердить
-        dialogBinding.findViewById<Button>(R.id.confirm_answer).setOnClickListener {
+            // Обработка кнопки Подтвердить
+            dialogBinding.findViewById<Button>(R.id.confirm_answer).setOnClickListener {
 //            myDialog.dismiss()
-            if (whoCriminal.text.toString().contains("Вася") || whoCriminal.text.toString()
-                    .contains("вася")
-            ) {
-                whoCriminal.setBackgroundColor(resources.getColor(R.color.teal_200))
-                Toast.makeText(requireContext(), "Правильный ответ", Toast.LENGTH_SHORT).show()
-            } else {
-                whoCriminal.setBackgroundColor(resources.getColor(R.color.black_overlay))
-                Toast.makeText(requireContext(), "Неверный ответ", Toast.LENGTH_SHORT).show()
-                return@setOnClickListener
-            }
+                if (whoCriminal.text.toString().contains("Вася") || whoCriminal.text.toString()
+                        .contains("вася")
+                ) {
+                    whoCriminal.setBackgroundColor(resources.getColor(R.color.teal_200))
+                    Toast.makeText(requireContext(), "Правильный ответ", Toast.LENGTH_SHORT).show()
+                } else {
+                    whoCriminal.setBackgroundColor(resources.getColor(R.color.black_overlay))
+                    Toast.makeText(requireContext(), "Неверный ответ", Toast.LENGTH_SHORT).show()
+                    return@setOnClickListener
+                }
 
-            if (howCriminal.text.toString().contains("Нож") || howCriminal.text.toString()
-                    .contains("нож")
-            ) {
-                howCriminal.setBackgroundColor(resources.getColor(R.color.teal_200))
-                Toast.makeText(requireContext(), "Правильный ответ", Toast.LENGTH_SHORT).show()
-            } else {
-                howCriminal.setBackgroundColor(resources.getColor(R.color.black_overlay))
-                Toast.makeText(requireContext(), "Неверный ответ", Toast.LENGTH_SHORT).show()
-                return@setOnClickListener
-            }
+                if (howCriminal.text.toString().contains("Нож") || howCriminal.text.toString()
+                        .contains("нож")
+                ) {
+                    howCriminal.setBackgroundColor(resources.getColor(R.color.teal_200))
+                    Toast.makeText(requireContext(), "Правильный ответ", Toast.LENGTH_SHORT).show()
+                } else {
+                    howCriminal.setBackgroundColor(resources.getColor(R.color.black_overlay))
+                    Toast.makeText(requireContext(), "Неверный ответ", Toast.LENGTH_SHORT).show()
+                    return@setOnClickListener
+                }
 
-            if (whyCriminal.text.toString().contains("Обида") || whyCriminal.text.toString()
-                    .contains("обида")
-            ) {
-                whyCriminal.setBackgroundColor(resources.getColor(R.color.teal_200))
-                Toast.makeText(requireContext(), "Правильный ответ", Toast.LENGTH_SHORT).show()
-            } else {
-                whyCriminal.setBackgroundColor(resources.getColor(R.color.black_overlay))
-                Toast.makeText(requireContext(), "Неверный ответ", Toast.LENGTH_SHORT).show()
-                return@setOnClickListener
-            }
+                if (whyCriminal.text.toString().contains("Обида") || whyCriminal.text.toString()
+                        .contains("обида")
+                ) {
+                    whyCriminal.setBackgroundColor(resources.getColor(R.color.teal_200))
+                    Toast.makeText(requireContext(), "Правильный ответ", Toast.LENGTH_SHORT).show()
+                } else {
+                    whyCriminal.setBackgroundColor(resources.getColor(R.color.black_overlay))
+                    Toast.makeText(requireContext(), "Неверный ответ", Toast.LENGTH_SHORT).show()
+                    return@setOnClickListener
+                }
 
-            if (whoCriminal.text.toString().contains("Вася") || whoCriminal.text.toString()
-                    .contains("вася")
-                && howCriminal.text.toString().contains("Ножом") || howCriminal.text.toString()
-                    .contains("ножом")
-                && whyCriminal.text.toString().contains("Обида") || whyCriminal.text.toString()
-                    .contains("обида")
-            ) {
-                dialogBinding.findViewById<LinearLayout>(R.id.answer_check).visibility = View.GONE
-                dialogBinding.findViewById<TextView>(R.id.congratulation).visibility = View.VISIBLE
+                if (whoCriminal.text.toString().contains("Вася") || whoCriminal.text.toString()
+                        .contains("вася")
+                    && howCriminal.text.toString().contains("Ножом") || howCriminal.text.toString()
+                        .contains("ножом")
+                    && whyCriminal.text.toString().contains("Обида") || whyCriminal.text.toString()
+                        .contains("обида")
+                ) {
+                    dialogBinding.findViewById<LinearLayout>(R.id.answer_check).visibility =
+                        View.GONE
+                    dialogBinding.findViewById<TextView>(R.id.congratulation).visibility =
+                        View.VISIBLE
+                }
             }
         }
     }
-    }
-
 
 
     private fun initRwHelperListVideo() {
@@ -163,8 +163,14 @@ class DetailsCrimeFragment : Fragment(), OnItemClick {
         binding.apply {
             detailsBack.setOnClickListener {
                 sharedPref = requireActivity().getPreferences(AppCompatActivity.MODE_PRIVATE)
-                val token = sharedPref.getString(Constants.ACCESS_TOKEN,"")
-                DataBaseHelper().getAuthUser(token!!,requireContext(),sharedPref,requireActivity() as AppCompatActivity, numberSeason)
+                val token = sharedPref.getString(Constants.ACCESS_TOKEN, "")
+                DataBaseHelper().getAuthUser(
+                    token!!,
+                    requireContext(),
+                    sharedPref,
+                    requireActivity() as AppCompatActivity,
+                    numberSeason
+                )
             }
         }
     }
@@ -268,17 +274,18 @@ class DetailsCrimeFragment : Fragment(), OnItemClick {
 
 
     private fun initRecyclerViewTittleMaterials() {
-        val arrayNameDetails = resources.getStringArray(R.array.details_crime_list)
         listDetails.removeAll(listDetails.toSet())
 
-        for (i in arrayNameDetails) {
-            listDetails.add(i)
-        }
+        val sharedPref: SharedPreferences =
+            requireActivity().getPreferences(AppCompatActivity.MODE_PRIVATE)
+        val token = sharedPref.getString(Constants.ACCESS_TOKEN, "")
+        DataBaseHelper().getDirectoryCrimesName(token!!, 1, listDetails, adapterNameMaterials)
+
         val recyclerView: RecyclerView = binding.recyclerViewDetails
         recyclerView.setHasFixedSize(true)
 
         recyclerView.layoutManager = GridLayoutManager(requireContext(), 3)
-        recyclerView.adapter = DetailsAdapter(listDetails, this)
+        recyclerView.adapter = adapterNameMaterials
 
 
     }

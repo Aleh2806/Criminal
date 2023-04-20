@@ -2,10 +2,15 @@ package aleh.ahiyevich.criminal.repository
 
 import aleh.ahiyevich.criminal.Constants
 import aleh.ahiyevich.criminal.R
+import aleh.ahiyevich.criminal.api.cases.Cases
+import aleh.ahiyevich.criminal.api.cases.DataCase
+import aleh.ahiyevich.criminal.api.directories.Data
+import aleh.ahiyevich.criminal.api.directories.DirectoriesApi
 import aleh.ahiyevich.criminal.model.AuthUser
 import aleh.ahiyevich.criminal.model.SeasonData
 import aleh.ahiyevich.criminal.model.SeasonsDB
 import aleh.ahiyevich.criminal.view.adapters.CrimesAdapter
+import aleh.ahiyevich.criminal.view.adapters.DetailsAdapter
 import aleh.ahiyevich.criminal.view.adapters.SeasonsAdapter
 import aleh.ahiyevich.criminal.view.fragments.AuthorizationFragment
 import aleh.ahiyevich.criminal.view.fragments.SeasonsFragment
@@ -13,9 +18,7 @@ import aleh.ahiyevich.retrofit.api.auth.AuthApi
 import aleh.ahiyevich.retrofit.api.auth.AuthRequest
 import aleh.ahiyevich.retrofit.api.auth.RefreshTokenRequest
 import aleh.ahiyevich.retrofit.api.auth.ResponseToken
-import aleh.ahiyevich.criminal.api.cases.Cases
 import aleh.ahiyevich.retrofit.api.cases.CasesApi
-import aleh.ahiyevich.criminal.api.cases.DataCase
 import aleh.ahiyevich.retrofit.api.seasons.SeasonsApi
 import android.app.Activity
 import android.content.Context
@@ -30,10 +33,9 @@ import retrofit2.Response
 class DataBaseHelper {
 
     private lateinit var sharedPref: SharedPreferences
+
     // Авторизация пользователя
-    fun login(
-        context: Context, email: String, password: String, activity: AppCompatActivity
-    ) {
+    fun login(context: Context, email: String, password: String, activity: AppCompatActivity) {
         if (email.isEmpty()) {
             Toast.makeText(context, "Введите е-маил", Toast.LENGTH_SHORT).show()
         } else if (password.isEmpty()) {
@@ -51,13 +53,6 @@ class DataBaseHelper {
                             response.body()!!.data.access_token,
                             response.body()!!.data.refresh_token
                         ,activity)
-                        Toast.makeText(
-                            context,
-                            "Авторизация успешная\n\nAccess token = ${response.body()!!.data.access_token}\n\n" +
-                                    "Refresh token = ${response.body()!!.data.refresh_token}",
-                            Toast.LENGTH_SHORT
-                        )
-                            .show()
 
                         activity
                             .supportFragmentManager
@@ -78,13 +73,7 @@ class DataBaseHelper {
     }
 
     // Получение авторизованного пользовталя
-    fun getAuthUser(
-        token: String,
-        context: Context,
-        sharedPref: SharedPreferences,
-        activity: AppCompatActivity,
-        numberSeason: String
-    ) {
+    fun getAuthUser(token: String, context: Context, sharedPref: SharedPreferences, activity: AppCompatActivity, numberSeason: String) {
 
         val request = BaseRequest().retrofit.create(AuthApi::class.java)
         val call: Call<AuthUser> = request.getAuthUser("Bearer $token")
@@ -94,6 +83,7 @@ class DataBaseHelper {
                 if (response.isSuccessful) {
                     if (authUser?.success == true){
                         // на страницу сезонов
+//                        getDirectoryCrimesName(token,1)
                         activity
                             .supportFragmentManager
                             .beginTransaction()
@@ -108,7 +98,7 @@ class DataBaseHelper {
                             .commit()
                     }
                 } else if (response.code() == 401) {
-                    getAuthByRefreshToken(context, sharedPref, activity)
+                    getAuthByRefreshToken(sharedPref, activity)
                 } else {
                     activity
                         .supportFragmentManager
@@ -126,54 +116,8 @@ class DataBaseHelper {
         })
     }
 
-    // Получение сезонов
-    fun getSeasons(adapter: SeasonsAdapter, seasonList: ArrayList<SeasonData>, token: String, context: Context){
-
-            val request = BaseRequest().retrofit.create(SeasonsApi::class.java)
-            val call = request.getSeasons("Bearer $token")
-            call.enqueue(object : Callback<SeasonsDB> {
-                override fun onResponse(call: Call<SeasonsDB>, response: Response<SeasonsDB>) {
-                    val data = response.body()!!.data
-                    for (i in data){
-                        seasonList.add(i)
-
-                    }
-                    adapter.notifyDataSetChanged()
-
-                    Toast.makeText(context, "Season get", Toast.LENGTH_SHORT).show()
-                }
-
-                override fun onFailure(call: Call<SeasonsDB>, t: Throwable) {
-                    Toast.makeText(context, "Ошибка загрузки, проверьте интернет соединение", Toast.LENGTH_SHORT).show()
-
-                }
-            })
-    }
-
-    // Получение дел сезона
-    fun getCases(adapter: CrimesAdapter, crimesList: ArrayList<DataCase>, token: String, context: Context, seasonId: Int) {
-
-            val request = BaseRequest().retrofit.create(CasesApi::class.java)
-            val call = request.getCases("Bearer $token", seasonId)
-            call.enqueue(object : Callback<Cases> {
-                override fun onResponse(call: Call<Cases>, response: Response<Cases>) {
-                    val data = response.body()!!.data
-                    for (i in data){
-                        crimesList.add(i)
-                    }
-                    adapter.notifyDataSetChanged()
-                    Toast.makeText(context, "Cases gets", Toast.LENGTH_SHORT).show()
-
-                }
-
-                override fun onFailure(call: Call<Cases>, t: Throwable) {
-                    Toast.makeText(context, "Ошибка загрузки, проверьте интернет соединение", Toast.LENGTH_SHORT).show()
-                }
-            })
-    }
-
     // Получение Рефреш токена, если Access token мертв
-    fun getAuthByRefreshToken(context: Context, sharedPref: SharedPreferences, activity: AppCompatActivity) {
+    fun getAuthByRefreshToken(sharedPref: SharedPreferences, activity: AppCompatActivity) {
         val refreshToken = sharedPref.getString(Constants.REFRESH_TOKEN, "")
         if (refreshToken != null) {
             val request = BaseRequest().retrofit.create(AuthApi::class.java)
@@ -206,9 +150,11 @@ class DataBaseHelper {
                 }
 
                 override fun onFailure(call: Call<ResponseToken>, t: Throwable) {
-                    Log.d("@@",t.message.toString())
-                    Toast.makeText(context, t.message.toString(), Toast.LENGTH_SHORT)
-                        .show()
+                    activity.supportFragmentManager
+                        .beginTransaction()
+                        .replace(R.id.container_for_fragment,AuthorizationFragment())
+                        .commit()
+                    Log.d("refreshDead",t.message.toString())
                 }
 
             })
@@ -230,4 +176,64 @@ class DataBaseHelper {
         mEditor.apply()
     }
 
+
+    // Получение сезонов
+    fun getSeasonsList(adapter: SeasonsAdapter, seasonList: ArrayList<SeasonData>, token: String, context: Context){
+
+            val request = BaseRequest().retrofit.create(SeasonsApi::class.java)
+            val call = request.getSeasons("Bearer $token")
+            call.enqueue(object : Callback<SeasonsDB> {
+                override fun onResponse(call: Call<SeasonsDB>, response: Response<SeasonsDB>) {
+                    val data = response.body()!!.data
+                    for (i in data){
+                        seasonList.add(i)
+
+                    }
+                    adapter.notifyDataSetChanged()
+                }
+
+                override fun onFailure(call: Call<SeasonsDB>, t: Throwable) {
+                    Toast.makeText(context, "Ошибка загрузки, проверьте интернет соединение", Toast.LENGTH_SHORT).show()
+                }
+            })
+    }
+
+    // Получение дел сезона
+    fun getCasesList(adapter: CrimesAdapter, crimesList: ArrayList<DataCase>, token: String, context: Context, seasonId: Int) {
+
+            val request = BaseRequest().retrofit.create(CasesApi::class.java)
+            val call = request.getCases("Bearer $token", seasonId)
+            call.enqueue(object : Callback<Cases> {
+                override fun onResponse(call: Call<Cases>, response: Response<Cases>) {
+                    val data = response.body()!!.data
+                    for (i in data){
+                        crimesList.add(i)
+                    }
+                    adapter.notifyDataSetChanged()
+               }
+
+                override fun onFailure(call: Call<Cases>, t: Throwable) {
+                    Toast.makeText(context, "Ошибка загрузки, проверьте интернет соединение", Toast.LENGTH_SHORT).show()
+                }
+            })
+    }
+
+    fun getDirectoryCrimesName(token: String, crimeId:Int, listDetails: ArrayList<String>, adapter: DetailsAdapter){
+        val request = BaseRequest().retrofit.create(DirectoriesApi::class.java)
+        val call = request.getDirectoryName("Bearer $token", crimeId)
+        call.enqueue(object: Callback<Data>{
+            override fun onResponse(call: Call<Data>, response: Response<Data>) {
+               val directories = response.body()!!.data.directories
+                for (i in directories){
+                    listDetails.add(i.directory.name)
+                }
+                adapter.notifyDataSetChanged()
+            }
+
+            override fun onFailure(call: Call<Data>, t: Throwable) {
+                Log.d("getDirectoryCrimesName", "onFailure: ${t.message.toString()}")
+            }
+
+        })
+    }
 }

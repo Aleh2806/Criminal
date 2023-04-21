@@ -1,16 +1,21 @@
 package aleh.ahiyevich.criminal.view.fragments
 
+import aleh.ahiyevich.criminal.Constants
+import aleh.ahiyevich.criminal.api.directories.DocumentDescription
 import aleh.ahiyevich.criminal.databinding.FragmentDescriptionsDetailsBinding
 import aleh.ahiyevich.criminal.model.Materials
+import aleh.ahiyevich.criminal.repository.DataBaseHelper
 import aleh.ahiyevich.criminal.repository.FireBaseHelper
 //import aleh.ahiyevich.criminal.repository.FireBaseHelper
 import aleh.ahiyevich.criminal.view.adapters.DescriptionsDetailsAdapter
+import android.content.SharedPreferences
 import android.content.res.Configuration
 import android.os.Build
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -18,8 +23,8 @@ import androidx.recyclerview.widget.LinearLayoutManager
 
 class DescriptionsDetailsFragment : Fragment() {
 
-    private val materialsList: ArrayList<Materials> = ArrayList()
-    private val fireBaseHelper = FireBaseHelper()
+    private val materialsList: ArrayList<DocumentDescription> = ArrayList()
+//    private val fireBaseHelper = FireBaseHelper()
     val adapter = DescriptionsDetailsAdapter(materialsList)
 
     private var _binding: FragmentDescriptionsDetailsBinding? = null
@@ -49,18 +54,28 @@ class DescriptionsDetailsFragment : Fragment() {
         val materialName = arguments?.getString("KEY_MATERIAL")
         val tittleDescriptions = arguments?.getString("KEY_TITTLE")
         binding.descriptionDetails.text = tittleDescriptions
+        val sharedPref: SharedPreferences = requireActivity().getPreferences(AppCompatActivity.MODE_PRIVATE)
+        val token = sharedPref.getString(Constants.ACCESS_TOKEN,"")
 
-        fireBaseHelper.getMaterials(
-            adapter,
-            requireContext(),
-            materialsList,
-            numberSeason!!,
-            numberCrime!!,
-            materialName!!
-        )
-
+        backFromFragment()
         initRecyclerView()
+        DataBaseHelper().getMaterialsCrime(token!!,1, materialsList, adapter)
 
+
+//        fireBaseHelper.getMaterials(
+//            adapter,
+//            requireContext(),
+//            materialsList,
+//            numberSeason!!,
+//            numberCrime!!,
+//            materialName!!
+//        )
+
+
+
+    }
+
+    private fun backFromFragment(){
         binding.backBtn.setOnClickListener {
             requireActivity()
                 .supportFragmentManager
@@ -70,7 +85,7 @@ class DescriptionsDetailsFragment : Fragment() {
 
     private fun initRecyclerView() {
         val recyclerView = binding.recyclerViewDescriptions
-        recyclerView.layoutManager = GridLayoutManager(requireContext(),2)
+        recyclerView.layoutManager = LinearLayoutManager(requireContext())
         recyclerView.adapter = adapter
 
         if (resources.configuration.orientation == Configuration.ORIENTATION_LANDSCAPE) {

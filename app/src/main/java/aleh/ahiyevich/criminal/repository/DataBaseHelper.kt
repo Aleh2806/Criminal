@@ -6,10 +6,12 @@ import aleh.ahiyevich.criminal.api.cases.Cases
 import aleh.ahiyevich.criminal.api.cases.DataCase
 import aleh.ahiyevich.criminal.api.directories.Data
 import aleh.ahiyevich.criminal.api.directories.DirectoriesApi
+import aleh.ahiyevich.criminal.api.directories.DocumentDescription
 import aleh.ahiyevich.criminal.model.AuthUser
 import aleh.ahiyevich.criminal.model.SeasonData
 import aleh.ahiyevich.criminal.model.SeasonsDB
 import aleh.ahiyevich.criminal.view.adapters.CrimesAdapter
+import aleh.ahiyevich.criminal.view.adapters.DescriptionsDetailsAdapter
 import aleh.ahiyevich.criminal.view.adapters.DetailsAdapter
 import aleh.ahiyevich.criminal.view.adapters.SeasonsAdapter
 import aleh.ahiyevich.criminal.view.fragments.AuthorizationFragment
@@ -83,7 +85,6 @@ class DataBaseHelper {
                 if (response.isSuccessful) {
                     if (authUser?.success == true){
                         // на страницу сезонов
-//                        getDirectoryCrimesName(token,1)
                         activity
                             .supportFragmentManager
                             .beginTransaction()
@@ -187,7 +188,6 @@ class DataBaseHelper {
                     val data = response.body()!!.data
                     for (i in data){
                         seasonList.add(i)
-
                     }
                     adapter.notifyDataSetChanged()
                 }
@@ -226,6 +226,29 @@ class DataBaseHelper {
                val directories = response.body()!!.data.directories
                 for (i in directories){
                     listDetails.add(i.directory.name)
+                }
+                adapter.notifyDataSetChanged()
+            }
+
+            override fun onFailure(call: Call<Data>, t: Throwable) {
+                Log.d("getDirectoryCrimesName", "onFailure: ${t.message.toString()}")
+            }
+
+        })
+    }
+
+
+    fun getMaterialsCrime(token: String, crimeId:Int, materialsList: ArrayList<DocumentDescription>,adapter: DescriptionsDetailsAdapter){
+        val request = BaseRequest().retrofit.create(DirectoriesApi::class.java)
+        val call = request.getDirectoryName("Bearer $token", crimeId)
+        call.enqueue(object: Callback<Data>{
+            override fun onResponse(call: Call<Data>, response: Response<Data>) {
+               val data = response.body()!!.data.directories
+                for (i in data){
+                    val documents = i.documents
+                    for (it in documents){
+                        materialsList.add(it.document)
+                    }
                 }
                 adapter.notifyDataSetChanged()
             }

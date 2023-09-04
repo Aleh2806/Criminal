@@ -15,6 +15,7 @@ import android.graphics.drawable.ColorDrawable
 import android.net.Uri
 import android.os.Build
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -31,6 +32,7 @@ import com.google.android.exoplayer2.MediaItem
 import com.google.android.exoplayer2.Player
 import com.google.android.exoplayer2.ui.AspectRatioFrameLayout
 import com.google.android.exoplayer2.ui.PlayerView
+import kotlinx.android.synthetic.main.activity_main.*
 
 
 class DetailsCrimeFragment : Fragment(), OnItemClick {
@@ -41,6 +43,8 @@ class DetailsCrimeFragment : Fragment(), OnItemClick {
     private var simpleExoPlayer: ExoPlayer? = null
     private val listVideoDetails = ArrayList<String>()
     private lateinit var sharedPref: SharedPreferences
+    private lateinit var progress: ProgressBar
+    private var counterAnswers = 0
 
 
     private var _binding: FragmentDetailsCrimeBinding? = null
@@ -61,21 +65,60 @@ class DetailsCrimeFragment : Fragment(), OnItemClick {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-
         preparePlayer()
         initRecyclerViewTittleMaterials()
         backFromFragment()
         initRwHelperListVideo()
-        answerDialog()
-
+        answerDialogWho()
+        answerDialogWhy()
     }
 
 
-    private fun answerDialog() {
+    private fun answerDialogWho() {
         binding.btnAnswer.setOnClickListener {
             val dialogBinding = layoutInflater.inflate(R.layout.dialog_answer, null)
             val whoCriminal = dialogBinding.findViewById<EditText>(R.id.edit_text_who)
-            val howCriminal = dialogBinding.findViewById<EditText>(R.id.edit_text_how)
+            val cancel = dialogBinding.findViewById<ImageView>(R.id.btn_cancel)
+
+            val myDialog = Dialog(requireContext())
+            myDialog.setContentView(dialogBinding)
+            myDialog.setCancelable(false)
+            myDialog.window?.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
+            myDialog.show()
+
+            cancel.setOnClickListener {
+                myDialog.dismiss()
+            }
+
+            // Обработка кнопки Подтвердить
+            dialogBinding.findViewById<Button>(R.id.confirm_answer_who).setOnClickListener {
+                progress = binding.progress
+                if (whoCriminal.text.toString().contains("Q") || whoCriminal.text.toString()
+                        .contains("q")
+                ) {
+                    if (counterAnswers == 0){
+                        counterAnswers ++
+                        progress.progress = 1
+                        whoCriminal.setBackgroundColor(resources.getColor(R.color.progress_2))
+                    } else {
+                        progress.progress = 2
+                        dialogBinding.findViewById<LinearLayout>(R.id.answer_check).visibility =
+                            View.GONE
+                        dialogBinding.findViewById<TextView>(R.id.congratulation).visibility =
+                            View.VISIBLE
+                    }
+                } else {
+                    whoCriminal.setBackgroundColor(resources.getColor(R.color.black_overlay))
+                    Toast.makeText(requireContext(), "Неверный ответ", Toast.LENGTH_SHORT).show()
+                    return@setOnClickListener
+                }
+            }
+        }
+    }
+
+    private fun answerDialogWhy() {
+        binding.btnAnswer2.setOnClickListener {
+            val dialogBinding = layoutInflater.inflate(R.layout.dialog_answer_2, null)
             val whyCriminal = dialogBinding.findViewById<EditText>(R.id.edit_text_why)
             val cancel = dialogBinding.findViewById<ImageView>(R.id.btn_cancel)
 
@@ -90,56 +133,32 @@ class DetailsCrimeFragment : Fragment(), OnItemClick {
             }
 
             // Обработка кнопки Подтвердить
-            dialogBinding.findViewById<Button>(R.id.confirm_answer).setOnClickListener {
-//            myDialog.dismiss()
-                if (whoCriminal.text.toString().contains("Вася") || whoCriminal.text.toString()
-                        .contains("вася")
+            dialogBinding.findViewById<Button>(R.id.confirm_answer_why).setOnClickListener {
+                progress = binding.progress
+                if (whyCriminal.text.toString().contains("Q") || whyCriminal.text.toString()
+                        .contains("q")
                 ) {
-                    whoCriminal.setBackgroundColor(resources.getColor(R.color.teal_200))
-                    Toast.makeText(requireContext(), "Правильный ответ", Toast.LENGTH_SHORT).show()
-                } else {
-                    whoCriminal.setBackgroundColor(resources.getColor(R.color.black_overlay))
-                    Toast.makeText(requireContext(), "Неверный ответ", Toast.LENGTH_SHORT).show()
-                    return@setOnClickListener
-                }
+                    if (counterAnswers == 0){
+                        counterAnswers ++
+                        progress.progress = 1
+                        whyCriminal.setBackgroundColor(resources.getColor(R.color.progress_2))
+                    } else {
+                        progress.progress = 2
+                        dialogBinding.findViewById<LinearLayout>(R.id.answer_check).visibility =
+                            View.GONE
+                        dialogBinding.findViewById<TextView>(R.id.congratulation).visibility =
+                            View.VISIBLE
+                    }
 
-                if (howCriminal.text.toString().contains("Нож") || howCriminal.text.toString()
-                        .contains("нож")
-                ) {
-                    howCriminal.setBackgroundColor(resources.getColor(R.color.teal_200))
-                    Toast.makeText(requireContext(), "Правильный ответ", Toast.LENGTH_SHORT).show()
-                } else {
-                    howCriminal.setBackgroundColor(resources.getColor(R.color.black_overlay))
-                    Toast.makeText(requireContext(), "Неверный ответ", Toast.LENGTH_SHORT).show()
-                    return@setOnClickListener
-                }
-
-                if (whyCriminal.text.toString().contains("Обида") || whyCriminal.text.toString()
-                        .contains("обида")
-                ) {
-                    whyCriminal.setBackgroundColor(resources.getColor(R.color.teal_200))
-                    Toast.makeText(requireContext(), "Правильный ответ", Toast.LENGTH_SHORT).show()
                 } else {
                     whyCriminal.setBackgroundColor(resources.getColor(R.color.black_overlay))
                     Toast.makeText(requireContext(), "Неверный ответ", Toast.LENGTH_SHORT).show()
                     return@setOnClickListener
                 }
-
-                if (whoCriminal.text.toString().contains("Вася") || whoCriminal.text.toString()
-                        .contains("вася")
-                    && howCriminal.text.toString().contains("Ножом") || howCriminal.text.toString()
-                        .contains("ножом")
-                    && whyCriminal.text.toString().contains("Обида") || whyCriminal.text.toString()
-                        .contains("обида")
-                ) {
-                    dialogBinding.findViewById<LinearLayout>(R.id.answer_check).visibility =
-                        View.GONE
-                    dialogBinding.findViewById<TextView>(R.id.congratulation).visibility =
-                        View.VISIBLE
-                }
             }
         }
     }
+
 
 
     private fun initRwHelperListVideo() {
@@ -160,6 +179,7 @@ class DetailsCrimeFragment : Fragment(), OnItemClick {
 
     private fun backFromFragment() {
         val numberSeason = arguments?.getString("KEY_SEASON").toString()
+        val numberCrime = arguments?.getString("KEY_CRIME").toString()
         binding.apply {
             detailsBack.setOnClickListener {
                 sharedPref = requireActivity().getPreferences(AppCompatActivity.MODE_PRIVATE)
@@ -295,7 +315,7 @@ class DetailsCrimeFragment : Fragment(), OnItemClick {
             .supportFragmentManager
             .beginTransaction()
             .replace(R.id.container_for_fragment, fragment)
-            .addToBackStack("")
+            .addToBackStack(null)
             .hide(this)
             .commit()
     }

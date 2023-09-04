@@ -41,6 +41,7 @@ class MainActivity : AppCompatActivity() {
             supportFragmentManager
                 .beginTransaction()
                 .replace(R.id.container_for_fragment, AuthorizationFragment())
+                .addToBackStack(null)
                 .commit()
 
         }

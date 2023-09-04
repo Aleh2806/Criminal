@@ -26,6 +26,7 @@
             android:textSize="35sp" />
 
     </LinearLayout>
+
     <FrameLayout
         android:id="@+id/container_for_crimes_list"
         android:layout_width="match_parent"

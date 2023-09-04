@@ -24,7 +24,6 @@ import androidx.recyclerview.widget.LinearLayoutManager
 class DescriptionsDetailsFragment : Fragment() {
 
     private val materialsList: ArrayList<DocumentDescription> = ArrayList()
-//    private val fireBaseHelper = FireBaseHelper()
     val adapter = DescriptionsDetailsAdapter(materialsList)
 
     private var _binding: FragmentDescriptionsDetailsBinding? = null
@@ -59,20 +58,7 @@ class DescriptionsDetailsFragment : Fragment() {
 
         backFromFragment()
         initRecyclerView()
-        DataBaseHelper().getMaterialsCrime(token!!,1, materialsList, adapter)
-
-
-//        fireBaseHelper.getMaterials(
-//            adapter,
-//            requireContext(),
-//            materialsList,
-//            numberSeason!!,
-//            numberCrime!!,
-//            materialName!!
-//        )
-
-
-
+            DataBaseHelper().getMaterialsCrime(token!!,1, materialsList, adapter)
     }
 
     private fun backFromFragment(){

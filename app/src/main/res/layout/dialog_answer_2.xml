@@ -37,8 +37,8 @@
         <TextView
             android:id="@+id/congratulation"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:gravity="center"
+            android:layout_height="300dp"
+            android:gravity="center|top"
             android:layout_marginTop="70dp"
             android:text="Поздравляем!!!\n\nВы раскрыли преступление!"
             android:textColor="@color/black"
@@ -52,51 +52,31 @@
         android:gravity="center"
         android:orientation="vertical">
 
+
+
         <TextView
-            android:id="@+id/who_criminal"
+            android:id="@+id/why_criminal"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="5dp"
             android:gravity="center"
             android:padding="5dp"
-            android:text="Кто совершил преступление?"
+            android:text="Какой мотив преступления?"
             android:textColor="@color/black"
             android:textSize="22sp"
             android:visibility="visible" />
 
         <EditText
-            android:id="@+id/edit_text_who"
+            android:id="@+id/edit_text_why"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:gravity="center"
-            android:hint="Введите имя преступника"
-            android:textSize="16sp" />
-
-
-
-<!--        <TextView-->
-<!--            android:id="@+id/why_criminal"-->
-<!--            android:layout_width="match_parent"-->
-<!--            android:layout_height="wrap_content"-->
-<!--            android:layout_marginTop="5dp"-->
-<!--            android:gravity="center"-->
-<!--            android:padding="5dp"-->
-<!--            android:text="Какой мотив преступления?"-->
-<!--            android:textColor="@color/black"-->
-<!--            android:textSize="22sp"-->
-<!--            android:visibility="visible" />-->
-
-<!--        <EditText-->
-<!--            android:id="@+id/edit_text_why"-->
-<!--            android:layout_width="wrap_content"-->
-<!--            android:layout_height="wrap_content"-->
-<!--            android:gravity="center"-->
-<!--            android:hint="Введите мотив преступления"-->
-<!--            android:textSize="17sp" />-->
+            android:hint="Введите мотив преступления"
+            android:textSize="17sp" />
 
 
         <androidx.appcompat.widget.AppCompatButton
-            android:id="@+id/confirm_answer_who"
+            android:id="@+id/confirm_answer_why"
             android:layout_width="150dp"
             android:layout_height="35dp"
             android:layout_gravity="center"

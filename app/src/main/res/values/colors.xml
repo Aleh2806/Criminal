@@ -13,4 +13,9 @@
     <color name="light_blue_A400">#FF00B0FF</color>
     <color name="black_overlay">#66000000</color>
     <color name="background_app">#2B2B2B</color>
+    <color name="pg_background_1">#4cb5f5</color>
+    <color name="pg_background_2">#81c7f3</color>
+    <color name="pg_background_3">#b7b8b6</color>
+    <color name="progress_1">#ffeb3b</color>
+    <color name="progress_2">#12fb12</color>
 </resources>

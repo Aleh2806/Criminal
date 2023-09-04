@@ -66,7 +66,6 @@ class CrimesFragment : Fragment(), OnItemClick {
             dataBaseHelper.getCasesList(adapterCrimes,crimesList,token!!,requireContext(),1)
         } else {
             dataBaseHelper.getCasesList(adapterCrimes,crimesList,token!!,requireContext(),numberSeason.toInt())
-
         }
     }
 
@@ -109,7 +108,7 @@ class CrimesFragment : Fragment(), OnItemClick {
             .supportFragmentManager
             .beginTransaction()
             .replace(R.id.container_for_fragment, fragment)
-            .addToBackStack("")
+            .addToBackStack(null)
             .commit()
     }
 

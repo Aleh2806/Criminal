@@ -15,6 +15,7 @@ import aleh.ahiyevich.criminal.view.adapters.DescriptionsDetailsAdapter
 import aleh.ahiyevich.criminal.view.adapters.DetailsAdapter
 import aleh.ahiyevich.criminal.view.adapters.SeasonsAdapter
 import aleh.ahiyevich.criminal.view.fragments.AuthorizationFragment
+import aleh.ahiyevich.criminal.view.fragments.CrimesFragment
 import aleh.ahiyevich.criminal.view.fragments.SeasonsFragment
 import aleh.ahiyevich.retrofit.api.auth.AuthApi
 import aleh.ahiyevich.retrofit.api.auth.AuthRequest
@@ -89,6 +90,7 @@ class DataBaseHelper {
                             .supportFragmentManager
                             .beginTransaction()
                             .replace(R.id.container_for_fragment,SeasonsFragment.newInstance(numberSeason))
+                            .addToBackStack(null)
                             .commit()
                         Log.d("@@@","token check")
                     } else {
@@ -208,6 +210,7 @@ class DataBaseHelper {
                     val data = response.body()!!.data
                     for (i in data){
                         crimesList.add(i)
+
                     }
                     adapter.notifyDataSetChanged()
                }

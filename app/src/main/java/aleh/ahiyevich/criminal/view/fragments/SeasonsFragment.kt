@@ -100,6 +100,7 @@ class SeasonsFragment : Fragment(), OnItemClick {
             .supportFragmentManager
             .beginTransaction()
             .replace(R.id.container_for_crimes_list, fragment)
+            .addToBackStack(null)
             .commit()
     }
 

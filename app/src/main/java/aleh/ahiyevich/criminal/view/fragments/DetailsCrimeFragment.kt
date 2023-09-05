@@ -304,11 +304,11 @@ class DetailsCrimeFragment : Fragment(), OnItemClick {
     private fun initRecyclerViewTittleMaterials() {
         listDetails.removeAll(listDetails.toSet())
 
-        val crime = arguments?.getString("KEY_CRIME")?.toInt()
+        val crime = arguments?.getString("KEY_CRIME")!!.toInt()
         val sharedPref: SharedPreferences =
             requireActivity().getPreferences(AppCompatActivity.MODE_PRIVATE)
         val token = sharedPref.getString(Constants.ACCESS_TOKEN, "")
-        DataBaseHelper().getDirectoryCrimesName(token!!, crime!!, listDetails, adapterNameMaterials)
+        DataBaseHelper().getDirectoryCrimesName(token!!, crime, listDetails, adapterNameMaterials)
 
         val recyclerView: RecyclerView = binding.recyclerViewDetails
         recyclerView.setHasFixedSize(true)

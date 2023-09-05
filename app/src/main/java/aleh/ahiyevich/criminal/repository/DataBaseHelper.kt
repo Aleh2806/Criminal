@@ -210,7 +210,6 @@ class DataBaseHelper {
                     val data = response.body()!!.data
                     for (i in data){
                         crimesList.add(i)
-
                     }
                     adapter.notifyDataSetChanged()
                }

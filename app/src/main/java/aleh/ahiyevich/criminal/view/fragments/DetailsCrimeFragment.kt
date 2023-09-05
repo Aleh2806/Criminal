@@ -2,9 +2,11 @@ package aleh.ahiyevich.criminal.view.fragments
 
 import aleh.ahiyevich.criminal.Constants
 import aleh.ahiyevich.criminal.R
+import aleh.ahiyevich.criminal.api.cases.DataCase
 import aleh.ahiyevich.criminal.databinding.FragmentDetailsCrimeBinding
 import aleh.ahiyevich.criminal.model.OnItemClick
 import aleh.ahiyevich.criminal.repository.DataBaseHelper
+import aleh.ahiyevich.criminal.view.adapters.CrimesAdapter
 import aleh.ahiyevich.criminal.view.adapters.DetailsAdapter
 import aleh.ahiyevich.criminal.view.adapters.VideoListDetailsAdapter
 import android.app.Dialog
@@ -24,7 +26,6 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
-import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.google.android.exoplayer2.ExoPlayer
@@ -32,7 +33,6 @@ import com.google.android.exoplayer2.MediaItem
 import com.google.android.exoplayer2.Player
 import com.google.android.exoplayer2.ui.AspectRatioFrameLayout
 import com.google.android.exoplayer2.ui.PlayerView
-import kotlinx.android.synthetic.main.activity_main.*
 
 
 class DetailsCrimeFragment : Fragment(), OnItemClick {
@@ -41,7 +41,7 @@ class DetailsCrimeFragment : Fragment(), OnItemClick {
     private val adapterNameMaterials = DetailsAdapter(listDetails, this)
     private lateinit var playerView: PlayerView
     private var simpleExoPlayer: ExoPlayer? = null
-    private val listVideoDetails = ArrayList<String>()
+    private val listSuspects = ArrayList<String>()
     private lateinit var sharedPref: SharedPreferences
     private lateinit var progress: ProgressBar
     private var counterAnswers = 0
@@ -68,7 +68,7 @@ class DetailsCrimeFragment : Fragment(), OnItemClick {
         preparePlayer()
         initRecyclerViewTittleMaterials()
         backFromFragment()
-        initRwHelperListVideo()
+        initRwSuspects()
         answerDialogWho()
         answerDialogWhy()
     }
@@ -161,19 +161,20 @@ class DetailsCrimeFragment : Fragment(), OnItemClick {
 
 
 
-    private fun initRwHelperListVideo() {
-        listVideoDetails.add("1")
-        listVideoDetails.add("2")
-        listVideoDetails.add("3")
-        listVideoDetails.add("4")
-        listVideoDetails.add("5")
-        listVideoDetails.add("6")
+    private fun initRwSuspects() {
+        listSuspects.removeAll(listSuspects.toSet())
+        listSuspects.add("1")
+        listSuspects.add("2")
+        listSuspects.add("3")
+        listSuspects.add("4")
+        listSuspects.add("5")
+        listSuspects.add("6")
 
         val recyclerViewVideoDetails = binding.recyclerViewVideoHelpList
-        recyclerViewVideoDetails.adapter = VideoListDetailsAdapter(listVideoDetails)
+        recyclerViewVideoDetails.setHasFixedSize(true)
+        recyclerViewVideoDetails.adapter = VideoListDetailsAdapter(listSuspects)
         recyclerViewVideoDetails.layoutManager =
             LinearLayoutManager(requireContext(), LinearLayoutManager.HORIZONTAL, false)
-
     }
 
 
@@ -223,11 +224,18 @@ class DetailsCrimeFragment : Fragment(), OnItemClick {
         })
 
 
-        val videoSource = Uri.parse("https://www.rmp-streaming.com/media/big-buck-bunny-360p.mp4")
-//        val videoSource = Uri.parse("https://cdn.bitmovin.com/content/assets/art-of-motion-dash-hls-progressive/mpds/f08e80da-bf1d-4e3d-8899-f0f6155f6efa.mpd")
-        val mediaItem = MediaItem.fromUri(videoSource)
-        simpleExoPlayer?.setMediaItem(mediaItem)
-        simpleExoPlayer?.prepare()
+        val season = arguments?.getString("KEY_SEASON")
+        val crime = arguments?.getString("KEY_CRIME")
+        val video = arguments?.getString("VIDEO")
+
+            val videoSource = Uri.parse("https://crime.api.unmodum.com//seasons/$season/cases/$crime/videos/$video")
+            val mediaItem = MediaItem.fromUri(videoSource)
+            simpleExoPlayer?.setMediaItem(mediaItem)
+            simpleExoPlayer?.prepare()
+
+
+
+
 
 
         var isFullScreen = true
@@ -296,15 +304,17 @@ class DetailsCrimeFragment : Fragment(), OnItemClick {
     private fun initRecyclerViewTittleMaterials() {
         listDetails.removeAll(listDetails.toSet())
 
+        val crime = arguments?.getString("KEY_CRIME")?.toInt()
         val sharedPref: SharedPreferences =
             requireActivity().getPreferences(AppCompatActivity.MODE_PRIVATE)
         val token = sharedPref.getString(Constants.ACCESS_TOKEN, "")
-        DataBaseHelper().getDirectoryCrimesName(token!!, 1, listDetails, adapterNameMaterials)
+        DataBaseHelper().getDirectoryCrimesName(token!!, crime!!, listDetails, adapterNameMaterials)
 
         val recyclerView: RecyclerView = binding.recyclerViewDetails
         recyclerView.setHasFixedSize(true)
 
-        recyclerView.layoutManager = GridLayoutManager(requireContext(), 3)
+        recyclerView.layoutManager = LinearLayoutManager(requireContext(), LinearLayoutManager.HORIZONTAL, false)
+
         recyclerView.adapter = adapterNameMaterials
 
 
@@ -381,10 +391,11 @@ class DetailsCrimeFragment : Fragment(), OnItemClick {
 
     companion object {
 
-        fun newInstance(numberSeason: String, numberCrime: String): DetailsCrimeFragment {
+        fun newInstance(numberSeason: String, numberCrime: String, video: String): DetailsCrimeFragment {
             val bundle = Bundle()
             bundle.putString("KEY_SEASON", numberSeason)
             bundle.putString("KEY_CRIME", numberCrime)
+            bundle.putString("VIDEO", video)
             val fragment = DetailsCrimeFragment()
             fragment.arguments = bundle
             return fragment
@@ -405,4 +416,6 @@ class DetailsCrimeFragment : Fragment(), OnItemClick {
         super.onStart()
         callFullScreen()
     }
+
+
 }

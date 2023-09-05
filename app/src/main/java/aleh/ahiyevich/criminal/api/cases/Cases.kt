@@ -8,5 +8,12 @@ data class Cases(
 data class DataCase(
     val id: Int,
     val name: String,
-    val image: String
+    val original_name: String,
+    val description: String,
+    val case_steeps: List<Video>
+)
+
+data class Video(
+    val id: Int,
+    val original_name: String
 )

@@ -37,7 +37,8 @@ class CrimesAdapter(
 //        holder.nameCrime.text = crime.nameCrime
 //        Glide.with(holder.itemView.context).load(crime.imageCrime).into(holder.imageCrime)
             holder.nameCrime.text = crime.name
-            Glide.with(holder.imageCrime.context).load("https://crime.api.unmodum.com/images/case_image.jpg").into(holder.imageCrime)
+        holder.descriptionCrime.text = crime.description
+            Glide.with(holder.imageCrime.context).load("https://crime.api.unmodum.com//seasons/1/cases/${crime.id}/${crime.original_name}").into(holder.imageCrime)
 
         // Пока что загрузка картинки напрямую из сайта
 //        Picasso.get().load().into(holder.imageCrime)
@@ -53,7 +54,8 @@ class CrimesAdapter(
         View.OnClickListener {
 
         val nameCrime: TextView = itemView.findViewById(R.id.name_crime)
-        val imageCrime: ImageView = itemView.findViewById(R.id.image_crime)
+        val descriptionCrime: TextView = itemView.findViewById(R.id.description_crime)
+        var imageCrime: ImageView = itemView.findViewById(R.id.image_crime)
         val lockCrime: FrameLayout = itemView.findViewById(R.id.lock_crime)
 
 

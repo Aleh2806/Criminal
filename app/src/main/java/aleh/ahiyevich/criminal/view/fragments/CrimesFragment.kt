@@ -72,24 +72,22 @@ class CrimesFragment : Fragment(), OnItemClick {
 
     override fun onItemClick(position: Int) {
         val crime = crimesList[position]
-
         // Закрыл доступ к элементам под замком
 //        if (!crime.openCrime) {
 //            paymentDialog(position)
 //        } else {
             when (position in 0..9) {
-                (position == 0) -> replaceFragment(DetailsCrimeFragment.newInstance(numberSeason,"1"))
-                (position == 1) -> replaceFragment(DetailsCrimeFragment.newInstance(numberSeason,"2"))
-                (position == 2) -> replaceFragment(DetailsCrimeFragment.newInstance(numberSeason,"3"))
-                (position == 3) -> replaceFragment(DetailsCrimeFragment.newInstance(numberSeason,"4"))
-                (position == 4) -> replaceFragment(DetailsCrimeFragment.newInstance(numberSeason,"5"))
-                (position == 5) -> replaceFragment(DetailsCrimeFragment.newInstance(numberSeason,"6"))
-                (position == 6) -> replaceFragment(DetailsCrimeFragment.newInstance(numberSeason,"7"))
-                (position == 7) -> replaceFragment(DetailsCrimeFragment.newInstance(numberSeason,"8"))
-                (position == 8) -> replaceFragment(DetailsCrimeFragment.newInstance(numberSeason,"9"))
-                (position == 9) -> replaceFragment(DetailsCrimeFragment.newInstance(numberSeason,"10"))
+                (position == 0) -> replaceFragment(DetailsCrimeFragment.newInstance(numberSeason,crime.id.toString(),crime.case_steeps[0].original_name))
+                (position == 1) -> replaceFragment(DetailsCrimeFragment.newInstance(numberSeason,crime.id.toString(),crime.case_steeps[0].original_name))
+                (position == 2) -> replaceFragment(DetailsCrimeFragment.newInstance(numberSeason,crime.id.toString(),crime.case_steeps[0].original_name))
+                (position == 3) -> replaceFragment(DetailsCrimeFragment.newInstance(numberSeason,crime.id.toString(),crime.case_steeps[0].original_name))
+                (position == 4) -> replaceFragment(DetailsCrimeFragment.newInstance(numberSeason,crime.id.toString(),crime.case_steeps[0].original_name))
+                (position == 5) -> replaceFragment(DetailsCrimeFragment.newInstance(numberSeason,crime.id.toString(),crime.case_steeps[0].original_name))
+                (position == 6) -> replaceFragment(DetailsCrimeFragment.newInstance(numberSeason,crime.id.toString(),crime.case_steeps[0].original_name))
+                (position == 7) -> replaceFragment(DetailsCrimeFragment.newInstance(numberSeason,crime.id.toString(),crime.case_steeps[0].original_name))
+                (position == 8) -> replaceFragment(DetailsCrimeFragment.newInstance(numberSeason,crime.id.toString(),crime.case_steeps[0].original_name))
+                (position == 9) -> replaceFragment(DetailsCrimeFragment.newInstance(numberSeason,crime.id.toString(),crime.case_steeps[0].original_name))
                 else -> {}
-//            }
         }
     }
 
@@ -130,7 +128,7 @@ class CrimesFragment : Fragment(), OnItemClick {
                 Toast.LENGTH_LONG
             ).show()
             myDialog.dismiss()
-            replaceFragment(DetailsCrimeFragment.newInstance(numberSeason,crimesList[position+1].toString()))
+            replaceFragment(DetailsCrimeFragment.newInstance(numberSeason,crimesList[position+1].toString(),""))
         }
 
         // Обработка кнопки подтвердить инвайт код (Проверка кодов для каждого дела)

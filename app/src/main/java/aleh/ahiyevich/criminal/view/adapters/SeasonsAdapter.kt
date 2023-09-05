@@ -39,7 +39,7 @@ class SeasonsAdapter(
         }
 
         holder.nameSeason.text = season.name
-        Glide.with(holder.itemView.context).load(IMAGE_PATH + season.mobile_image).into(holder.image)
+        Glide.with(holder.itemView.context).load("https://crime.api.unmodum.com//seasons/${season.id}/${season.original_name}").into(holder.image)
 
     }
 
